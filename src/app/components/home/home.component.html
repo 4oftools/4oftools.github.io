@@ -1,0 +1,75 @@
+<div class="home">
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="container">
+      <div class="banner-content">
+        <h1 class="banner-title">{{ t('home.banner.title') }}</h1>
+        <p class="banner-subtitle">{{ t('home.banner.subtitle') }}</p>
+        <p class="banner-description">
+          {{ t('home.banner.description') }}
+        </p>
+        <div class="banner-actions">
+          <a routerLink="/tools" class="btn">{{ t('home.banner.explore') }}</a>
+          <a routerLink="/apps" class="btn btn-secondary">{{ t('home.banner.view') }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Section -->
+  <section id="tools" class="section tools-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{{ t('home.tools.title') }}</h2>
+        <p class="section-description">{{ t('home.tools.description') }}</p>
+      </div>
+      <div class="tools-grid">
+        <div *ngFor="let tool of displayedTools" class="tool-card card" [routerLink]="['/tools', tool.id]">
+          <div class="tool-icon">{{ tool.icon || '🔧' }}</div>
+          <h3 class="tool-name">{{ getToolName(tool) }}</h3>
+          <p class="tool-description">{{ getToolDescription(tool) }}</p>
+          <div class="tool-tags" *ngIf="getToolTags(tool).length > 0">
+            <span *ngFor="let tag of getToolTags(tool)" class="tag">{{ tag }}</span>
+          </div>
+          <div class="tool-action">
+            <span class="tool-link">{{ t('tool.detail') }} →</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-footer" *ngIf="hasMoreTools">
+        <a routerLink="/tools" class="btn-more">
+          {{ t('home.view.more') }} ({{ tools.length - DISPLAY_LIMIT }})
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apps Section -->
+  <section id="apps" class="section apps-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{{ t('home.apps.title') }}</h2>
+        <p class="section-description">{{ t('home.apps.description') }}</p>
+      </div>
+      <div class="apps-grid">
+        <div *ngFor="let app of displayedApps" class="app-card card" [routerLink]="['/apps', app.id]">
+          <div class="app-icon">{{ app.icon || '📱' }}</div>
+          <h3 class="app-name">{{ getToolName(app) }}</h3>
+          <p class="app-description">{{ getToolDescription(app) }}</p>
+          <div class="app-tags" *ngIf="getToolTags(app).length > 0">
+            <span *ngFor="let tag of getToolTags(app)" class="tag">{{ tag }}</span>
+          </div>
+          <div class="app-action">
+            <span class="app-link">{{ t('tool.detail') }} →</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-footer" *ngIf="hasMoreApps">
+        <a routerLink="/apps" class="btn-more">
+          {{ t('home.view.more') }} ({{ apps.length - DISPLAY_LIMIT }})
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+

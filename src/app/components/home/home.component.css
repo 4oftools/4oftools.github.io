@@ -1,0 +1,267 @@
+.home {
+  min-height: calc(100vh - 200px);
+}
+
+.banner {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--green-color) 50%, var(--secondary-color) 100%);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 250px;
+  height: 250px;
+  background: rgba(52, 211, 153, 0.15);
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+.banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.banner-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.banner-subtitle {
+  font-size: 24px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+.banner-description {
+  font-size: 18px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.banner .btn {
+  background: white;
+  color: var(--green-color);
+}
+
+.banner .btn:hover {
+  background: var(--green-bg);
+  color: var(--green-dark);
+}
+
+.banner .btn-secondary {
+  background: transparent;
+  color: white;
+  border-color: white;
+}
+
+.banner .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.section {
+  padding: 20px 0;
+  position: relative;
+}
+
+.tools-section {
+  background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--green-bg) 50%, var(--bg-secondary) 100%);
+}
+
+.apps-section {
+  background: linear-gradient(to bottom, var(--bg-secondary) 0%, rgba(236, 253, 245, 0.5) 50%, var(--bg-secondary) 100%);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.section-description {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.tools-grid,
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+}
+
+.tool-card,
+.app-card {
+  cursor: pointer;
+  text-align: center;
+  padding: 12px;
+  position: relative;
+  border-top: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tool-card::before,
+.app-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green-color), var(--green-light));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tool-card:hover::before,
+.app-card:hover::before {
+  opacity: 1;
+}
+
+.tool-card:hover,
+.app-card:hover {
+  border-top-color: var(--green-color);
+}
+
+.tool-icon,
+.app-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.tool-name,
+.app-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.tool-description,
+.app-description {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.6;
+  min-height: 48px;
+}
+
+.tool-tags,
+.app-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.tag {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.tool-action,
+.app-action {
+  margin-top: 12px;
+}
+
+.tool-link,
+.app-link {
+  color: var(--green-color);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tool-link:hover,
+.app-link:hover {
+  color: var(--green-dark);
+}
+
+.tool-card:hover .tool-link,
+.app-card:hover .app-link {
+  transform: translateX(4px);
+}
+
+.section-footer {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.btn-more {
+  display: inline-block;
+  padding: 12px 32px;
+  background: transparent;
+  color: var(--green-color);
+  border: 2px solid var(--green-color);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-more:hover {
+  background: var(--green-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 32px;
+  }
+  .banner-subtitle {
+    font-size: 20px;
+  }
+  .banner-description {
+    font-size: 16px;
+  }
+  .section-title {
+    font-size: 28px;
+  }
+  .tools-grid,
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,59 @@
+<div class="tool-detail" *ngIf="tool">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/tools">{{ t('nav.tools') }}</a>
+      <span class="separator">/</span>
+      <span>{{ getToolName(tool) }}</span>
+    </div>
+    
+    <div class="detail-content">
+      <div class="detail-header">
+        <div class="detail-icon">{{ tool.icon || '🔧' }}</div>
+        <div class="detail-info">
+          <h1 class="detail-title">{{ getToolName(tool) }}</h1>
+          <div class="detail-tags" *ngIf="getToolTags(tool).length > 0">
+            <span *ngFor="let tag of getToolTags(tool)" class="tag">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-section">
+          <h2>{{ t('tool.intro') }}</h2>
+          <p class="detail-description">{{ getToolDescription(tool) }}</p>
+        </div>
+
+        <div class="detail-section" *ngIf="tool.url">
+          <h2>{{ t('tool.link') }}</h2>
+          <a [href]="tool.url" target="_blank" class="external-link">
+            {{ tool.url }}
+            <span class="external-icon">↗</span>
+          </a>
+        </div>
+
+        <div class="detail-actions">
+          <a [href]="tool.url" target="_blank" class="btn" *ngIf="tool.url">
+            {{ t('tool.use') }}
+          </a>
+          <a routerLink="/tools" class="btn btn-secondary">
+            {{ t('tool.back.to.list') }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tool-detail loading" *ngIf="!tool && !error">
+  <div class="container">
+    <p>{{ t('loading') }}</p>
+  </div>
+</div>
+<div class="tool-detail error" *ngIf="error">
+  <div class="container">
+    <p>{{ t('tool.notfound') }}</p>
+    <a routerLink="/tools" class="btn">{{ t('tool.back.to.list') }}</a>
+  </div>
+</div>
+

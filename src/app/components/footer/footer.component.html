@@ -1,0 +1,37 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>{{ t('footer.about') }}</h3>
+        <div class="footer-about-content">
+          <div class="footer-logo-section">
+            <img src="/assets/logo_only.png" [alt]="t('logo.alt')" class="footer-logo" />
+            <span class="footer-site-name">{{ t('site.name') }}</span>
+          </div>
+          <p>{{ t('footer.about.text') }}</p>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>{{ t('footer.links') }}</h3>
+        <ul>
+          <li><a routerLink="/">{{ t('nav.home') }}</a></li>
+          <li><a routerLink="/tools">{{ t('nav.tools') }}</a></li>
+          <li><a routerLink="/apps">{{ t('nav.apps') }}</a></li>
+          <li><a routerLink="/ai">{{ t('nav.ai') }}</a></li>
+          <li><a routerLink="/sponsor">{{ t('nav.sponsor') }}</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>{{ t('footer.contact') }}</h3>
+        <ul>
+          <li><a href="mailto:contact@4oftools.com">{{ t('footer.email') }}</a></li>
+          <li><a href="https://github.com" target="_blank">{{ t('footer.github') }}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} {{ t('site.name') }} (4oftools). {{ t('footer.copyright') }}.</p>
+    </div>
+  </div>
+</footer>
+

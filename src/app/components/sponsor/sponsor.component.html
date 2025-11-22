@@ -1,0 +1,106 @@
+<div class="sponsor-page">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">{{ t('sponsor.title') }}</h1>
+      <p class="page-description">{{ t('sponsor.subtitle') }}</p>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <!-- QR Code Section -->
+      <section class="qr-section">
+        <div class="qr-cards">
+          <div class="qr-card">
+            <h3 class="qr-title">{{ t('sponsor.wechat') }}</h3>
+            <div class="qr-image-wrapper">
+              <img 
+                src="/assets/wechat-qr.png" 
+                [alt]="t('qr.wechat.alt')" 
+                class="qr-image"
+                (error)="onImageError($event)" />
+              <div class="qr-placeholder" #wechatPlaceholder style="display: none;">
+                <span class="qr-icon">💳</span>
+                <p>{{ t('sponsor.qr.placeholder') }}</p>
+              </div>
+            </div>
+            <p class="qr-description">{{ t('sponsor.wechat.desc') }}</p>
+          </div>
+          
+          <div class="qr-card">
+            <h3 class="qr-title">{{ t('sponsor.alipay') }}</h3>
+            <div class="qr-image-wrapper">
+              <img 
+                src="/assets/alipay-qr.png" 
+                [alt]="t('qr.alipay.alt')" 
+                class="qr-image"
+                (error)="onImageError($event)" />
+              <div class="qr-placeholder" #alipayPlaceholder style="display: none;">
+                <span class="qr-icon">💳</span>
+                <p>{{ t('sponsor.qr.placeholder') }}</p>
+              </div>
+            </div>
+            <p class="qr-description">{{ t('sponsor.alipay.desc') }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Donation Description Section -->
+    </div>
+    <section class="description-section">
+      <div class="container">
+        <div class="description-content">
+          <h2 class="section-title">{{ t('sponsor.description.title') }}</h2>
+          <div class="description-text">
+            <p>{{ t('sponsor.description.text1') }}</p>
+            <p>{{ t('sponsor.description.text2') }}</p>
+            <p>{{ t('sponsor.description.text3') }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+
+      <!-- Sponsors Section -->
+      <section class="sponsors-section">
+        <h2 class="section-title">{{ t('sponsor.sponsors.title') }}</h2>
+        
+        <!-- Corporate Sponsors -->
+        <div class="sponsors-category" *ngIf="corporateSponsors.length > 0">
+          <h3 class="category-title">{{ t('sponsor.sponsors.corporate') }}</h3>
+          <div class="sponsors-list">
+            <div *ngFor="let sponsor of corporateSponsors" class="sponsor-item">
+              <div class="sponsor-info">
+                <h4 class="sponsor-name">{{ sponsor.name }}</h4>
+                <p class="sponsor-amount">{{ t('sponsor.amount') }}: {{ sponsor.amount }}</p>
+                <p class="sponsor-date">{{ t('sponsor.date') }}: {{ sponsor.date }}</p>
+                <p class="sponsor-message" *ngIf="sponsor.message">{{ sponsor.message }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Individual Sponsors -->
+        <div class="sponsors-category" *ngIf="individualSponsors.length > 0">
+          <h3 class="category-title">{{ t('sponsor.sponsors.individual') }}</h3>
+          <div class="sponsors-list">
+            <div *ngFor="let sponsor of individualSponsors" class="sponsor-item">
+              <div class="sponsor-info">
+                <h4 class="sponsor-name">{{ sponsor.name }}</h4>
+                <p class="sponsor-amount">{{ t('sponsor.amount') }}: {{ sponsor.amount }}</p>
+                <p class="sponsor-date">{{ t('sponsor.date') }}: {{ sponsor.date }}</p>
+                <p class="sponsor-message" *ngIf="sponsor.message">{{ sponsor.message }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="corporateSponsors.length === 0 && individualSponsors.length === 0">
+          <p>{{ t('sponsor.sponsors.empty') }}</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+

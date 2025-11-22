@@ -1,0 +1,54 @@
+<div class="apps-page">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">{{ t('apps.title') }}</h1>
+      <p class="page-description">{{ t('apps.description') }}</p>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="filter-section">
+        <div class="filter-controls">
+          <div class="filter-tabs">
+            <button 
+              *ngFor="let cat of categories" 
+              class="filter-tab"
+              [class.active]="selectedCategory === cat.value"
+              (click)="filterByCategory(cat.value)">
+              {{ t(cat.key) }}
+            </button>
+          </div>
+          <div class="search-box">
+            <input 
+              type="text" 
+              class="search-input"
+              [placeholder]="t('search.placeholder.apps')"
+              [(ngModel)]="searchQuery"
+              (ngModelChange)="onSearchChange()" />
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="apps-grid">
+        <div *ngFor="let app of filteredApps" class="app-card card" [routerLink]="['/apps', app.id]">
+          <div class="app-icon">{{ app.icon || '📱' }}</div>
+          <h3 class="app-name">{{ getToolName(app) }}</h3>
+          <p class="app-description">{{ getToolDescription(app) }}</p>
+          <div class="app-tags" *ngIf="getToolTags(app).length > 0">
+            <span *ngFor="let tag of getToolTags(app)" class="tag">{{ tag }}</span>
+          </div>
+          <div class="app-action">
+            <span class="app-link">{{ t('tool.detail') }} →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="filteredApps.length === 0">
+        <p>{{ t('empty.apps') }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

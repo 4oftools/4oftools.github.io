@@ -1,0 +1,54 @@
+<div class="tools-page">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">{{ t('tools.title') }}</h1>
+      <p class="page-description">{{ t('tools.description') }}</p>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="filter-section">
+        <div class="filter-controls">
+          <div class="filter-tabs">
+            <button 
+              *ngFor="let cat of categories" 
+              class="filter-tab"
+              [class.active]="selectedCategory === cat.value"
+              (click)="filterByCategory(cat.value)">
+              {{ t(cat.key) }}
+            </button>
+          </div>
+          <div class="search-box">
+            <input 
+              type="text" 
+              class="search-input"
+              [placeholder]="t('search.placeholder')"
+              [(ngModel)]="searchQuery"
+              (ngModelChange)="onSearchChange()" />
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-grid">
+        <div *ngFor="let tool of filteredTools" class="tool-card card" [routerLink]="['/tools', tool.id]">
+          <div class="tool-icon">{{ tool.icon || '🔧' }}</div>
+          <h3 class="tool-name">{{ getToolName(tool) }}</h3>
+          <p class="tool-description">{{ getToolDescription(tool) }}</p>
+          <div class="tool-tags" *ngIf="getToolTags(tool).length > 0">
+            <span *ngFor="let tag of getToolTags(tool)" class="tag">{{ tag }}</span>
+          </div>
+          <div class="tool-action">
+            <span class="tool-link">{{ t('tool.detail') }} →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="filteredTools.length === 0">
+        <p>{{ t('empty.state') }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

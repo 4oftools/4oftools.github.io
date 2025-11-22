@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <a routerLink="/" class="logo">
+        <img src="/assets/logo_only.png" [alt]="t('logo.alt')" class="logo-image" />
+        <span class="logo-text">{{ t('site.name') }}</span>
+      </a>
+      <nav class="nav">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ t('nav.home') }}</a>
+        <a routerLink="/tools" routerLinkActive="active" class="nav-link">{{ t('nav.tools') }}</a>
+        <a routerLink="/apps" routerLinkActive="active" class="nav-link">{{ t('nav.apps') }}</a>
+        <a routerLink="/ai" routerLinkActive="active" class="nav-link">{{ t('nav.ai') }}</a>
+        <a routerLink="/sponsor" routerLinkActive="active" class="nav-link">{{ t('nav.sponsor') }}</a>
+      </nav>
+      <div class="language-switcher">
+        <button 
+          class="lang-btn" 
+          [class.active]="currentLang === 'zh'"
+          (click)="switchLanguage('zh')">
+          {{ t('lang.zh') }}
+        </button>
+        <button 
+          class="lang-btn" 
+          [class.active]="currentLang === 'en'"
+          (click)="switchLanguage('en')">
+          {{ t('lang.en') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+

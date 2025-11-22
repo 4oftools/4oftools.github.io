@@ -1,0 +1,59 @@
+<div class="app-detail" *ngIf="app">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/apps">{{ t('nav.apps') }}</a>
+      <span class="separator">/</span>
+      <span>{{ getAppName(app) }}</span>
+    </div>
+    
+    <div class="detail-content">
+      <div class="detail-header">
+        <div class="detail-icon">{{ app.icon || '📱' }}</div>
+        <div class="detail-info">
+          <h1 class="detail-title">{{ getAppName(app) }}</h1>
+          <div class="detail-tags" *ngIf="getAppTags(app).length > 0">
+            <span *ngFor="let tag of getAppTags(app)" class="tag">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-section">
+          <h2>{{ t('tool.intro') }}</h2>
+          <p class="detail-description">{{ getAppDescription(app) }}</p>
+        </div>
+
+        <div class="detail-section" *ngIf="app.url">
+          <h2>{{ t('tool.link') }}</h2>
+          <a [href]="app.url" target="_blank" class="external-link">
+            {{ app.url }}
+            <span class="external-icon">↗</span>
+          </a>
+        </div>
+
+        <div class="detail-actions">
+          <a [href]="app.url" target="_blank" class="btn" *ngIf="app.url">
+            {{ t('tool.use') }}
+          </a>
+          <a routerLink="/apps" class="btn btn-secondary">
+            {{ t('tool.back.to.list') }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="app-detail loading" *ngIf="!app && !error">
+  <div class="container">
+    <p>{{ t('loading') }}</p>
+  </div>
+</div>
+<div class="app-detail error" *ngIf="error">
+  <div class="container">
+    <p>{{ t('app.notfound') }}</p>
+    <a routerLink="/apps" class="btn">{{ t('tool.back.to.list') }}</a>
+  </div>
+</div>
+

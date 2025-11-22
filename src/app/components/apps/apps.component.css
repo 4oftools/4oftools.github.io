@@ -1,0 +1,238 @@
+.apps-page {
+  min-height: calc(100vh - 200px);
+}
+
+.page-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--green-color) 50%, var(--secondary-color) 100%);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 250px;
+  height: 250px;
+  background: rgba(52, 211, 153, 0.15);
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+.page-header .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.page-description {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.page-content {
+  padding: 20px 0;
+  background: linear-gradient(to bottom, var(--bg-secondary) 0%, rgba(236, 253, 245, 0.5) 50%, var(--bg-secondary) 100%);
+  min-height: calc(100vh - 400px);
+}
+
+.filter-section {
+  margin-bottom: 16px;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.search-box {
+  position: relative;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 36px 8px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--green-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.filter-tab {
+  padding: 8px 20px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-tab:hover {
+  border-color: var(--green-color);
+  color: var(--green-color);
+}
+
+.filter-tab.active {
+  background: var(--green-color);
+  border-color: var(--green-color);
+  color: white;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+}
+
+.app-card {
+  cursor: pointer;
+  text-align: center;
+  padding: 12px;
+  position: relative;
+  border-top: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.app-card:hover {
+  border-top-color: var(--green-color);
+  transform: translateY(-4px);
+}
+
+.app-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.app-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.app-description {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.6;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+.app-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.tag {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.app-action {
+  margin-top: 12px;
+}
+
+.app-link {
+  color: var(--green-color);
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.app-card:hover .app-link {
+  transform: translateX(4px);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 28px;
+  }
+  .page-description {
+    font-size: 16px;
+  }
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  
+  .search-box {
+    min-width: 100%;
+  }
+}
+

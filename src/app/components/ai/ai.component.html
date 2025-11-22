@@ -1,0 +1,135 @@
+<div class="ai-page">
+  <!-- Hero Section -->
+  <section class="ai-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">{{ t('ai.title') }}</h1>
+        <p class="hero-subtitle">{{ t('ai.subtitle') }}</p>
+        <p class="hero-description">
+          {{ t('ai.description') }}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications Section -->
+  <section id="applications" class="ai-section" *ngIf="applications.length > 0">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{{ t('ai.applications') }}</h2>
+        <p class="section-description">{{ t('ai.applications.desc') }}</p>
+      </div>
+      <div class="ai-grid">
+        <div *ngFor="let item of applications" class="ai-card card">
+          <div class="ai-card-header">
+            <div class="ai-icon">{{ item.icon || '🤖' }}</div>
+            <div class="ai-card-info">
+              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+            </div>
+          </div>
+          <p class="ai-description">{{ getItemDescription(item) }}</p>
+          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
+            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          </div>
+          <div class="ai-meta">
+            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
+            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
+              {{ t('ai.visit') }} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  <section id="technologies" class="ai-section" *ngIf="technologies.length > 0">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{{ t('ai.technologies') }}</h2>
+        <p class="section-description">{{ t('ai.technologies.desc') }}</p>
+      </div>
+      <div class="ai-grid">
+        <div *ngFor="let item of technologies" class="ai-card card">
+          <div class="ai-card-header">
+            <div class="ai-icon">{{ item.icon || '🧠' }}</div>
+            <div class="ai-card-info">
+              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+            </div>
+          </div>
+          <p class="ai-description">{{ getItemDescription(item) }}</p>
+          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
+            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          </div>
+          <div class="ai-meta">
+            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
+            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
+              {{ t('ai.learn') }} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Section -->
+  <section id="tools" class="ai-section" *ngIf="tools.length > 0">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{{ t('ai.tools') }}</h2>
+        <p class="section-description">{{ t('ai.tools.desc') }}</p>
+      </div>
+      <div class="ai-grid">
+        <div *ngFor="let item of tools" class="ai-card card">
+          <div class="ai-card-header">
+            <div class="ai-icon">{{ item.icon || '🛠️' }}</div>
+            <div class="ai-card-info">
+              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+            </div>
+          </div>
+          <p class="ai-description">{{ getItemDescription(item) }}</p>
+          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
+            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          </div>
+          <div class="ai-meta">
+            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
+            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
+              {{ t('ai.visit') }} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="ai-section" *ngIf="products.length > 0">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{{ t('ai.products') }}</h2>
+        <p class="section-description">{{ t('ai.products.desc') }}</p>
+      </div>
+      <div class="ai-grid">
+        <div *ngFor="let item of products" class="ai-card card">
+          <div class="ai-card-header">
+            <div class="ai-icon">{{ item.icon || '📦' }}</div>
+            <div class="ai-card-info">
+              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+            </div>
+          </div>
+          <p class="ai-description">{{ getItemDescription(item) }}</p>
+          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
+            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          </div>
+          <div class="ai-meta">
+            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
+            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
+              {{ t('ai.visit') }} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
