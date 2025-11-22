@@ -16,5 +16,6 @@ export interface Tool {
   tagsEn?: string[];
   featured?: boolean;
   createdAt?: string;
+  internalRoute?: string; // 如果有内部实现页面，指定路由路径，如 'json-formatter'
 }
 

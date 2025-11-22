@@ -1,0 +1,71 @@
+<div class="timestamp-converter-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="mode-switcher">
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'timestamp-to-date'"
+            (click)="switchMode()">
+            {{ t('timestamp.to.date') }}
+          </button>
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'date-to-timestamp'"
+            (click)="switchMode()">
+            {{ t('date.to.timestamp') }}
+          </button>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="process()">
+            {{ t('timestamp.convert') }}
+          </button>
+          <button class="btn btn-secondary" (click)="useCurrentTime()" *ngIf="mode === 'timestamp-to-date'">
+            {{ t('timestamp.current') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="converter-container">
+        <div class="input-section">
+          <div class="section-header">
+            <h3>{{ mode === 'timestamp-to-date' ? t('timestamp.input') : t('date.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(mode === 'timestamp-to-date' ? timestamp : dateTime)" *ngIf="mode === 'timestamp-to-date' ? timestamp : dateTime">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-editor"
+            [(ngModel)]="inputValue"
+            [placeholder]="mode === 'timestamp-to-date' ? t('timestamp.input.placeholder') : t('date.input.placeholder')"
+            rows="25"></textarea>
+        </div>
+
+        <div class="output-section">
+          <div class="section-header">
+            <h3>{{ mode === 'timestamp-to-date' ? t('date.output') : t('timestamp.output') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(outputValue)" *ngIf="outputValue">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-editor"
+            [ngModel]="outputValue"
+            [placeholder]="mode === 'timestamp-to-date' ? t('date.output.placeholder') : t('timestamp.output.placeholder')"
+            rows="25"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -6,6 +6,7 @@ import { ToolService } from '../../services/tool.service';
 import { LanguageService } from '../../services/language.service';
 import { Tool, ToolCategory } from '../../models/tool.model';
 import { Subscription } from 'rxjs';
+import { APPS_CATEGORIES } from '../../config/apps.metadata';
 
 @Component({
   selector: 'app-apps',
@@ -21,14 +22,7 @@ export class AppsComponent implements OnInit, OnDestroy {
   searchQuery: string = '';
   private subscriptions = new Subscription();
   
-  categories: { value: ToolCategory | 'all', key: string }[] = [
-    { value: 'all', key: 'filter.all' },
-    { value: 'efficiency', key: 'filter.efficiency' },
-    { value: 'life', key: 'filter.life' },
-    { value: 'programmer', key: 'filter.programmer' },
-    { value: 'design', key: 'filter.design' },
-    { value: 'other', key: 'filter.other' }
-  ];
+  categories = APPS_CATEGORIES;
 
   constructor(
     private toolService: ToolService,

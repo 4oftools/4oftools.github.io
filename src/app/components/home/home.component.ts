@@ -64,4 +64,13 @@ export class HomeComponent implements OnInit {
   getToolTags(tool: Tool): string[] {
     return this.langService.currentLang === 'en' && tool.tagsEn ? tool.tagsEn : (tool.tags || []);
   }
+
+  getToolRoute(tool: Tool): string[] {
+    // 如果有内部实现页面，跳转到工具页面
+    if (tool.internalRoute) {
+      return ['/tools', tool.internalRoute];
+    }
+    // 否则跳转到详情页
+    return ['/tools', tool.id];
+  }
 }

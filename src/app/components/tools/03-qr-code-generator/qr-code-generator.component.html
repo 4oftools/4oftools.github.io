@@ -1,0 +1,66 @@
+<div class="qr-code-generator-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="control-group">
+          <label>{{ t('qr.size') }}</label>
+          <input 
+            type="number" 
+            [(ngModel)]="size" 
+            min="100" 
+            max="500" 
+            step="50"
+            class="size-input" />
+          <span class="size-unit">px</span>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="generateQRCode()">
+            {{ t('qr.generate') }}
+          </button>
+          <button class="btn btn-secondary" (click)="downloadQRCode()" *ngIf="qrCodeDataUrl">
+            {{ t('qr.download') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="qr-generator-container">
+        <div class="input-section">
+          <div class="section-header">
+            <h3>{{ t('qr.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard()" *ngIf="inputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="input-editor"
+            [(ngModel)]="inputText"
+            [placeholder]="t('qr.input.placeholder')"
+            rows="25"></textarea>
+        </div>
+
+        <div class="output-section">
+          <div class="section-header">
+            <h3>{{ t('qr.output') }}</h3>
+          </div>
+          <div class="qr-code-display">
+            <div class="qr-code-placeholder" *ngIf="!qrCodeDataUrl">
+              <div class="placeholder-icon">📱</div>
+              <p>{{ t('qr.placeholder.text') }}</p>
+            </div>
+            <img *ngIf="qrCodeDataUrl" [src]="qrCodeDataUrl" [alt]="t('qr.code.alt')" class="qr-code-image" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

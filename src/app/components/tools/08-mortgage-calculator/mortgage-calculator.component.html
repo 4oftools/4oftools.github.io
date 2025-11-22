@@ -1,0 +1,172 @@
+<div class="mortgage-calculator-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="input-group">
+          <label>{{ t('mortgage.loan.type') }}</label>
+          <select [(ngModel)]="loanType" (change)="onLoanTypeChange()" class="select-input">
+            <option value="commercial">{{ t('mortgage.commercial.loan') }}</option>
+            <option value="provident">{{ t('mortgage.provident.loan') }}</option>
+            <option value="combined">{{ t('mortgage.combined.loan') }}</option>
+          </select>
+        </div>
+        
+        <!-- 单一贷款类型 -->
+        <div class="input-group" *ngIf="loanType !== 'combined'">
+          <label>{{ t('mortgage.loan.amount') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="number" 
+              [(ngModel)]="loanAmount" 
+              (input)="calculate()"
+              min="0"
+              step="10000"
+              class="number-input" />
+            <span class="unit">{{ t('mortgage.yuan') }}</span>
+          </div>
+        </div>
+        
+        <!-- 组合贷款：商业贷款金额 -->
+        <div class="input-group" *ngIf="loanType === 'combined'">
+          <label>{{ t('mortgage.commercial.amount') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="number" 
+              [(ngModel)]="commercialLoanAmount" 
+              (input)="calculate()"
+              min="0"
+              step="10000"
+              class="number-input" />
+            <span class="unit">{{ t('mortgage.yuan') }}</span>
+          </div>
+        </div>
+        
+        <!-- 组合贷款：公积金贷款金额 -->
+        <div class="input-group" *ngIf="loanType === 'combined'">
+          <label>{{ t('mortgage.provident.amount') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="number" 
+              [(ngModel)]="providentLoanAmount" 
+              (input)="calculate()"
+              min="0"
+              step="10000"
+              class="number-input" />
+            <span class="unit">{{ t('mortgage.yuan') }}</span>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label>{{ t('mortgage.loan.term') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="number" 
+              [(ngModel)]="loanTerm" 
+              (input)="calculate()"
+              min="1"
+              max="50"
+              class="number-input" />
+            <span class="unit">{{ t('mortgage.years') }}</span>
+          </div>
+        </div>
+        
+        <!-- 商业贷款利率 -->
+        <div class="input-group" *ngIf="loanType === 'commercial' || loanType === 'combined'">
+          <label>{{ t('mortgage.commercial.rate') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="number" 
+              [(ngModel)]="commercialRate" 
+              (input)="calculate()"
+              min="0"
+              max="20"
+              step="0.1"
+              class="number-input" />
+            <span class="unit">%</span>
+          </div>
+        </div>
+        
+        <!-- 公积金贷款利率 -->
+        <div class="input-group" *ngIf="loanType === 'provident' || loanType === 'combined'">
+          <label>{{ t('mortgage.provident.rate') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="number" 
+              [(ngModel)]="providentRate" 
+              (input)="calculate()"
+              min="0"
+              max="20"
+              step="0.1"
+              class="number-input" />
+            <span class="unit">%</span>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label>{{ t('mortgage.payment.type') }}</label>
+          <select [(ngModel)]="paymentType" (change)="calculate()" class="select-input">
+            <option value="equal-payment">{{ t('mortgage.equal.payment') }}</option>
+            <option value="equal-principal">{{ t('mortgage.equal.principal') }}</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" (click)="clearAll(); calculate()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="result-container">
+        <div class="result-summary">
+          <div class="result-card">
+            <div class="result-label">{{ t('mortgage.monthly.payment') }}</div>
+            <div class="result-value">{{ formatCurrency(monthlyPayment) }}</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">{{ t('mortgage.total.interest') }}</div>
+            <div class="result-value">{{ formatCurrency(totalInterest) }}</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">{{ t('mortgage.total.payment') }}</div>
+            <div class="result-value">{{ formatCurrency(totalPayment) }}</div>
+          </div>
+        </div>
+
+        <div class="payment-details">
+          <div class="section-header">
+            <h3>{{ t('mortgage.payment.details') }}</h3>
+            <span class="detail-count">{{ t('mortgage.total.months') }}: {{ loanTerm * 12 }}</span>
+          </div>
+          <div class="details-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>{{ t('mortgage.month') }}</th>
+                  <th>{{ t('mortgage.principal') }}</th>
+                  <th>{{ t('mortgage.interest') }}</th>
+                  <th>{{ t('mortgage.monthly.total') }}</th>
+                  <th>{{ t('mortgage.remaining') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detail of paymentDetails.slice(0, 12)">
+                  <td>{{ detail.month }}</td>
+                  <td>{{ formatCurrency(detail.principal) }}</td>
+                  <td>{{ formatCurrency(detail.interest) }}</td>
+                  <td>{{ formatCurrency(detail.total) }}</td>
+                  <td>{{ formatCurrency(detail.remaining) }}</td>
+                </tr>
+                <tr *ngIf="paymentDetails.length > 12" class="more-rows">
+                  <td colspan="5">{{ t('mortgage.showing.first') }} 12 {{ t('mortgage.months') }}, {{ t('mortgage.total') }} {{ paymentDetails.length }} {{ t('mortgage.months') }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

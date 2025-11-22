@@ -1,0 +1,74 @@
+<div class="base64-encoder-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="mode-switcher">
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'encode'"
+            (click)="switchMode()">
+            {{ t('base64.encode') }}
+          </button>
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'decode'"
+            (click)="switchMode()">
+            {{ t('base64.decode') }}
+          </button>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="process()">
+            {{ mode === 'encode' ? t('base64.encode') : t('base64.decode') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage" [class.error]="errorMessage.includes('error') || errorMessage.includes('错误')">
+        {{ errorMessage }}
+      </div>
+
+      <div class="editor-container">
+        <div class="editor-section">
+          <div class="section-header">
+            <h3>{{ mode === 'encode' ? t('base64.input') : t('base64.base64.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(inputText)" *ngIf="inputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="editor"
+            [(ngModel)]="inputText"
+            [placeholder]="mode === 'encode' ? t('base64.input.placeholder') : t('base64.base64.input.placeholder')"
+            rows="25"></textarea>
+        </div>
+
+        <div class="swap-button-container">
+          <button class="btn-swap" (click)="swapContent()" title="Swap">
+            ⇄
+          </button>
+        </div>
+
+        <div class="editor-section">
+          <div class="section-header">
+            <h3>{{ mode === 'encode' ? t('base64.output') : t('base64.text.output') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(outputText)" *ngIf="outputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="editor"
+            [(ngModel)]="outputText"
+            [placeholder]="mode === 'encode' ? t('base64.output.placeholder') : t('base64.text.output.placeholder')"
+            rows="25"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

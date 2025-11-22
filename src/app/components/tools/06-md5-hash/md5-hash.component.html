@@ -1,0 +1,51 @@
+<div class="md5-hash-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="generateHash()">
+            {{ t('md5.generate') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="hash-container">
+        <div class="input-section">
+          <div class="section-header">
+            <h3>{{ t('md5.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(inputText)" *ngIf="inputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="hash-editor"
+            [(ngModel)]="inputText"
+            (input)="generateHash()"
+            [placeholder]="t('md5.input.placeholder')"
+            rows="25"></textarea>
+        </div>
+
+        <div class="output-section">
+          <div class="section-header">
+            <h3>{{ t('md5.output') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(hashResult)" *ngIf="hashResult">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="hash-editor"
+            [(ngModel)]="hashResult"
+            [placeholder]="t('md5.output.placeholder')"
+            rows="25"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ToolService } from '../../services/tool.service';
-import { LanguageService } from '../../services/language.service';
-import { Tool } from '../../models/tool.model';
+import { ToolService } from '../../../services/tool.service';
+import { LanguageService } from '../../../services/language.service';
+import { Tool } from '../../../models/tool.model';
 
 @Component({
   selector: 'app-app-detail',
@@ -27,7 +27,7 @@ export class AppDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     
     if (id) {
-      this.toolService.getToolById(id).subscribe(tool => {
+      this.toolService.getToolById(id).subscribe((tool: Tool | undefined) => {
         if (tool && tool.category === 'app') {
           this.app = tool;
         } else {

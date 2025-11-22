@@ -1,0 +1,90 @@
+<div class="jwt-parser-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="input-section">
+          <label>{{ t('jwt.input.token') }}</label>
+          <textarea
+            [(ngModel)]="jwtToken"
+            (input)="parseJWT()"
+            rows="5"
+            class="jwt-input"
+            [placeholder]="t('jwt.input.placeholder')"></textarea>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="result-container" *ngIf="header && payload">
+        <div class="jwt-info-section">
+          <div class="info-card" *ngIf="payload.exp">
+            <div class="info-label">{{ t('jwt.expiration') }}</div>
+            <div class="info-value" [class.expired]="isExpired()">
+              {{ getExpirationDate() }}
+              <span class="status-badge" [class.expired]="isExpired()">
+                {{ isExpired() ? t('jwt.expired') : t('jwt.valid') }}
+              </span>
+            </div>
+            <div class="info-subtext" *ngIf="!isExpired()">
+              {{ t('jwt.time.until.expiration') }}: {{ getTimeUntilExpiration() }}
+            </div>
+          </div>
+          <div class="info-card" *ngIf="payload.iat">
+            <div class="info-label">{{ t('jwt.issued.at') }}</div>
+            <div class="info-value">{{ getIssuedAtDate() }}</div>
+          </div>
+          <div class="info-card" *ngIf="payload.iss">
+            <div class="info-label">{{ t('jwt.issuer') }}</div>
+            <div class="info-value">{{ payload.iss }}</div>
+          </div>
+          <div class="info-card" *ngIf="payload.sub">
+            <div class="info-label">{{ t('jwt.subject') }}</div>
+            <div class="info-value">{{ payload.sub }}</div>
+          </div>
+        </div>
+
+        <div class="jwt-sections">
+          <div class="jwt-section">
+            <div class="section-header">
+              <h3>{{ t('jwt.header') }}</h3>
+              <button class="btn-copy" (click)="copyToClipboard(headerJson)">
+                {{ t('json.formatter.copy') }}
+              </button>
+            </div>
+            <pre class="json-output">{{ headerJson }}</pre>
+          </div>
+
+          <div class="jwt-section">
+            <div class="section-header">
+              <h3>{{ t('jwt.payload') }}</h3>
+              <button class="btn-copy" (click)="copyToClipboard(payloadJson)">
+                {{ t('json.formatter.copy') }}
+              </button>
+            </div>
+            <pre class="json-output">{{ payloadJson }}</pre>
+          </div>
+
+          <div class="jwt-section">
+            <div class="section-header">
+              <h3>{{ t('jwt.signature') }}</h3>
+              <button class="btn-copy" (click)="copyToClipboard(signature)">
+                {{ t('json.formatter.copy') }}
+              </button>
+            </div>
+            <div class="signature-output">{{ signature }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

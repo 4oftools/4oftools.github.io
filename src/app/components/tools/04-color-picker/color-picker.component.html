@@ -1,0 +1,96 @@
+<div class="color-picker-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="control-group">
+          <label>{{ t('color.format') }}</label>
+          <select [(ngModel)]="colorFormat" class="format-select">
+            <option value="hex">HEX</option>
+            <option value="rgb">RGB</option>
+            <option value="hsl">HSL</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="color-picker-container">
+        <div class="color-picker-section">
+          <div class="section-header">
+            <h3>{{ t('color.picker') }}</h3>
+          </div>
+          <div class="color-picker-wrapper">
+            <input 
+              type="color" 
+              [(ngModel)]="selectedColor"
+              (input)="onColorChange($event)"
+              class="color-input" />
+            <div class="color-preview" [style.background-color]="selectedColor"></div>
+          </div>
+          <div class="color-value-display">
+            <div class="color-value-item">
+              <label>{{ t('color.hex') }}</label>
+              <div class="value-box">
+                <span class="color-value">{{ selectedColor }}</span>
+                <button class="btn-icon" (click)="copyToClipboard(selectedColor)">
+                  {{ t('json.formatter.copy') }}
+                </button>
+              </div>
+            </div>
+            <div class="color-value-item">
+              <label>{{ t('color.rgb') }}</label>
+              <div class="value-box">
+                <span class="color-value">{{ hexToRgb(selectedColor) }}</span>
+                <button class="btn-icon" (click)="copyToClipboard(hexToRgb(selectedColor))">
+                  {{ t('json.formatter.copy') }}
+                </button>
+              </div>
+            </div>
+            <div class="color-value-item">
+              <label>{{ t('color.hsl') }}</label>
+              <div class="value-box">
+                <span class="color-value">{{ hexToHsl(selectedColor) }}</span>
+                <button class="btn-icon" (click)="copyToClipboard(hexToHsl(selectedColor))">
+                  {{ t('json.formatter.copy') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-info-section">
+          <div class="section-header">
+            <h3>{{ t('color.info') }}</h3>
+          </div>
+          <div class="color-info-display">
+            <div class="info-item">
+              <span class="info-label">{{ t('color.current') }}</span>
+              <div class="current-color-box" [style.background-color]="selectedColor"></div>
+              <span class="current-color-value">{{ getColorInFormat() }}</span>
+            </div>
+            <div class="color-details">
+              <div class="detail-item">
+                <span class="detail-label">{{ t('color.hex') }}:</span>
+                <span class="detail-value">{{ selectedColor }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ t('color.rgb') }}:</span>
+                <span class="detail-value">{{ hexToRgb(selectedColor) }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ t('color.hsl') }}:</span>
+                <span class="detail-value">{{ hexToHsl(selectedColor) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -6,6 +6,7 @@ import { ToolService } from '../../services/tool.service';
 import { LanguageService } from '../../services/language.service';
 import { Tool, ToolCategory } from '../../models/tool.model';
 import { Subscription } from 'rxjs';
+import { TOOLS_CATEGORIES } from '../../config/tools.metadata';
 
 @Component({
   selector: 'app-tools',
@@ -21,14 +22,7 @@ export class ToolsComponent implements OnInit, OnDestroy {
   searchQuery: string = '';
   private subscriptions = new Subscription();
   
-  categories: { value: ToolCategory | 'all', key: string }[] = [
-    { value: 'all', key: 'filter.all' },
-    { value: 'programmer', key: 'filter.programmer' },
-    { value: 'efficiency', key: 'filter.efficiency' },
-    { value: 'life', key: 'filter.life' },
-    { value: 'design', key: 'filter.design' },
-    { value: 'other', key: 'filter.other' }
-  ];
+  categories = TOOLS_CATEGORIES;
 
   constructor(
     private toolService: ToolService,
@@ -101,6 +95,15 @@ export class ToolsComponent implements OnInit, OnDestroy {
 
   getToolTags(tool: Tool): string[] {
     return this.langService.currentLang === 'en' && tool.tagsEn ? tool.tagsEn : (tool.tags || []);
+  }
+
+  getToolRoute(tool: Tool): string[] {
+    // 如果有内部实现页面，跳转到工具页面
+    if (tool.internalRoute) {
+      return ['/tools', tool.internalRoute];
+    }
+    // 否则跳转到详情页
+    return ['/tools', tool.id];
   }
 }
 

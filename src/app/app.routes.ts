@@ -1,15 +1,35 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { ToolDetailComponent } from './components/tool-detail/tool-detail.component';
-import { AppDetailComponent } from './components/app-detail/app-detail.component';
+import { ToolDetailComponent } from './components/tools/tool-detail/tool-detail.component';
+import { AppDetailComponent } from './components/apps/app-detail/app-detail.component';
 import { AIComponent } from './components/ai/ai.component';
 import { ToolsComponent } from './components/tools/tools.component';
 import { AppsComponent } from './components/apps/apps.component';
 import { SponsorComponent } from './components/sponsor/sponsor.component';
+import { JsonFormatterComponent } from './components/tools/01-json-formatter/json-formatter.component';
+import { Base64EncoderComponent } from './components/tools/02-base64-encoder/base64-encoder.component';
+import { QrCodeGeneratorComponent } from './components/tools/03-qr-code-generator/qr-code-generator.component';
+import { ColorPickerComponent } from './components/tools/04-color-picker/color-picker.component';
+import { TimestampConverterComponent } from './components/tools/05-timestamp-converter/timestamp-converter.component';
+import { Md5HashComponent } from './components/tools/06-md5-hash/md5-hash.component';
+import { UrlEncoderComponent } from './components/tools/07-url-encoder/url-encoder.component';
+import { MortgageCalculatorComponent } from './components/tools/08-mortgage-calculator/mortgage-calculator.component';
+import { JwtParserComponent } from './components/tools/09-jwt-parser/jwt-parser.component';
+import { WebspherePasswordComponent } from './components/tools/10-websphere-password/websphere-password.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'tools', component: ToolsComponent },
+  { path: 'tools/json-formatter', component: JsonFormatterComponent },
+  { path: 'tools/base64-encoder', component: Base64EncoderComponent },
+  { path: 'tools/qr-code-generator', component: QrCodeGeneratorComponent },
+  { path: 'tools/color-picker', component: ColorPickerComponent },
+  { path: 'tools/timestamp-converter', component: TimestampConverterComponent },
+  { path: 'tools/md5-hash', component: Md5HashComponent },
+  { path: 'tools/url-encoder', component: UrlEncoderComponent },
+  { path: 'tools/mortgage-calculator', component: MortgageCalculatorComponent },
+  { path: 'tools/jwt-parser', component: JwtParserComponent },
+  { path: 'tools/websphere-password', component: WebspherePasswordComponent },
   { path: 'tools/:id', component: ToolDetailComponent },
   { path: 'apps', component: AppsComponent },
   { path: 'apps/:id', component: AppDetailComponent },

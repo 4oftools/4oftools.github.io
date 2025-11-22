@@ -32,7 +32,7 @@
       </div>
 
       <div class="tools-grid">
-        <div *ngFor="let tool of filteredTools" class="tool-card card" [routerLink]="['/tools', tool.id]">
+        <div *ngFor="let tool of filteredTools" class="tool-card card" [routerLink]="getToolRoute(tool)">
           <div class="tool-icon">{{ tool.icon || '🔧' }}</div>
           <h3 class="tool-name">{{ getToolName(tool) }}</h3>
           <p class="tool-description">{{ getToolDescription(tool) }}</p>
