@@ -62,7 +62,26 @@ src/
 
 编辑 `src/app/services/tool.service.ts` 文件，在 `tools` 数组中添加您的工具和应用数据。
 
-## 许可证
+## 部署到 GitHub Pages
 
-MIT
+### 自动部署
 
+项目已配置 GitHub Actions 自动部署。当您推送代码到 `main` 或 `master` 分支时，会自动构建并部署到 GitHub Pages。
+
+### 手动触发部署
+
+1. 前往 GitHub 仓库的 Actions 页面
+2. 选择 "Deploy to GitHub Pages" workflow
+3. 点击 "Run workflow" 按钮
+
+### 配置 GitHub Pages
+
+1. 前往仓库的 Settings > Pages
+2. 在 Source 部分，选择 "GitHub Actions"
+3. 保存设置
+
+### 注意事项
+
+- 如果您的仓库名是 `username.github.io`，base-href 会自动设置为 `/`
+- 如果您的仓库名是其他名称（如 `4oftools`），需要修改 `.github/workflows/deploy.yaml` 中的 `--base-href` 参数为 `/仓库名/`
+- 项目会自动创建 `404.html` 文件以支持 Angular SPA 路由
