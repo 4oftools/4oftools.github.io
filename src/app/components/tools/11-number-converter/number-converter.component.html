@@ -1,0 +1,78 @@
+<div class="number-converter-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="base-selector-group">
+          <div class="base-selector">
+            <label>{{ t('number.from') }}</label>
+            <select [(ngModel)]="fromBase" (change)="convert()" class="select-input">
+              <option value="binary">{{ t('number.binary') }}</option>
+              <option value="octal">{{ t('number.octal') }}</option>
+              <option value="decimal">{{ t('number.decimal') }}</option>
+              <option value="hexadecimal">{{ t('number.hexadecimal') }}</option>
+            </select>
+          </div>
+          <div class="swap-icon" (click)="swapBases()" title="Swap">
+            ⇄
+          </div>
+          <div class="base-selector">
+            <label>{{ t('number.to') }}</label>
+            <select [(ngModel)]="toBase" (change)="convert()" class="select-input">
+              <option value="binary">{{ t('number.binary') }}</option>
+              <option value="octal">{{ t('number.octal') }}</option>
+              <option value="decimal">{{ t('number.decimal') }}</option>
+              <option value="hexadecimal">{{ t('number.hexadecimal') }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="convert()">
+            {{ t('number.convert') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="converter-container">
+        <div class="converter-section">
+          <div class="section-header">
+            <h3>{{ t('number.input') }} ({{ t('number.' + fromBase) }})</h3>
+            <button class="btn-icon" (click)="copyToClipboard(inputValue)" *ngIf="inputValue">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-input"
+            [(ngModel)]="inputValue"
+            (input)="convert()"
+            [placeholder]="t('number.input.placeholder')"
+            rows="15"></textarea>
+        </div>
+
+        <div class="converter-section">
+          <div class="section-header">
+            <h3>{{ t('number.output') }} ({{ t('number.' + toBase) }})</h3>
+            <button class="btn-icon" (click)="copyToClipboard(outputValue)" *ngIf="outputValue">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-output"
+            [(ngModel)]="outputValue"
+            [placeholder]="t('number.output.placeholder')"
+            rows="15"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

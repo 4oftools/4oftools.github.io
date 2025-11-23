@@ -16,6 +16,13 @@ import { UrlEncoderComponent } from './components/tools/07-url-encoder/url-encod
 import { MortgageCalculatorComponent } from './components/tools/08-mortgage-calculator/mortgage-calculator.component';
 import { JwtParserComponent } from './components/tools/09-jwt-parser/jwt-parser.component';
 import { WebspherePasswordComponent } from './components/tools/10-websphere-password/websphere-password.component';
+import { NumberConverterComponent } from './components/tools/11-number-converter/number-converter.component';
+import { HashConverterComponent } from './components/tools/12-hash-converter/hash-converter.component';
+import { CryptoEncryptorComponent } from './components/tools/13-crypto-encryptor/crypto-encryptor.component';
+import { RegexTesterComponent } from './components/tools/14-regex-tester/regex-tester.component';
+import { XmlFormatterComponent } from './components/tools/15-xml-formatter/xml-formatter.component';
+import { CrontabCalculatorComponent } from './components/tools/16-crontab-calculator/crontab-calculator.component';
+import { YamlJsonConverterComponent } from './components/tools/17-yaml-json-converter/yaml-json-converter.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +37,13 @@ export const routes: Routes = [
   { path: 'tools/mortgage-calculator', component: MortgageCalculatorComponent },
   { path: 'tools/jwt-parser', component: JwtParserComponent },
   { path: 'tools/websphere-password', component: WebspherePasswordComponent },
+  { path: 'tools/number-converter', component: NumberConverterComponent },
+  { path: 'tools/hash-converter', component: HashConverterComponent },
+  { path: 'tools/crypto-encryptor', component: CryptoEncryptorComponent },
+  { path: 'tools/regex-tester', component: RegexTesterComponent },
+  { path: 'tools/xml-formatter', component: XmlFormatterComponent },
+  { path: 'tools/crontab-calculator', component: CrontabCalculatorComponent },
+  { path: 'tools/yaml-json-converter', component: YamlJsonConverterComponent },
   { path: 'tools/:id', component: ToolDetailComponent },
   { path: 'apps', component: AppsComponent },
   { path: 'apps/:id', component: AppDetailComponent },

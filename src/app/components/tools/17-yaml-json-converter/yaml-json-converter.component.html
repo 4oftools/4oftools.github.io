@@ -1,0 +1,89 @@
+<div class="yaml-json-converter-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="mode-switcher">
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'yaml-to-json'"
+            (click)="switchMode()">
+            {{ t('yaml.yaml.to.json') }}
+          </button>
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'json-to-yaml'"
+            (click)="switchMode()">
+            {{ t('yaml.json.to.yaml') }}
+          </button>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="convert()">
+            {{ t('yaml.convert') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="converter-container">
+        <div class="converter-section">
+          <div class="section-header">
+            <h3>{{ mode === 'yaml-to-json' ? t('yaml.yaml.input') : t('yaml.json.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(mode === 'yaml-to-json' ? yamlText : jsonText)" *ngIf="mode === 'yaml-to-json' ? yamlText : jsonText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-editor"
+            [(ngModel)]="yamlText"
+            *ngIf="mode === 'yaml-to-json'"
+            [placeholder]="t('yaml.yaml.placeholder')"
+            rows="25"></textarea>
+          <textarea 
+            class="converter-editor"
+            [(ngModel)]="jsonText"
+            *ngIf="mode === 'json-to-yaml'"
+            [placeholder]="t('yaml.json.placeholder')"
+            rows="25"></textarea>
+        </div>
+
+        <div class="swap-button-container">
+          <button class="btn-swap" (click)="swapContent()" title="Swap">
+            ⇄
+          </button>
+        </div>
+
+        <div class="converter-section">
+          <div class="section-header">
+            <h3>{{ mode === 'yaml-to-json' ? t('yaml.json.output') : t('yaml.yaml.output') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(mode === 'yaml-to-json' ? jsonText : yamlText)" *ngIf="mode === 'yaml-to-json' ? jsonText : yamlText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-editor"
+            [(ngModel)]="jsonText"
+            *ngIf="mode === 'yaml-to-json'"
+            [placeholder]="t('yaml.json.output.placeholder')"
+            rows="25"
+            readonly></textarea>
+          <textarea 
+            class="converter-editor"
+            [(ngModel)]="yamlText"
+            *ngIf="mode === 'json-to-yaml'"
+            [placeholder]="t('yaml.yaml.output.placeholder')"
+            rows="25"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

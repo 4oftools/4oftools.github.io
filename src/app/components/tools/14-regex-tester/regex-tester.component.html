@@ -1,0 +1,126 @@
+<div class="regex-tester-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="regex-input-group">
+          <label>{{ t('regex.pattern') }}</label>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              [(ngModel)]="regexPattern" 
+              (input)="testRegex()"
+              class="regex-input"
+              [placeholder]="t('regex.pattern.placeholder')" />
+            <span class="regex-delimiter">/</span>
+            <input 
+              type="text" 
+              [(ngModel)]="flags" 
+              (input)="testRegex()"
+              class="flags-input"
+              [placeholder]="t('regex.flags.placeholder')" />
+            <span class="regex-delimiter">/</span>
+          </div>
+        </div>
+        <div class="flags-group">
+          <label>{{ t('regex.flags') }}</label>
+          <div class="flags-buttons">
+            <button 
+              class="flag-btn" 
+              [class.active]="flags.includes('g')"
+              (click)="toggleFlag('g')">
+              g
+            </button>
+            <button 
+              class="flag-btn" 
+              [class.active]="flags.includes('i')"
+              (click)="toggleFlag('i')">
+              i
+            </button>
+            <button 
+              class="flag-btn" 
+              [class.active]="flags.includes('m')"
+              (click)="toggleFlag('m')">
+              m
+            </button>
+            <button 
+              class="flag-btn" 
+              [class.active]="flags.includes('s')"
+              (click)="toggleFlag('s')">
+              s
+            </button>
+            <button 
+              class="flag-btn" 
+              [class.active]="flags.includes('u')"
+              (click)="toggleFlag('u')">
+              u
+            </button>
+            <button 
+              class="flag-btn" 
+              [class.active]="flags.includes('y')"
+              (click)="toggleFlag('y')">
+              y
+            </button>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="testRegex()">
+            {{ t('regex.test') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="test-container">
+        <div class="test-section">
+          <div class="section-header">
+            <h3>{{ t('regex.test.text') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(testText)" *ngIf="testText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="test-textarea"
+            [(ngModel)]="testText"
+            (input)="testRegex()"
+            [placeholder]="t('regex.test.placeholder')"
+            rows="15"></textarea>
+        </div>
+
+        <div class="results-section">
+          <div class="section-header">
+            <h3>{{ t('regex.results') }} ({{ matches.length }})</h3>
+          </div>
+          <div class="results-content">
+            <div *ngIf="matches.length === 0 && isValid && testText" class="no-matches">
+              {{ t('regex.no.matches') }}
+            </div>
+            <div *ngFor="let match of matches; let i = index" class="match-item">
+              <div class="match-header">
+                <span class="match-number">#{{ i + 1 }}</span>
+                <span class="match-index">Index: {{ match.index }}</span>
+                <button class="btn-icon-small" (click)="copyToClipboard(match.match)">
+                  {{ t('json.formatter.copy') }}
+                </button>
+              </div>
+              <div class="match-content">{{ match.match }}</div>
+              <div *ngIf="match.groups.length > 0" class="match-groups">
+                <div *ngFor="let group of match.groups; let j = index" class="group-item">
+                  Group {{ j + 1 }}: {{ group }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

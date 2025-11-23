@@ -1,0 +1,54 @@
+<div class="hash-converter-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="algorithm-selector">
+          <label>{{ t('hash.algorithm') }}</label>
+          <select [(ngModel)]="selectedAlgorithm" (change)="generateHash()" class="select-input">
+            <option *ngFor="let algo of algorithms" [value]="algo">{{ algo }}</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="converter-container">
+        <div class="converter-section">
+          <div class="section-header">
+            <h3>{{ t('hash.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(inputText)" *ngIf="inputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-input"
+            [(ngModel)]="inputText"
+            (input)="generateHash()"
+            [placeholder]="t('hash.input.placeholder')"
+            rows="20"></textarea>
+        </div>
+
+        <div class="converter-section">
+          <div class="section-header">
+            <h3>{{ t('hash.output') }} ({{ selectedAlgorithm }})</h3>
+            <button class="btn-icon" (click)="copyToClipboard(hashResult)" *ngIf="hashResult">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="converter-output"
+            [(ngModel)]="hashResult"
+            [placeholder]="t('hash.output.placeholder')"
+            rows="5"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

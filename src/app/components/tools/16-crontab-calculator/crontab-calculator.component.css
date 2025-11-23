@@ -1,0 +1,274 @@
+.crontab-calculator-page {
+  background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--green-bg) 30%, var(--bg-secondary) 100%);
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+}
+
+.crontab-calculator-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 20%, rgba(52, 211, 153, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-content {
+  padding: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tool-controls {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.cron-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 300px;
+}
+
+.cron-input-group label {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.cron-input {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.3s;
+}
+
+.cron-input:focus {
+  outline: none;
+  border-color: var(--green-color);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-color) 0%, var(--green-light) 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-color) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+  background: var(--bg-secondary);
+  border-color: var(--text-secondary);
+}
+
+.error-message {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  background: #fef2f2;
+  color: #dc2626;
+  border-left: 4px solid #dc2626;
+}
+
+.description-section {
+  margin-bottom: 20px;
+}
+
+.description-card {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--green-color);
+  color: var(--text-primary);
+}
+
+.results-section {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.section-header {
+  margin-bottom: 12px;
+}
+
+.section-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.runs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.run-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border-left: 4px solid var(--green-color);
+}
+
+.run-number {
+  font-weight: 600;
+  color: var(--green-color);
+  min-width: 40px;
+}
+
+.run-time {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  color: var(--text-primary);
+}
+
+.btn-icon-small {
+  padding: 4px 8px;
+  background: var(--green-bg);
+  color: var(--green-dark);
+  border: 1px solid var(--green-light);
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-icon-small:hover {
+  background: var(--green-color);
+  color: white;
+  border-color: var(--green-color);
+}
+
+.info-section {
+  margin-top: 20px;
+}
+
+.info-card {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--green-color);
+}
+
+.info-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+}
+
+.info-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.cron-format {
+  background: var(--bg-secondary);
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.cron-format code {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  color: var(--green-color);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.format-labels {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.format-labels span {
+  flex: 1;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .tool-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cron-input-group {
+    min-width: 100%;
+  }
+
+  .button-group {
+    width: 100%;
+  }
+
+  .button-group .btn {
+    flex: 1;
+    min-width: 0;
+  }
+}
+

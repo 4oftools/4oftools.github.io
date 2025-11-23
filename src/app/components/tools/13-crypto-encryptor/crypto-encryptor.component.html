@@ -1,0 +1,91 @@
+<div class="crypto-encryptor-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="control-group">
+          <div class="algorithm-selector">
+            <label>{{ t('crypto.algorithm') }}</label>
+            <select [(ngModel)]="selectedAlgorithm" (change)="process()" class="select-input">
+              <option *ngFor="let algo of algorithms" [value]="algo">{{ algo }}</option>
+            </select>
+          </div>
+          <div class="password-input">
+            <label>{{ t('crypto.password') }}</label>
+            <input 
+              type="password" 
+              [(ngModel)]="password" 
+              (input)="process()"
+              class="password-field"
+              [placeholder]="t('crypto.password.placeholder')" />
+          </div>
+        </div>
+        <div class="mode-switcher">
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'encrypt'"
+            (click)="switchMode()">
+            {{ t('crypto.encrypt') }}
+          </button>
+          <button 
+            class="mode-btn" 
+            [class.active]="mode === 'decrypt'"
+            (click)="switchMode()">
+            {{ t('crypto.decrypt') }}
+          </button>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="process()">
+            {{ mode === 'encrypt' ? t('crypto.encrypt') : t('crypto.decrypt') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="editor-container">
+        <div class="editor-section">
+          <div class="section-header">
+            <h3>{{ mode === 'encrypt' ? t('crypto.input.text') : t('crypto.input.encrypted') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(inputText)" *ngIf="inputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="editor"
+            [(ngModel)]="inputText"
+            [placeholder]="mode === 'encrypt' ? t('crypto.input.placeholder') : t('crypto.encrypted.placeholder')"
+            rows="20"></textarea>
+        </div>
+
+        <div class="swap-button-container">
+          <button class="btn-swap" (click)="swapContent()" title="Swap">
+            ⇄
+          </button>
+        </div>
+
+        <div class="editor-section">
+          <div class="section-header">
+            <h3>{{ mode === 'encrypt' ? t('crypto.output.encrypted') : t('crypto.output.text') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(outputText)" *ngIf="outputText">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="editor"
+            [(ngModel)]="outputText"
+            [placeholder]="mode === 'encrypt' ? t('crypto.output.placeholder') : t('crypto.decrypted.placeholder')"
+            rows="20"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

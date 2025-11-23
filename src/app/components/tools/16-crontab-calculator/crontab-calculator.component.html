@@ -1,0 +1,70 @@
+<div class="crontab-calculator-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="cron-input-group">
+          <label>{{ t('crontab.expression') }}</label>
+          <input 
+            type="text" 
+            [(ngModel)]="cronExpression" 
+            (input)="calculate()"
+            class="cron-input"
+            [placeholder]="t('crontab.placeholder')" />
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="calculate()">
+            {{ t('crontab.calculate') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="description-section" *ngIf="description">
+        <div class="description-card">
+          <strong>{{ t('crontab.description') }}:</strong> {{ description }}
+        </div>
+      </div>
+
+      <div class="results-section" *ngIf="nextRuns.length > 0">
+        <div class="section-header">
+          <h3>{{ t('crontab.next.runs') }} ({{ nextRuns.length }})</h3>
+        </div>
+        <div class="runs-list">
+          <div *ngFor="let run of nextRuns; let i = index" class="run-item">
+            <span class="run-number">#{{ i + 1 }}</span>
+            <span class="run-time">{{ formatDate(run) }}</span>
+            <button class="btn-icon-small" (click)="copyToClipboard(formatDate(run))">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <div class="info-card">
+          <h4>{{ t('crontab.info.title') }}</h4>
+          <p>{{ t('crontab.info.description') }}</p>
+          <div class="cron-format">
+            <code>* * * * *</code>
+            <div class="format-labels">
+              <span>{{ t('crontab.minute') }}</span>
+              <span>{{ t('crontab.hour') }}</span>
+              <span>{{ t('crontab.day') }}</span>
+              <span>{{ t('crontab.month') }}</span>
+              <span>{{ t('crontab.weekday') }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

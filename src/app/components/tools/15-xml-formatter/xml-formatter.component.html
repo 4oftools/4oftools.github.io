@@ -1,0 +1,75 @@
+<div class="xml-formatter-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="control-group">
+          <label>{{ t('xml.formatter.indent') }}</label>
+          <input 
+            type="number" 
+            [(ngModel)]="indentSize" 
+            min="1" 
+            max="8" 
+            class="indent-input" />
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="formatXml()">
+            {{ t('xml.formatter.format') }}
+          </button>
+          <button class="btn btn-secondary" (click)="compressXml()">
+            {{ t('xml.formatter.compress') }}
+          </button>
+          <button class="btn btn-secondary" (click)="validateXml()">
+            {{ t('xml.formatter.validate') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage" [class.error]="errorMessage.startsWith('✗') || errorMessage.startsWith('Invalid') || errorMessage.startsWith('无效')">
+        {{ errorMessage }}
+      </div>
+
+      <div class="xml-editor-container">
+        <div class="xml-editor-section">
+          <div class="section-header">
+            <h3>{{ t('xml.formatter.input') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(inputXml)" *ngIf="inputXml">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="xml-editor"
+            [(ngModel)]="inputXml"
+            placeholder='<?xml version="1.0" encoding="UTF-8"?><root><item>Enter your XML here</item></root>'
+            rows="25"></textarea>
+        </div>
+
+        <div class="swap-button-container">
+          <button class="btn-swap" (click)="swapContent()" title="Swap">
+            ⇄
+          </button>
+        </div>
+
+        <div class="xml-editor-section">
+          <div class="section-header">
+            <h3>{{ t('xml.formatter.output') }}</h3>
+            <button class="btn-icon" (click)="copyToClipboard(outputXml)" *ngIf="outputXml">
+              {{ t('json.formatter.copy') }}
+            </button>
+          </div>
+          <textarea 
+            class="xml-editor"
+            [(ngModel)]="outputXml"
+            [placeholder]="t('xml.formatter.output.placeholder')"
+            rows="25"
+            readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
