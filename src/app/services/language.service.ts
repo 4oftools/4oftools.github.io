@@ -7,7 +7,7 @@ export type Language = 'zh' | 'en';
   providedIn: 'root'
 })
 export class LanguageService {
-  private currentLanguage$ = new BehaviorSubject<Language>('zh');
+  private currentLanguage$ = new BehaviorSubject<Language>('en');
   
   translations: { [key: string]: { zh: string; en: string } } = {
     'site.name': { zh: '否兔联盟', en: '4oftools' },
