@@ -1,10 +1,12 @@
+export type AICategory = 'programming' | 'model' | 'image' | 'video' | 'other';
+
 export interface AIItem {
   id: string;
   title: string;
   titleEn?: string;
   description: string;
   descriptionEn?: string;
-  category: 'application' | 'product' | 'technology' | 'tool';
+  category: AICategory;
   icon?: string;
   image?: string;
   url?: string;

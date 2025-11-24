@@ -12,124 +12,68 @@
     </div>
   </section>
 
-  <!-- Applications Section -->
-  <section id="applications" class="ai-section" *ngIf="applications.length > 0">
+  <!-- Filter and Content Section -->
+  <div class="page-content">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">{{ t('ai.applications') }}</h2>
-        <p class="section-description">{{ t('ai.applications.desc') }}</p>
-      </div>
-      <div class="ai-grid">
-        <div *ngFor="let item of applications" class="ai-card card">
-          <div class="ai-card-header">
-            <div class="ai-icon">{{ item.icon || '🤖' }}</div>
-            <div class="ai-card-info">
-              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+      <div class="content-layout">
+        <!-- Left Sidebar - Filters -->
+        <aside class="filter-sidebar">
+          <div class="search-section">
+            <h3 class="filter-title">{{ t('search.placeholder.ai') }}</h3>
+            <div class="search-box">
+              <input 
+                type="text" 
+                class="search-input"
+                [placeholder]="t('search.placeholder.ai')"
+                [(ngModel)]="searchQuery"
+                (ngModelChange)="onSearchChange()" />
+              <span class="search-icon">🔍</span>
             </div>
           </div>
-          <p class="ai-description">{{ getItemDescription(item) }}</p>
-          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
-            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          <div class="filter-section">
+            <h3 class="filter-title">{{ t('filter.all') }}</h3>
+            <div class="filter-list">
+              <button 
+                *ngFor="let cat of categories" 
+                class="filter-tab"
+                [class.active]="selectedCategory === cat.value"
+                (click)="filterByCategory(cat.value)">
+                <span class="filter-label">{{ t(cat.key) }}</span>
+                <span class="count-badge">{{ getCategoryCount(cat.value) }}</span>
+              </button>
+            </div>
           </div>
-          <div class="ai-meta">
-            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
-            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
-              {{ t('ai.visit') }} →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </aside>
 
-  <!-- Technologies Section -->
-  <section id="technologies" class="ai-section" *ngIf="technologies.length > 0">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">{{ t('ai.technologies') }}</h2>
-        <p class="section-description">{{ t('ai.technologies.desc') }}</p>
-      </div>
-      <div class="ai-grid">
-        <div *ngFor="let item of technologies" class="ai-card card">
-          <div class="ai-card-header">
-            <div class="ai-icon">{{ item.icon || '🧠' }}</div>
-            <div class="ai-card-info">
-              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+        <!-- Right Content - AI Items Grid -->
+        <main class="content-main">
+          <div class="ai-grid" *ngIf="filteredItems.length > 0">
+            <div *ngFor="let item of filteredItems" class="ai-card card">
+              <div class="ai-card-header">
+                <div class="ai-icon">{{ item.icon || '🤖' }}</div>
+                <div class="ai-card-info">
+                  <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
+                </div>
+              </div>
+              <p class="ai-description">{{ getItemDescription(item) }}</p>
+              <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
+                <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+              </div>
+              <div class="ai-meta">
+                <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
+                  {{ t('ai.visit') }} →
+                </a>
+              </div>
             </div>
           </div>
-          <p class="ai-description">{{ getItemDescription(item) }}</p>
-          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
-            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
-          </div>
-          <div class="ai-meta">
-            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
-            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
-              {{ t('ai.learn') }} →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Tools Section -->
-  <section id="tools" class="ai-section" *ngIf="tools.length > 0">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">{{ t('ai.tools') }}</h2>
-        <p class="section-description">{{ t('ai.tools.desc') }}</p>
-      </div>
-      <div class="ai-grid">
-        <div *ngFor="let item of tools" class="ai-card card">
-          <div class="ai-card-header">
-            <div class="ai-icon">{{ item.icon || '🛠️' }}</div>
-            <div class="ai-card-info">
-              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
-            </div>
+          <!-- Empty State -->
+          <div class="empty-state" *ngIf="filteredItems.length === 0">
+            <p>{{ t('empty.state') }}</p>
           </div>
-          <p class="ai-description">{{ getItemDescription(item) }}</p>
-          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
-            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
-          </div>
-          <div class="ai-meta">
-            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
-            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
-              {{ t('ai.visit') }} →
-            </a>
-          </div>
-        </div>
+        </main>
       </div>
     </div>
-  </section>
-
-  <!-- Products Section -->
-  <section id="products" class="ai-section" *ngIf="products.length > 0">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">{{ t('ai.products') }}</h2>
-        <p class="section-description">{{ t('ai.products.desc') }}</p>
-      </div>
-      <div class="ai-grid">
-        <div *ngFor="let item of products" class="ai-card card">
-          <div class="ai-card-header">
-            <div class="ai-icon">{{ item.icon || '📦' }}</div>
-            <div class="ai-card-info">
-              <h3 class="ai-title">{{ getItemTitle(item) }}</h3>
-            </div>
-          </div>
-          <p class="ai-description">{{ getItemDescription(item) }}</p>
-          <div class="ai-tags" *ngIf="item.tags && item.tags.length > 0">
-            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
-          </div>
-          <div class="ai-meta">
-            <span class="ai-date" *ngIf="item.date">{{ item.date }}</span>
-            <a [href]="item.url" target="_blank" class="ai-link" *ngIf="item.url">
-              {{ t('ai.visit') }} →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
 
