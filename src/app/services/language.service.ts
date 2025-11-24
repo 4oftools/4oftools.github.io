@@ -76,7 +76,7 @@ export class LanguageService {
     'sponsor.alipay': { zh: '支付宝', en: 'Alipay' },
     'sponsor.alipay.desc': { zh: '使用支付宝扫描二维码进行赞助', en: 'Scan the QR code with Alipay to sponsor' },
     'sponsor.paypal': { zh: 'PayPal', en: 'PayPal' },
-    'sponsor.paypal.desc': { zh: '点击图片或按钮通过 PayPal 进行赞助', en: 'Click the image or button to sponsor via PayPal' },
+    'sponsor.paypal.desc': { zh: '点击图片或者扫描二维码通过 PayPal 进行赞助', en: 'Click the image or scan the QR code to sponsor via PayPal' },
     'sponsor.paypal.button': { zh: 'PayPal 赞助', en: 'Donate with PayPal' },
     'sponsor.qr.placeholder': { zh: '二维码图片', en: 'QR Code Image' },
     'sponsor.description.title': { zh: '关于赞助', en: 'About Sponsorship' },
