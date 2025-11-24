@@ -69,6 +69,7 @@
   justify-content: space-between;
 }
 
+
 .filter-tabs {
   display: flex;
   gap: 12px;
@@ -119,6 +120,9 @@
   color: var(--text-primary);
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .filter-tab:hover {
@@ -130,6 +134,16 @@
   background: var(--green-color);
   border-color: var(--green-color);
   color: white;
+}
+
+.count-badge {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.filter-tab.active .count-badge {
+  opacity: 1;
 }
 
 .tools-grid {

@@ -16,7 +16,7 @@
               class="filter-tab"
               [class.active]="selectedCategory === cat.value"
               (click)="filterByCategory(cat.value)">
-              {{ t(cat.key) }}
+              {{ t(cat.key) }} <span class="count-badge">({{ getCategoryCount(cat.value) }})</span>
             </button>
           </div>
           <div class="search-box">

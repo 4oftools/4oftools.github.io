@@ -15,7 +15,7 @@
             <h3 class="qr-title">{{ t('sponsor.wechat') }}</h3>
             <div class="qr-image-wrapper">
               <img 
-                src="/assets/wechat-qr.png" 
+                src="/assets/weixin.jpg" 
                 [alt]="t('qr.wechat.alt')" 
                 class="qr-image"
                 (error)="onImageError($event)" />
@@ -31,7 +31,7 @@
             <h3 class="qr-title">{{ t('sponsor.alipay') }}</h3>
             <div class="qr-image-wrapper">
               <img 
-                src="/assets/alipay-qr.png" 
+                src="/assets/zhifubao.jpg" 
                 [alt]="t('qr.alipay.alt')" 
                 class="qr-image"
                 (error)="onImageError($event)" />
@@ -41,6 +41,34 @@
               </div>
             </div>
             <p class="qr-description">{{ t('sponsor.alipay.desc') }}</p>
+          </div>
+          
+          <div class="qr-card">
+            <h3 class="qr-title">{{ t('sponsor.paypal') }}</h3>
+            <div class="qr-image-wrapper">
+              <a 
+                [href]="paypalLink" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="paypal-link">
+                <img 
+                  src="/assets/paypal.jpg" 
+                  [alt]="t('qr.paypal.alt')" 
+                  class="qr-image"
+                  (error)="onImageError($event)" />
+              </a>
+              <div class="qr-placeholder" #paypalPlaceholder style="display: none;">
+                <a 
+                  [href]="paypalLink" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="paypal-button">
+                  <span class="qr-icon">💳</span>
+                  <p>{{ t('sponsor.paypal.button') }}</p>
+                </a>
+              </div>
+            </div>
+            <p class="qr-description">{{ t('sponsor.paypal.desc') }}</p>
           </div>
         </div>
       </section>

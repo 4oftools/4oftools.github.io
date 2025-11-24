@@ -96,5 +96,12 @@ export class AppsComponent implements OnInit, OnDestroy {
   getToolTags(tool: Tool): string[] {
     return this.langService.currentLang === 'en' && tool.tagsEn ? tool.tagsEn : (tool.tags || []);
   }
+
+  getCategoryCount(category: ToolCategory | 'all'): number {
+    if (category === 'all') {
+      return this.allApps.length;
+    }
+    return this.allApps.filter(app => app.type === category).length;
+  }
 }
 

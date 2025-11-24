@@ -105,5 +105,12 @@ export class ToolsComponent implements OnInit, OnDestroy {
     // 否则跳转到详情页
     return ['/tools', tool.id];
   }
+
+  getCategoryCount(category: ToolCategory | 'all'): number {
+    if (category === 'all') {
+      return this.allTools.length;
+    }
+    return this.allTools.filter(tool => tool.type === category).length;
+  }
 }
 

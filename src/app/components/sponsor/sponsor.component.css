@@ -96,7 +96,8 @@
 
 .qr-image-wrapper {
   margin: 20px 0;
-  min-height: 200px;
+  min-height: 300px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,10 +107,53 @@
 }
 
 .qr-image {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.paypal-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.paypal-link:hover {
+  transform: scale(1.05);
+}
+
+.paypal-link:hover .qr-image {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.paypal-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  padding: 20px;
+  background: var(--green-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  min-height: 200px;
+}
+
+.paypal-button:hover {
+  background: var(--green-color);
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.paypal-button .qr-icon {
+  color: white;
 }
 
 .qr-placeholder {

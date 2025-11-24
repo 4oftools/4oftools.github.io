@@ -20,6 +20,7 @@ interface Sponsor {
 export class SponsorComponent {
   corporateSponsors: Sponsor[] = [];
   individualSponsors: Sponsor[] = [];
+  paypalLink: string = 'https://www.paypal.com/donate/?hosted_button_id=YOUR_BUTTON_ID'; // 请替换为实际的 PayPal 收款链接
 
   constructor(public langService: LanguageService) {
     // 示例数据，实际应该从服务获取
