@@ -20,7 +20,7 @@ export interface SEOData {
   providedIn: 'root'
 })
 export class SEOService {
-  private baseUrl = 'https://4oftools.com'; // 请替换为实际域名
+  private baseUrl = 'https://www.4oftools.com'; // 请替换为实际域名
   private defaultImage = `${this.baseUrl}/assets/logo.png`;
 
   constructor(
