@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToolService } from '../../../services/tool.service';
 import { LanguageService } from '../../../services/language.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
+import { getToolDetailSEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tool-detail',
@@ -12,15 +15,17 @@ import { Tool } from '../../../models/tool.model';
   templateUrl: './tool-detail.component.html',
   styleUrls: ['./tool-detail.component.css']
 })
-export class ToolDetailComponent implements OnInit {
+export class ToolDetailComponent implements OnInit, OnDestroy {
   tool: Tool | undefined;
   error = false;
+  private subscriptions = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private toolService: ToolService,
-    public langService: LanguageService
+    public langService: LanguageService,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
@@ -35,6 +40,8 @@ export class ToolDetailComponent implements OnInit {
             return;
           }
           this.tool = tool;
+          // 设置SEO
+          this.seoService.setSEO(getToolDetailSEO(tool));
         } else {
           this.error = true;
         }
@@ -42,6 +49,18 @@ export class ToolDetailComponent implements OnInit {
     } else {
       this.error = true;
     }
+
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      if (this.tool) {
+        this.seoService.setSEO(getToolDetailSEO(this.tool));
+      }
+    });
+    this.subscriptions.add(langSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

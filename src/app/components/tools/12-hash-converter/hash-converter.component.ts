@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 type HashAlgorithm = 'MD5' | 'SHA1' | 'SHA256' | 'SHA512' | 'SHA3' | 'RIPEMD160';
@@ -17,27 +20,43 @@ type HashAlgorithm = 'MD5' | 'SHA1' | 'SHA256' | 'SHA512' | 'SHA3' | 'RIPEMD160'
   templateUrl: './hash-converter.component.html',
   styleUrls: ['./hash-converter.component.css']
 })
-export class HashConverterComponent implements OnInit {
+export class HashConverterComponent implements OnInit, OnDestroy {
   inputText: string = '';
   selectedAlgorithm: HashAlgorithm = 'MD5';
   hashResult: string = '';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   algorithms: HashAlgorithm[] = ['MD5', 'SHA1', 'SHA256', 'SHA512', 'SHA3', 'RIPEMD160'];
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
-    this.toolService.getAllTools().subscribe(tools => {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['hash-converter']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['hash-converter']);
+    });
+    this.subscriptions.add(langSub);
+
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'hash-converter');
     });
+    this.subscriptions.add(toolSub);
     
     // Auto generate hash on input change
     this.generateHash();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

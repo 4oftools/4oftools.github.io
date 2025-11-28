@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-yaml-json-converter',
@@ -14,23 +17,39 @@ import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component
   templateUrl: './yaml-json-converter.component.html',
   styleUrls: ['./yaml-json-converter.component.css']
 })
-export class YamlJsonConverterComponent implements OnInit {
+export class YamlJsonConverterComponent implements OnInit, OnDestroy {
   yamlText: string = '';
   jsonText: string = '';
   errorMessage: string = '';
   mode: 'yaml-to-json' | 'json-to-yaml' = 'yaml-to-json';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
-    this.toolService.getAllTools().subscribe(tools => {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['yaml-json-converter']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['yaml-json-converter']);
+    });
+    this.subscriptions.add(langSub);
+
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'yaml-json-converter');
     });
+    this.subscriptions.add(toolSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

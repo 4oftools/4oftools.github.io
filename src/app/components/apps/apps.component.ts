@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ToolService } from '../../services/tool.service';
 import { LanguageService } from '../../services/language.service';
+import { SEOService } from '../../services/seo.service';
 import { Tool, ToolCategory } from '../../models/tool.model';
 import { Subscription } from 'rxjs';
 import { APPS_CATEGORIES } from '../../config/apps.metadata';
+import { APPS_LIST_SEO } from '../../config/seo.config';
 
 @Component({
   selector: 'app-apps',
@@ -26,10 +28,20 @@ export class AppsComponent implements OnInit, OnDestroy {
 
   constructor(
     private toolService: ToolService,
-    public langService: LanguageService
+    public langService: LanguageService,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(APPS_LIST_SEO);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(APPS_LIST_SEO);
+    });
+    this.subscriptions.add(langSub);
+
     const sub = this.toolService.getToolsByCategory('app').subscribe(apps => {
       this.allApps = apps;
       this.filteredApps = apps;

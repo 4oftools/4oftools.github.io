@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 import QRCode from 'qrcode';
 
 @Component({
@@ -15,24 +18,40 @@ import QRCode from 'qrcode';
   templateUrl: './qr-code-generator.component.html',
   styleUrls: ['./qr-code-generator.component.css']
 })
-export class QrCodeGeneratorComponent implements OnInit {
+export class QrCodeGeneratorComponent implements OnInit, OnDestroy {
   inputText: string = '';
   qrCodeDataUrl: string = '';
   errorMessage: string = '';
   size: number = 300;
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['qr-code-generator']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['qr-code-generator']);
+    });
+    this.subscriptions.add(langSub);
+
     // 根据路由获取工具数据
-    this.toolService.getAllTools().subscribe(tools => {
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'qr-code-generator');
     });
+    this.subscriptions.add(toolSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

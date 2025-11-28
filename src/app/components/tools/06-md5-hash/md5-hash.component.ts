@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -15,22 +18,38 @@ import * as CryptoJS from 'crypto-js';
   templateUrl: './md5-hash.component.html',
   styleUrls: ['./md5-hash.component.css']
 })
-export class Md5HashComponent implements OnInit {
+export class Md5HashComponent implements OnInit, OnDestroy {
   inputText: string = '';
   hashResult: string = '';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['md5-hash']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['md5-hash']);
+    });
+    this.subscriptions.add(langSub);
+
     // 根据路由获取工具数据
-    this.toolService.getAllTools().subscribe(tools => {
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'md5-hash');
     });
+    this.subscriptions.add(toolSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 interface PaymentDetail {
   month: number;
@@ -22,7 +25,7 @@ interface PaymentDetail {
   templateUrl: './mortgage-calculator.component.html',
   styleUrls: ['./mortgage-calculator.component.css']
 })
-export class MortgageCalculatorComponent implements OnInit {
+export class MortgageCalculatorComponent implements OnInit, OnDestroy {
   loanType: 'commercial' | 'provident' | 'combined' = 'commercial';
   loanAmount: number = 1000000;
   commercialLoanAmount: number = 0;
@@ -38,21 +41,37 @@ export class MortgageCalculatorComponent implements OnInit {
   paymentDetails: PaymentDetail[] = [];
   
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['mortgage-calculator']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['mortgage-calculator']);
+    });
+    this.subscriptions.add(langSub);
+
     // 根据路由获取工具数据
-    this.toolService.getAllTools().subscribe(tools => {
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'mortgage-calculator');
     });
+    this.subscriptions.add(toolSub);
     
     // 初始计算
     this.calculate();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

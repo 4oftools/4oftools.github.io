@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crontab-calculator',
@@ -14,23 +17,39 @@ import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component
   templateUrl: './crontab-calculator.component.html',
   styleUrls: ['./crontab-calculator.component.css']
 })
-export class CrontabCalculatorComponent implements OnInit {
+export class CrontabCalculatorComponent implements OnInit, OnDestroy {
   cronExpression: string = '';
   nextRuns: Date[] = [];
   errorMessage: string = '';
   description: string = '';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
-    this.toolService.getAllTools().subscribe(tools => {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['crontab-calculator']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['crontab-calculator']);
+    });
+    this.subscriptions.add(langSub);
+
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'crontab-calculator');
     });
+    this.subscriptions.add(toolSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

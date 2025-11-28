@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 type BaseType = 'binary' | 'octal' | 'decimal' | 'hexadecimal';
 
@@ -16,24 +19,40 @@ type BaseType = 'binary' | 'octal' | 'decimal' | 'hexadecimal';
   templateUrl: './number-converter.component.html',
   styleUrls: ['./number-converter.component.css']
 })
-export class NumberConverterComponent implements OnInit {
+export class NumberConverterComponent implements OnInit, OnDestroy {
   inputValue: string = '';
   fromBase: BaseType = 'decimal';
   toBase: BaseType = 'hexadecimal';
   outputValue: string = '';
   errorMessage: string = '';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
-    this.toolService.getAllTools().subscribe(tools => {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['number-converter']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['number-converter']);
+    });
+    this.subscriptions.add(langSub);
+
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'number-converter');
     });
+    this.subscriptions.add(toolSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

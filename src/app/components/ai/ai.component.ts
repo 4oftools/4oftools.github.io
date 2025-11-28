@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AIService } from '../../services/ai.service';
 import { LanguageService } from '../../services/language.service';
+import { SEOService } from '../../services/seo.service';
 import { AIItem, AICategory } from '../../models/ai-item.model';
 import { Subscription } from 'rxjs';
 import { AI_CATEGORIES } from '../../config/ai.metadata';
+import { AI_PAGE_SEO } from '../../config/seo.config';
 
 @Component({
   selector: 'app-ai',
@@ -25,10 +27,20 @@ export class AIComponent implements OnInit, OnDestroy {
 
   constructor(
     private aiService: AIService,
-    public langService: LanguageService
+    public langService: LanguageService,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(AI_PAGE_SEO);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(AI_PAGE_SEO);
+    });
+    this.subscriptions.add(langSub);
+
     const sub = this.aiService.getAllItems().subscribe(items => {
       this.allItems = items;
       this.filteredItems = items;

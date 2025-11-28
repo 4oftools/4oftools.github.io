@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-timestamp-converter',
@@ -14,12 +17,13 @@ import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component
   templateUrl: './timestamp-converter.component.html',
   styleUrls: ['./timestamp-converter.component.css']
 })
-export class TimestampConverterComponent implements OnInit {
+export class TimestampConverterComponent implements OnInit, OnDestroy {
   timestamp: string = '';
   dateTime: string = '';
   errorMessage: string = '';
   mode: 'timestamp-to-date' | 'date-to-timestamp' = 'timestamp-to-date';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   get inputValue(): string {
     return this.mode === 'timestamp-to-date' ? this.timestamp : this.dateTime;
@@ -48,18 +52,33 @@ export class TimestampConverterComponent implements OnInit {
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['timestamp-converter']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['timestamp-converter']);
+    });
+    this.subscriptions.add(langSub);
+
     // 根据路由获取工具数据
-    this.toolService.getAllTools().subscribe(tools => {
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'timestamp-converter');
     });
+    this.subscriptions.add(toolSub);
     
     // 初始化当前时间戳
     this.timestamp = Math.floor(Date.now() / 1000).toString();
     this.convertTimestampToDate();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {

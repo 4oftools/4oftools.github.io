@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
+import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { TOOL_PAGES_SEO } from '../../../config/seo.config';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-url-encoder',
@@ -14,24 +17,40 @@ import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component
   templateUrl: './url-encoder.component.html',
   styleUrls: ['./url-encoder.component.css']
 })
-export class UrlEncoderComponent implements OnInit {
+export class UrlEncoderComponent implements OnInit, OnDestroy {
   inputText: string = '';
   outputText: string = '';
   errorMessage: string = '';
   mode: 'encode' | 'decode' = 'encode';
   tool: Tool | undefined;
+  private subscriptions = new Subscription();
 
   constructor(
     public langService: LanguageService,
     private toolService: ToolService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SEOService
   ) {}
 
   ngOnInit() {
+    // 设置SEO
+    this.seoService.setSEO(TOOL_PAGES_SEO['url-encoder']);
+    
+    // 订阅语言变化，更新SEO
+    const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+      this.seoService.setSEO(TOOL_PAGES_SEO['url-encoder']);
+    });
+    this.subscriptions.add(langSub);
+
     // 根据路由获取工具数据
-    this.toolService.getAllTools().subscribe(tools => {
+    const toolSub = this.toolService.getAllTools().subscribe(tools => {
       this.tool = tools.find(t => t.internalRoute === 'url-encoder');
     });
+    this.subscriptions.add(toolSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   t(key: string): string {
