@@ -1,0 +1,167 @@
+<div class="severance-calculator-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="termination-type-switch">
+          <label class="switch-label">{{ t('severance.termination.type') }}</label>
+          <div class="switch-container">
+            <button 
+              class="switch-option" 
+              [class.active]="terminationType === 'economic'"
+              (click)="terminationType = 'economic'; calculate()">
+              {{ t('severance.economic.termination') }}
+            </button>
+            <button 
+              class="switch-option" 
+              [class.active]="terminationType === 'illegal'"
+              (click)="terminationType = 'illegal'; calculate()">
+              {{ t('severance.illegal.termination') }}
+            </button>
+          </div>
+        </div>
+        
+        <div class="input-row">
+          <div class="input-group">
+            <label>{{ t('severance.start.date') }}</label>
+            <div class="input-wrapper">
+              <input 
+                type="date" 
+                [(ngModel)]="startDate" 
+                class="date-input" />
+            </div>
+          </div>
+          
+          <div class="input-group">
+            <label>{{ t('severance.end.date') }}</label>
+            <div class="input-wrapper">
+              <input 
+                type="date" 
+                [(ngModel)]="endDate" 
+                class="date-input" />
+            </div>
+          </div>
+          
+          <div class="input-group">
+            <label>{{ t('severance.y.months') }}</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                [(ngModel)]="yMonths" 
+                min="0"
+                step="0.5"
+                class="number-input" />
+              <span class="unit">{{ t('severance.months') }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-row">
+          <div class="input-group">
+            <label>{{ t('severance.last.year.salary') }}</label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                [value]="lastYearTotalSalaryDisplay"
+                (input)="onLastYearTotalSalaryInput($event)"
+                class="number-input" />
+              <span class="unit">{{ t('severance.yuan') }}</span>
+            </div>
+          </div>
+          
+          <div class="input-group">
+            <label>{{ t('severance.triple.social.avg') }}</label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                [value]="tripleSocialAverageDisplay"
+                (input)="onTripleSocialAverageInput($event)"
+                class="number-input" />
+              <span class="unit">{{ t('severance.yuan') }}</span>
+            </div>
+          </div>
+          
+          <div class="input-group">
+            <label>{{ t('severance.contract.monthly.salary') }}</label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                [value]="contractMonthlySalaryDisplay"
+                (input)="onContractMonthlySalaryInput($event)"
+                class="number-input" />
+              <span class="unit">{{ t('severance.yuan') }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="calculate()">
+            {{ t('severance.calculate') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('json.formatter.clear') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="result-container">
+        <div class="result-summary">
+          <div class="result-card">
+            <div class="result-label">
+              <span *ngIf="terminationType === 'economic'">{{ t('severance.severance.pay.economic') }}</span>
+              <span *ngIf="terminationType === 'illegal'">{{ t('severance.severance.pay.illegal') }}</span>
+            </div>
+            <div class="result-value">{{ formatCurrency(severancePay) }}</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">{{ t('severance.n.amount') }}</div>
+            <div class="result-value">{{ formatCurrency(terminationType === 'illegal' ? nAmount * 2 : nAmount) }}</div>
+            <div class="result-subtitle">
+              <span *ngIf="terminationType === 'economic'">{{ t('severance.n.detail') }}: {{ nMonths }} × {{ formatCurrency(nSalary) }}</span>
+              <span *ngIf="terminationType === 'illegal'">{{ t('severance.n.detail') }}: 2 × {{ nMonths }} × {{ formatCurrency(nSalary) }}</span>
+            </div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">{{ t('severance.y.amount') }}</div>
+            <div class="result-value">{{ formatCurrency(yAmount) }}</div>
+            <div class="result-subtitle">{{ t('severance.y.detail') }}: {{ yMonths }} × {{ formatCurrency(contractMonthlySalary) }}</div>
+          </div>
+        </div>
+
+        <div class="calculation-details" *ngIf="calculationDetails">
+          <div class="section-header">
+            <h3>{{ t('severance.calculation.details') }}</h3>
+          </div>
+          <div class="details-content">
+            <pre>{{ calculationDetails }}</pre>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="section-header">
+            <h3>{{ t('severance.legal.info') }}</h3>
+          </div>
+          <div class="info-content">
+            <h4>{{ t('severance.n.explanation') }}</h4>
+            <ul>
+              <li>{{ t('severance.info.1') }}</li>
+              <li>{{ t('severance.info.2') }}</li>
+              <li>{{ t('severance.info.3') }}</li>
+              <li>{{ t('severance.info.4') }}</li>
+              <li>{{ t('severance.info.5') }}</li>
+            </ul>
+            <h4>{{ t('severance.y.explanation') }}</h4>
+            <ul>
+              <li>{{ t('severance.info.6') }}</li>
+              <li>{{ t('severance.info.7') }}</li>
+              <li>{{ t('severance.info.8') }}</li>
+            </ul>
+            <p class="disclaimer">{{ t('severance.disclaimer') }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

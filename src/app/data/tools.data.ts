@@ -255,6 +255,21 @@ export const TOOLS_DATA: Tool[] = [
     featured: false,
     url: 'https://example.com/yaml-json-converter',
     internalRoute: 'yaml-json-converter' // 已实现的内部页面
+  },
+  {
+    id: 'tool-18',
+    name: '裁员补贴计算器',
+    nameEn: 'Severance Pay Calculator',
+    description: '根据工作年限和月薪计算裁员经济补偿金，符合中国劳动法规定，帮助了解应得的补偿金额。',
+    descriptionEn: 'Calculate severance pay based on years of service and monthly salary, compliant with Chinese labor law, helping you understand your entitled compensation.',
+    category: 'tool',
+    type: 'life',
+    icon: '💰',
+    tags: ['生活工具', '计算器', '劳动法'],
+    tagsEn: ['Life Tool', 'Calculator', 'Labor Law'],
+    featured: false,
+    url: 'https://example.com/severance-calculator',
+    internalRoute: 'severance-calculator' // 已实现的内部页面
   }
 ];
 

@@ -23,6 +23,7 @@ import { RegexTesterComponent } from './components/tools/14-regex-tester/regex-t
 import { XmlFormatterComponent } from './components/tools/15-xml-formatter/xml-formatter.component';
 import { CrontabCalculatorComponent } from './components/tools/16-crontab-calculator/crontab-calculator.component';
 import { YamlJsonConverterComponent } from './components/tools/17-yaml-json-converter/yaml-json-converter.component';
+import { SeveranceCalculatorComponent } from './components/tools/18-severance-calculator/severance-calculator.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +45,7 @@ export const routes: Routes = [
   { path: 'tools/xml-formatter', component: XmlFormatterComponent },
   { path: 'tools/crontab-calculator', component: CrontabCalculatorComponent },
   { path: 'tools/yaml-json-converter', component: YamlJsonConverterComponent },
+  { path: 'tools/severance-calculator', component: SeveranceCalculatorComponent },
   { path: 'tools/:id', component: ToolDetailComponent },
   { path: 'apps', component: AppsComponent },
   { path: 'apps/:id', component: AppDetailComponent },

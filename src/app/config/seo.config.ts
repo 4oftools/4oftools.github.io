@@ -391,6 +391,20 @@ export const TOOL_PAGES_SEO: { [key: string]: SEOData } = {
       zh: 'YAML转JSON,JSON转YAML,YAML转换,JSON转换,配置文件转换,在线YAML JSON转换器',
       en: 'YAML to JSON,JSON to YAML,YAML converter,JSON converter,config file converter,online YAML JSON converter'
     }
+  },
+  'severance-calculator': {
+    title: {
+      zh: '裁员补贴计算器 - 否兔联盟 | 经济补偿金计算工具',
+      en: 'Severance Pay Calculator - 4oftools | Economic Compensation Calculator'
+    },
+    description: {
+      zh: '根据工作年限和月薪计算裁员经济补偿金，符合中国劳动法规定。免费在线裁员补贴计算器，帮助了解应得的补偿金额。',
+      en: 'Calculate severance pay based on years of service and monthly salary, compliant with Chinese labor law. Free online severance pay calculator to help you understand your entitled compensation.'
+    },
+    keywords: {
+      zh: '裁员补贴,经济补偿金,劳动法,裁员计算器,补偿金计算,在线计算器',
+      en: 'severance pay,economic compensation,labor law,severance calculator,compensation calculator,online calculator'
+    }
   }
 };
 
