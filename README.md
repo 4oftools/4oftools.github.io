@@ -65,7 +65,7 @@ Explore feature-rich applications organized by categories:
 
 ## How to Use
 
-1. **Browse Tools** - Visit the [Tools](https://4oftools.com/tools) page to see all available tools
+1. **Browse Tools** - Visit the [Tools](https://www.4oftools.com/tools) page to see all available tools
 2. **Search & Filter** - Use the search bar or category filters to find specific tools
 3. **Use Tools** - Click on any tool to start using it immediately
 4. **Switch Language** - Use the language switcher in the header to change between English and Chinese
@@ -87,7 +87,7 @@ Explore feature-rich applications organized by categories:
 
 ## Support
 
-If you have any questions, suggestions, or feedback, please feel free to contact us or visit our [Sponsor](https://4oftools.com/sponsor) page to support the platform.
+If you have any questions, suggestions, or feedback, please feel free to contact us or visit our [Sponsor](https://www.4oftools.com/sponsor) page to support the platform.
 
 ## Contributing
 
