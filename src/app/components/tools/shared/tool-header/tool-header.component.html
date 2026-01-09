@@ -17,7 +17,10 @@
     </div>
     <div class="header-content">
       <div class="tool-info">
-        <div class="tool-icon-large">{{ tool.icon || '🔧' }}</div>
+        <div class="tool-icon-large">
+          <img *ngIf="isIconImage(tool.icon)" [src]="tool.icon" [alt]="getToolName()" />
+          <span *ngIf="!isIconImage(tool.icon)">{{ tool.icon || '🔧' }}</span>
+        </div>
         <div class="tool-title-group">
           <h1 class="tool-title">{{ getToolName() }}</h1>
           <p class="tool-subtitle">{{ getToolDescription() }}</p>

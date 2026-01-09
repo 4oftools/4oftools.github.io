@@ -24,6 +24,7 @@ import { XmlFormatterComponent } from './components/tools/15-xml-formatter/xml-f
 import { CrontabCalculatorComponent } from './components/tools/16-crontab-calculator/crontab-calculator.component';
 import { YamlJsonConverterComponent } from './components/tools/17-yaml-json-converter/yaml-json-converter.component';
 import { SeveranceCalculatorComponent } from './components/tools/18-severance-calculator/severance-calculator.component';
+import { SqlToErDiagramComponent } from './components/tools/19-sql-to-er-diagram/sql-to-er-diagram.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -46,6 +47,7 @@ export const routes: Routes = [
   { path: 'tools/crontab-calculator', component: CrontabCalculatorComponent },
   { path: 'tools/yaml-json-converter', component: YamlJsonConverterComponent },
   { path: 'tools/severance-calculator', component: SeveranceCalculatorComponent },
+  { path: 'tools/sql-to-er-diagram', component: SqlToErDiagramComponent },
   { path: 'tools/:id', component: ToolDetailComponent },
   { path: 'apps', component: AppsComponent },
   { path: 'apps/:id', component: AppDetailComponent },
@@ -53,4 +55,3 @@ export const routes: Routes = [
   { path: 'sponsor', component: SponsorComponent },
   { path: '**', redirectTo: '' }
 ];
-

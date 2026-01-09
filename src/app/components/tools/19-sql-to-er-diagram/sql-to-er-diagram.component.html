@@ -1,0 +1,120 @@
+<div class="sql-er-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="generateDiagram()">
+            {{ t('sql.er.generate') }}
+          </button>
+          <button class="btn btn-outline" (click)="clearAll()">
+            {{ t('sql.er.clear') }}
+          </button>
+          <button class="btn btn-outline" (click)="loadSample()">
+            {{ t('sql.er.sample') }}
+          </button>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" (click)="copyToClipboard(mermaidText)" [disabled]="!mermaidText">
+            {{ t('sql.er.copy') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="editor-grid">
+        <div class="editor-section">
+          <div class="section-header">
+            <h3>{{ t('sql.er.input') }}</h3>
+          </div>
+          <textarea
+            class="editor-textarea"
+            [(ngModel)]="sqlText"
+            [placeholder]="t('sql.er.input.placeholder')"
+            rows="20"></textarea>
+        </div>
+
+        <div class="editor-section">
+          <div class="section-header">
+            <h3>{{ t('sql.er.output') }}</h3>
+          </div>
+          <textarea
+            class="editor-textarea"
+            [value]="mermaidText"
+            [placeholder]="t('sql.er.output.placeholder')"
+            rows="20"
+            readonly></textarea>
+        </div>
+      </div>
+
+      <div class="diagram-section">
+        <div class="section-header">
+          <h3>{{ t('sql.er.diagram') }}</h3>
+          <div class="diagram-actions" *ngIf="diagramNodes.length">
+            <button class="btn btn-outline btn-small" (click)="zoomOut()">-</button>
+            <button class="btn btn-outline btn-small" (click)="resetView()">1:1</button>
+            <button class="btn btn-outline btn-small" (click)="zoomIn()">+</button>
+          </div>
+        </div>
+        <div
+          class="diagram-scroll"
+          *ngIf="diagramNodes.length"
+          (wheel)="onWheel($event)"
+          (mousedown)="onMouseDown($event)"
+          (mousemove)="onMouseMove($event)"
+          (mouseup)="onMouseUp()"
+          (mouseleave)="onMouseUp()">
+          <div class="diagram-viewport">
+            <div
+              class="diagram-canvas"
+              [style.width.px]="canvasWidth"
+              [style.height.px]="canvasHeight"
+              [style.transform]="diagramTransform">
+              <svg
+                class="diagram-lines"
+                [attr.width]="canvasWidth"
+                [attr.height]="canvasHeight"
+                aria-hidden="true">
+                <defs>
+                  <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z" class="arrow-head"></path>
+                  </marker>
+                </defs>
+                <path
+                  *ngFor="let link of diagramLinks"
+                  [attr.d]="link.path"
+                  class="link-path"
+                  marker-end="url(#arrow)"></path>
+              </svg>
+
+              <div
+                class="diagram-node"
+                *ngFor="let node of diagramNodes"
+                [style.left.px]="node.x"
+                [style.top.px]="node.y"
+                [style.width.px]="node.width"
+                [style.height.px]="node.height">
+                <div class="node-title">{{ node.table.name }}</div>
+                <div class="node-columns">
+                  <div class="node-row" *ngFor="let column of node.table.columns">
+                    <span class="column-name">{{ column.name }}</span>
+                    <span class="column-type">{{ column.type }}</span>
+                    <span class="column-badge pk" *ngIf="column.isPrimaryKey">PK</span>
+                    <span class="column-badge fk" *ngIf="column.isForeignKey">FK</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="diagram-empty" *ngIf="!diagramNodes.length">
+          {{ t('sql.er.empty') }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

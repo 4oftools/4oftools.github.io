@@ -405,7 +405,20 @@ export const TOOL_PAGES_SEO: { [key: string]: SEOData } = {
       zh: '裁员补贴,经济补偿金,劳动法,裁员计算器,补偿金计算,在线计算器',
       en: 'severance pay,economic compensation,labor law,severance calculator,compensation calculator,online calculator'
     }
+  },
+  'sql-to-er-diagram': {
+    title: {
+      zh: 'SQL转ER图 - 否兔联盟 | SQL建表语句可视化工具',
+      en: 'SQL to ER Diagram - 4oftools | Visualize CREATE TABLE SQL'
+    },
+    description: {
+      zh: '将SQL建表语句快速转换为ER图与Mermaid代码，方便数据库结构可视化和设计沟通。免费在线SQL转ER图工具。',
+      en: 'Convert CREATE TABLE SQL into ER diagrams and Mermaid code for database visualization and design collaboration. Free online SQL to ER diagram tool.'
+    },
+    keywords: {
+      zh: 'SQL转ER图,ER图生成,SQL建表,数据库可视化,Mermaid ER,在线ER图工具',
+      en: 'SQL to ER diagram,ER diagram generator,CREATE TABLE,Database visualization,Mermaid ER,online ER tool'
+    }
   }
 };
-
 

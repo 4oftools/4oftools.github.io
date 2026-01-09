@@ -124,5 +124,9 @@ export class ToolsComponent implements OnInit, OnDestroy {
     }
     return this.allTools.filter(tool => tool.type === category).length;
   }
-}
 
+  isIconImage(icon?: string): boolean {
+    if (!icon) return false;
+    return icon.includes('/') || /\.(svg|png|jpg|jpeg|webp)$/i.test(icon);
+  }
+}

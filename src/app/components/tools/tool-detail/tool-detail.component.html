@@ -10,7 +10,10 @@
     
     <div class="detail-content">
       <div class="detail-header">
-        <div class="detail-icon">{{ tool.icon || '🔧' }}</div>
+        <div class="detail-icon">
+          <img *ngIf="isIconImage(tool.icon)" [src]="tool.icon" [alt]="getToolName(tool)" />
+          <span *ngIf="!isIconImage(tool.icon)">{{ tool.icon || '??' }}</span>
+        </div>
         <div class="detail-info">
           <h1 class="detail-title">{{ getToolName(tool) }}</h1>
           <div class="detail-tags" *ngIf="getToolTags(tool).length > 0">

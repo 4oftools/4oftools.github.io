@@ -270,6 +270,20 @@ export const TOOLS_DATA: Tool[] = [
     featured: false,
     url: 'https://example.com/severance-calculator',
     internalRoute: 'severance-calculator' // 已实现的内部页面
+  },
+  {
+    id: 'tool-19',
+    name: 'SQL转ER图',
+    nameEn: 'SQL to ER Diagram',
+    description: '将SQL建表语句快速转换为ER图与Mermaid代码，便于数据库结构可视化和设计沟通。',
+    descriptionEn: 'Convert CREATE TABLE SQL into ER diagrams and Mermaid code for database visualization and design collaboration.',
+    category: 'tool',
+    type: 'programmer',
+    icon: '🧱',
+    tags: ['开发工具', '数据库', 'ER图'],
+    tagsEn: ['Development Tool', 'Database', 'ER Diagram'],
+    featured: false,
+    url: 'https://example.com/sql-to-er-diagram',
+    internalRoute: 'sql-to-er-diagram' // 已实现的内部页面
   }
 ];
-

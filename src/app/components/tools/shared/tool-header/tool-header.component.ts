@@ -27,5 +27,10 @@ export class ToolHeaderComponent {
   getToolDescription(): string {
     return this.langService.currentLang === 'en' && this.tool.descriptionEn ? this.tool.descriptionEn : this.tool.description;
   }
+
+  isIconImage(icon?: string): boolean {
+    if (!icon) return false;
+    return icon.includes('/') || /\.(svg|png|jpg|jpeg|webp)$/i.test(icon);
+  }
 }
 

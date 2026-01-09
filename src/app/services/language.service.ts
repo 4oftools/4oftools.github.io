@@ -287,6 +287,17 @@ export class LanguageService {
     'yaml.json.placeholder': { zh: '请输入JSON内容...', en: 'Enter JSON content...' },
     'yaml.yaml.output.placeholder': { zh: '转换后的YAML将显示在这里', en: 'Converted YAML will appear here' },
     'yaml.json.output.placeholder': { zh: '转换后的JSON将显示在这里', en: 'Converted JSON will appear here' },
+    'sql.er.input': { zh: 'SQL输入', en: 'SQL Input' },
+    'sql.er.output': { zh: 'Mermaid输出', en: 'Mermaid Output' },
+    'sql.er.output.placeholder': { zh: '生成的Mermaid ER图将显示在这里', en: 'Generated Mermaid ER diagram will appear here' },
+    'sql.er.generate': { zh: '生成ER图', en: 'Generate ER Diagram' },
+    'sql.er.clear': { zh: '清空', en: 'Clear' },
+    'sql.er.sample': { zh: '示例SQL', en: 'Sample SQL' },
+    'sql.er.copy': { zh: '复制', en: 'Copy' },
+    'sql.er.diagram': { zh: 'ER图预览', en: 'ER Diagram Preview' },
+    'sql.er.empty': { zh: '暂无解析结果', en: 'No diagram yet' },
+    'sql.er.parse.error': { zh: '未检测到有效的CREATE TABLE语句', en: 'No valid CREATE TABLE statements detected' },
+    'sql.er.input.placeholder': { zh: '请输入CREATE TABLE SQL...', en: 'Paste CREATE TABLE SQL...' },
     'severance.start.date': { zh: '入职日期', en: 'Start Date' },
     'severance.end.date': { zh: '裁员离开日期', en: 'Departure Date' },
     'severance.last.year.salary': { zh: '去年全年薪资', en: 'Last Year Total Salary' },
@@ -347,4 +358,3 @@ export class LanguageService {
     return this.currentLanguage$.value;
   }
 }
-

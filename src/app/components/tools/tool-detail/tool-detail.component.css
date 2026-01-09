@@ -45,6 +45,12 @@
   flex-shrink: 0;
 }
 
+.detail-icon img {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
 .detail-info {
   flex: 1;
 }
@@ -227,4 +233,3 @@
     padding: 12px 24px;
   }
 }
-

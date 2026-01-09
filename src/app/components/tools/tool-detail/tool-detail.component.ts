@@ -78,4 +78,9 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
   getToolTags(tool: Tool): string[] {
     return this.langService.currentLang === 'en' && tool.tagsEn ? tool.tagsEn : (tool.tags || []);
   }
+
+  isIconImage(icon?: string): boolean {
+    if (!icon) return false;
+    return icon.includes('/') || /\.(svg|png|jpg|jpeg|webp)$/i.test(icon);
+  }
 }
