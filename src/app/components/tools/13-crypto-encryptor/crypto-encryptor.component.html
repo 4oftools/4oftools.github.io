@@ -21,27 +21,29 @@
               [placeholder]="t('crypto.password.placeholder')" />
           </div>
         </div>
-        <div class="mode-switcher">
-          <button 
-            class="mode-btn" 
-            [class.active]="mode === 'encrypt'"
-            (click)="switchMode()">
-            {{ t('crypto.encrypt') }}
-          </button>
-          <button 
-            class="mode-btn" 
-            [class.active]="mode === 'decrypt'"
-            (click)="switchMode()">
-            {{ t('crypto.decrypt') }}
-          </button>
-        </div>
-        <div class="button-group">
-          <button class="btn btn-primary" (click)="process()">
-            {{ mode === 'encrypt' ? t('crypto.encrypt') : t('crypto.decrypt') }}
-          </button>
-          <button class="btn btn-outline" (click)="clearAll()">
-            {{ t('json.formatter.clear') }}
-          </button>
+        <div class="actions-row">
+          <div class="mode-switcher">
+            <button 
+              class="mode-btn" 
+              [class.active]="mode === 'encrypt'"
+              (click)="switchMode()">
+              {{ t('crypto.encrypt') }}
+            </button>
+            <button 
+              class="mode-btn" 
+              [class.active]="mode === 'decrypt'"
+              (click)="switchMode()">
+              {{ t('crypto.decrypt') }}
+            </button>
+          </div>
+          <div class="button-group">
+            <button class="btn btn-primary" (click)="process()">
+              {{ mode === 'encrypt' ? t('crypto.encrypt') : t('crypto.decrypt') }}
+            </button>
+            <button class="btn btn-outline" (click)="clearAll()">
+              {{ t('json.formatter.clear') }}
+            </button>
+          </div>
         </div>
       </div>
 

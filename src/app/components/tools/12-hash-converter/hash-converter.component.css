@@ -159,11 +159,11 @@
 }
 
 .converter-input {
-  min-height: 400px;
+  min-height: 900px;
 }
 
 .converter-output {
-  min-height: 100px;
+  min-height: 900px;
   background: var(--bg-secondary);
   cursor: default;
 }

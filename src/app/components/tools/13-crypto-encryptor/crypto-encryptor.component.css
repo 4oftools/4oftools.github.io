@@ -92,6 +92,14 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
+.actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .mode-switcher {
   display: flex;
   gap: 8px;
@@ -231,7 +239,7 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   transition: border-color 0.3s;
-  min-height: 400px;
+  min-height: 900px;
 }
 
 .editor:focus {
@@ -294,6 +302,11 @@
 
   .control-group {
     flex-direction: column;
+  }
+
+  .actions-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .mode-switcher {

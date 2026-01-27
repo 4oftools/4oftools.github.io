@@ -121,9 +121,10 @@
 .tools-grid,
 .apps-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
   gap: 20px;
   max-width: 100%;
+  justify-content: center;
 }
 
 .tool-card,
@@ -134,6 +135,8 @@
   position: relative;
   border-top: 3px solid transparent;
   transition: all 0.3s ease;
+  max-width: 320px;
+  width: 100%;
 }
 
 .tool-card::before,

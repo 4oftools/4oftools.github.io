@@ -247,7 +247,7 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   transition: border-color 0.3s;
-  min-height: 300px;
+  min-height: 500px;
 }
 
 .test-textarea:focus {
