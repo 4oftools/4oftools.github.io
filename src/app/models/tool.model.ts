@@ -19,5 +19,13 @@ export interface Tool {
   featured?: boolean;
   createdAt?: string;
   internalRoute?: string; // 如果有内部实现页面，指定路由路径，如 'json-formatter'
+  /** 应用是否开源（仅应用使用） */
+  openSource?: boolean;
+  /** 开源地址（如 GitHub 链接），openSource 为 true 时使用 */
+  openSourceUrl?: string;
+  /** 官网地址，openSource 为 false 时使用，也可与 url 共用 */
+  website?: string;
+  /** 下载地址，openSource 为 false 时使用 */
+  downloadUrl?: string;
 }
 

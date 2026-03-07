@@ -187,6 +187,27 @@
   min-height: 40px;
 }
 
+.app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.app-badges .badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.app-badges .badge-open {
+  background: var(--green-bg);
+  color: var(--green-dark);
+}
+
 .app-tags {
   display: flex;
   flex-wrap: wrap;

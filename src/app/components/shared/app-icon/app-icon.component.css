@@ -1,0 +1,11 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+:host ::ng-deep iconify-icon {
+  display: inline-block;
+  vertical-align: middle;
+}

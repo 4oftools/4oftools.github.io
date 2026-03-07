@@ -1,0 +1,7 @@
+@if (isIconifyId(icon)) {
+  <iconify-icon [attr.icon]="icon" [attr.width]="size" [attr.height]="size" [attr.class]="iconClass"></iconify-icon>
+} @else if (isImageUrl(icon)) {
+  <img [src]="icon" [alt]="alt" [style.width]="size" [style.height]="size" [class]="iconClass" />
+} @else if (icon) {
+  <span [class]="iconClass" [style.font-size]="size">{{ icon }}</span>
+}

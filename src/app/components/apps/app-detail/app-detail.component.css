@@ -89,6 +89,11 @@
   color: var(--text-primary);
 }
 
+.detail-section-sub {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
 .detail-description {
   font-size: 16px;
   line-height: 1.8;
@@ -190,9 +195,22 @@
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
 }
 
-.detail-actions .btn.btn-secondary:active {
+.detail-actions .btn.btn-secondary:active,
+.detail-actions .btn.btn-outline:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.detail-actions .btn.btn-outline {
+  background: var(--bg-primary);
+  color: var(--green-color);
+  border: 2px solid var(--green-color);
+}
+
+.detail-actions .btn.btn-outline:hover {
+  background: var(--green-bg);
+  border-color: var(--green-dark);
+  color: var(--green-dark);
 }
 
 .loading,

@@ -24,6 +24,7 @@ import { CrontabCalculatorComponent } from './components/tools/16-crontab-calcul
 import { YamlJsonConverterComponent } from './components/tools/17-yaml-json-converter/yaml-json-converter.component';
 import { SeveranceCalculatorComponent } from './components/tools/18-severance-calculator/severance-calculator.component';
 import { SqlToErDiagramComponent } from './components/tools/19-sql-to-er-diagram/sql-to-er-diagram.component';
+import { BambooGtdComponent } from './components/apps/01-bamboo-gtd/bamboo-gtd.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,6 +50,7 @@ export const routes: Routes = [
   { path: 'tools/sql-to-er-diagram', component: SqlToErDiagramComponent },
   { path: 'tools/:id', component: ToolDetailComponent },
   { path: 'apps', component: AppsComponent },
+  { path: 'apps/bamboo-gtd', component: BambooGtdComponent },
   { path: 'apps/:id', component: AppDetailComponent },
   { path: 'sponsor', component: SponsorComponent },
   { path: '**', redirectTo: '' }

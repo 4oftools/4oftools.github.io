@@ -1,0 +1,73 @@
+<div class="bamboo-gtd-page">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/apps">{{ t('nav.apps') }}</a>
+      <span class="separator">/</span>
+      <span>竹林工作法</span>
+    </div>
+
+    <header class="app-header">
+      <div class="app-header-icon">
+        <app-icon icon="mdi:leaf" size="56px"></app-icon>
+      </div>
+      <div class="app-header-text">
+        <h1 class="app-title">竹林工作法</h1>
+        <p class="app-subtitle">个人 GTD 工作法与工具 · Bamboo Grove GTD</p>
+        <div class="app-tags">
+          <span class="tag">GTD</span>
+          <span class="tag">效率</span>
+          <span class="tag">个人管理</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <section class="content-section">
+        <h2>方法介绍</h2>
+        <p>竹林工作法是一套个人 GTD（Getting Things Done）工作法，通过简洁的流程帮助管理任务、清空收件箱并保持专注。下文将用截图展示核心步骤与工具使用方式。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/01-bamboo-gtd/intro.png" alt="竹林工作法介绍截图" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「方法介绍」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/01-bamboo-gtd/intro.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section">
+        <h2>核心流程</h2>
+        <p>收件箱 → 拆解与分类 → 执行与回顾。以下为流程示意与工具界面截图。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/01-bamboo-gtd/flow.png" alt="核心流程截图" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「核心流程」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/01-bamboo-gtd/flow.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section">
+        <h2>工具使用</h2>
+        <p>（可补充说明使用的工具或模板，并配截图。）</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/01-bamboo-gtd/tools.png" alt="工具使用截图" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「工具使用」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/01-bamboo-gtd/tools.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <div class="back-actions">
+        <a routerLink="/apps" class="btn btn-secondary">
+          {{ t('tool.back.to.list') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

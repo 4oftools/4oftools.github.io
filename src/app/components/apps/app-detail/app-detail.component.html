@@ -25,17 +25,35 @@
           <p class="detail-description">{{ getAppDescription(app) }}</p>
         </div>
 
-        <div class="detail-section" *ngIf="app.url">
-          <h2>{{ t('tool.link') }}</h2>
-          <a [href]="app.url" target="_blank" class="external-link">
-            {{ app.url }}
+        <!-- 开源应用：展示开源地址 -->
+        <div class="detail-section" *ngIf="app.openSource && app.openSourceUrl">
+          <h2>{{ t('app.openSource') }}</h2>
+          <a [href]="app.openSourceUrl" target="_blank" rel="noopener noreferrer" class="external-link">
+            {{ app.openSourceUrl }}
+            <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+          </a>
+        </div>
+
+        <!-- 非开源：展示官网、下载地址 -->
+        <div class="detail-section" *ngIf="!app.openSource && (app.website || app.url || app.downloadUrl)">
+          <h2 *ngIf="app.website || app.url">{{ t('app.website') }}</h2>
+          <a *ngIf="app.website || app.url" [href]="app.website || app.url" target="_blank" rel="noopener noreferrer" class="external-link">
+            {{ app.website || app.url }}
+            <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+          </a>
+          <h2 *ngIf="app.downloadUrl" class="detail-section-sub">{{ t('app.downloadUrl') }}</h2>
+          <a *ngIf="app.downloadUrl" [href]="app.downloadUrl" target="_blank" rel="noopener noreferrer" class="external-link">
+            {{ app.downloadUrl }}
             <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
           </a>
         </div>
 
         <div class="detail-actions">
-          <a [href]="app.url" target="_blank" class="btn" *ngIf="app.url">
-            {{ t('tool.use') }}
+          <a [href]="app.openSourceUrl || app.website || app.url" target="_blank" rel="noopener noreferrer" class="btn" *ngIf="app.openSource ? app.openSourceUrl : (app.website || app.url)">
+            {{ app.openSource ? t('app.openSourceUrl') : t('tool.use') }}
+          </a>
+          <a [href]="app.downloadUrl" target="_blank" rel="noopener noreferrer" class="btn btn-outline" *ngIf="!app.openSource && app.downloadUrl">
+            {{ t('app.download') }}
           </a>
           <a routerLink="/apps" class="btn btn-secondary">
             {{ t('tool.back.to.list') }}

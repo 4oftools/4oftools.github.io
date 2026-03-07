@@ -36,6 +36,11 @@
           <div class="app-icon"><app-icon [icon]="app.icon || 'mdi:cellphone'" size="40px"></app-icon></div>
           <h3 class="app-name">{{ getToolName(app) }}</h3>
           <p class="app-description">{{ getToolDescription(app) }}</p>
+          <div class="app-badges" *ngIf="app.openSource || app.website || app.url || app.downloadUrl">
+            <span *ngIf="app.openSource" class="badge badge-open">{{ t('app.openSource') }}</span>
+            <span *ngIf="!app.openSource && (app.website || app.url)" class="badge">{{ t('app.website') }}</span>
+            <span *ngIf="app.downloadUrl" class="badge">{{ t('app.download') }}</span>
+          </div>
           <div class="app-tags" *ngIf="getToolTags(app).length > 0">
             <span *ngFor="let tag of getToolTags(app)" class="tag">{{ tag }}</span>
           </div>
