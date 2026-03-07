@@ -25,7 +25,9 @@
       </div>
       <div class="tools-grid">
         <div *ngFor="let tool of displayedTools" class="tool-card card" [routerLink]="getToolRoute(tool)">
-          <div class="tool-icon">{{ tool.icon || '🔧' }}</div>
+          <div class="tool-icon-wrap" [ngClass]="'tool-icon--' + (tool.iconColor || 'slate')">
+            <app-icon [icon]="tool.icon || 'mdi:wrench'" size="48px" iconClass="tool-icon-svg"></app-icon>
+          </div>
           <h3 class="tool-name">{{ getToolName(tool) }}</h3>
           <p class="tool-description">{{ getToolDescription(tool) }}</p>
           <div class="tool-tags" *ngIf="getToolTags(tool).length > 0">
@@ -53,7 +55,9 @@
       </div>
       <div class="apps-grid">
         <div *ngFor="let app of displayedApps" class="app-card card" [routerLink]="['/apps', app.id]">
-          <div class="app-icon">{{ app.icon || '📱' }}</div>
+          <div class="tool-icon-wrap" [ngClass]="'tool-icon--' + (app.iconColor ?? 'app')">
+            <app-icon [icon]="app.icon || 'mdi:cellphone'" size="48px" iconClass="tool-icon-svg"></app-icon>
+          </div>
           <h3 class="app-name">{{ getToolName(app) }}</h3>
           <p class="app-description">{{ getToolDescription(app) }}</p>
           <div class="app-tags" *ngIf="getToolTags(app).length > 0">

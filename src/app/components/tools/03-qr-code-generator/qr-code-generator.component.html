@@ -37,6 +37,7 @@
           <div class="section-header">
             <h3>{{ t('qr.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard()" *ngIf="inputText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -53,7 +54,7 @@
           </div>
           <div class="qr-code-display">
             <div class="qr-code-placeholder" *ngIf="!qrCodeDataUrl">
-              <div class="placeholder-icon">📱</div>
+              <div class="placeholder-icon"><app-icon icon="mdi:qrcode" size="4em"></app-icon></div>
               <p>{{ t('qr.placeholder.text') }}</p>
             </div>
             <img *ngIf="qrCodeDataUrl" [src]="qrCodeDataUrl" [alt]="t('qr.code.alt')" class="qr-code-image" />

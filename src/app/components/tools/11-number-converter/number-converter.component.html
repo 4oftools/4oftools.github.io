@@ -15,7 +15,7 @@
             </select>
           </div>
           <div class="swap-icon" (click)="swapBases()" title="Swap">
-            ⇄
+            <app-icon icon="mdi:swap-vertical" size="1.5em"></app-icon>
           </div>
           <div class="base-selector">
             <label>{{ t('number.to') }}</label>
@@ -46,6 +46,7 @@
           <div class="section-header">
             <h3>{{ t('number.input') }} ({{ t('number.' + fromBase) }})</h3>
             <button class="btn-icon" (click)="copyToClipboard(inputValue)" *ngIf="inputValue">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -61,6 +62,7 @@
           <div class="section-header">
             <h3>{{ t('number.output') }} ({{ t('number.' + toBase) }})</h3>
             <button class="btn-icon" (click)="copyToClipboard(outputValue)" *ngIf="outputValue">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

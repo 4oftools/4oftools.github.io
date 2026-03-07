@@ -7,11 +7,12 @@ import { SEOService } from '../../services/seo.service';
 import { Tool } from '../../models/tool.model';
 import { HOME_SEO } from '../../config/seo.config';
 import { Subscription } from 'rxjs';
+import { AppIconComponent } from '../shared/app-icon/app-icon.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AppIconComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

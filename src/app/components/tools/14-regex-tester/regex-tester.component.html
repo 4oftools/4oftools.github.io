@@ -83,6 +83,7 @@
           <div class="section-header">
             <h3>{{ t('regex.test.text') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(testText)" *ngIf="testText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -107,6 +108,7 @@
                 <span class="match-number">#{{ i + 1 }}</span>
                 <span class="match-index">Index: {{ match.index }}</span>
                 <button class="btn-icon-small" (click)="copyToClipboard(match.match)">
+                <app-icon icon="mdi:content-copy" size="0.9em"></app-icon>
                   {{ t('json.formatter.copy') }}
                 </button>
               </div>

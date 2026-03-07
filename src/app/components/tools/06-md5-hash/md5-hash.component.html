@@ -19,6 +19,7 @@
           <div class="section-header">
             <h3>{{ t('md5.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(inputText)" *ngIf="inputText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -34,6 +35,7 @@
           <div class="section-header">
             <h3>{{ t('md5.output') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(hashResult)" *ngIf="hashResult">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

@@ -9,11 +9,12 @@ import { Tool, ToolCategory } from '../../models/tool.model';
 import { Subscription } from 'rxjs';
 import { APPS_CATEGORIES } from '../../config/apps.metadata';
 import { APPS_LIST_SEO } from '../../config/seo.config';
+import { AppIconComponent } from '../shared/app-icon/app-icon.component';
 
 @Component({
   selector: 'app-apps',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, AppIconComponent],
   templateUrl: './apps.component.html',
   styleUrls: ['./apps.component.css']
 })

@@ -20,7 +20,7 @@
                 class="qr-image"
                 (error)="onImageError($event)" />
               <div class="qr-placeholder" #wechatPlaceholder style="display: none;">
-                <span class="qr-icon">💳</span>
+                <span class="qr-icon"><app-icon icon="mdi:credit-card" size="2em"></app-icon></span>
                 <p>{{ t('sponsor.qr.placeholder') }}</p>
               </div>
             </div>
@@ -36,7 +36,7 @@
                 class="qr-image"
                 (error)="onImageError($event)" />
               <div class="qr-placeholder" #alipayPlaceholder style="display: none;">
-                <span class="qr-icon">💳</span>
+                <span class="qr-icon"><app-icon icon="mdi:credit-card" size="2em"></app-icon></span>
                 <p>{{ t('sponsor.qr.placeholder') }}</p>
               </div>
             </div>
@@ -63,7 +63,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   class="paypal-button">
-                  <span class="qr-icon">💳</span>
+                  <span class="qr-icon"><app-icon icon="mdi:credit-card" size="2em"></app-icon></span>
                   <p>{{ t('sponsor.paypal.button') }}</p>
                 </a>
               </div>

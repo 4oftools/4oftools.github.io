@@ -11,8 +11,7 @@
     <div class="detail-content">
       <div class="detail-header">
         <div class="detail-icon">
-          <img *ngIf="isIconImage(tool.icon)" [src]="tool.icon" [alt]="getToolName(tool)" />
-          <span *ngIf="!isIconImage(tool.icon)">{{ tool.icon || '??' }}</span>
+          <app-icon [icon]="tool.icon || 'mdi:wrench'" size="48px" [alt]="getToolName(tool)"></app-icon>
         </div>
         <div class="detail-info">
           <h1 class="detail-title">{{ getToolName(tool) }}</h1>
@@ -32,7 +31,7 @@
           <h2>{{ t('tool.link') }}</h2>
           <a [href]="tool.url" target="_blank" class="external-link">
             {{ tool.url }}
-            <span class="external-icon">↗</span>
+            <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
           </a>
         </div>
 

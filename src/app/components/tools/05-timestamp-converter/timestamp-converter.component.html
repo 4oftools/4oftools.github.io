@@ -40,6 +40,7 @@
           <div class="section-header">
             <h3>{{ mode === 'timestamp-to-date' ? t('timestamp.input') : t('date.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(mode === 'timestamp-to-date' ? timestamp : dateTime)" *ngIf="mode === 'timestamp-to-date' ? timestamp : dateTime">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -54,6 +55,7 @@
           <div class="section-header">
             <h3>{{ mode === 'timestamp-to-date' ? t('date.output') : t('timestamp.output') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(outputValue)" *ngIf="outputValue">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

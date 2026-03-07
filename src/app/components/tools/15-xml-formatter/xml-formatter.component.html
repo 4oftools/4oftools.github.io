@@ -38,6 +38,7 @@
           <div class="section-header">
             <h3>{{ t('xml.formatter.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(inputXml)" *ngIf="inputXml">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -58,6 +59,7 @@
           <div class="section-header">
             <h3>{{ t('xml.formatter.output') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(outputXml)" *ngIf="outputXml">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

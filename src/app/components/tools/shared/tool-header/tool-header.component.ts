@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LanguageService } from '../../../../services/language.service';
 import { Tool } from '../../../../models/tool.model';
+import { AppIconComponent } from '../../../shared/app-icon/app-icon.component';
 
 @Component({
   selector: 'app-tool-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AppIconComponent],
   templateUrl: './tool-header.component.html',
   styleUrls: ['./tool-header.component.css']
 })
@@ -26,11 +27,6 @@ export class ToolHeaderComponent {
 
   getToolDescription(): string {
     return this.langService.currentLang === 'en' && this.tool.descriptionEn ? this.tool.descriptionEn : this.tool.description;
-  }
-
-  isIconImage(icon?: string): boolean {
-    if (!icon) return false;
-    return icon.includes('/') || /\.(svg|png|jpg|jpeg|webp)$/i.test(icon);
   }
 }
 

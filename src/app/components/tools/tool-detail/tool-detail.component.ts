@@ -7,11 +7,12 @@ import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { getToolDetailSEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
+import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 
 @Component({
   selector: 'app-tool-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AppIconComponent],
   templateUrl: './tool-detail.component.html',
   styleUrls: ['./tool-detail.component.css']
 })
@@ -77,10 +78,5 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
 
   getToolTags(tool: Tool): string[] {
     return this.langService.currentLang === 'en' && tool.tagsEn ? tool.tagsEn : (tool.tags || []);
-  }
-
-  isIconImage(icon?: string): boolean {
-    if (!icon) return false;
-    return icon.includes('/') || /\.(svg|png|jpg|jpeg|webp)$/i.test(icon);
   }
 }

@@ -26,16 +26,15 @@
               [placeholder]="t('search.placeholder')"
               [(ngModel)]="searchQuery"
               (ngModelChange)="onSearchChange()" />
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"><app-icon icon="tabler:search" size="1.2em"></app-icon></span>
           </div>
         </div>
       </div>
 
       <div class="tools-grid">
         <div *ngFor="let tool of filteredTools" class="tool-card card" [routerLink]="getToolRoute(tool)">
-          <div class="tool-icon">
-            <img *ngIf="isIconImage(tool.icon)" [src]="tool.icon" [alt]="getToolName(tool)" />
-            <span *ngIf="!isIconImage(tool.icon)">{{ tool.icon || '??' }}</span>
+          <div class="tool-icon-wrap" [ngClass]="'tool-icon--' + (tool.iconColor || 'slate')">
+            <app-icon [icon]="tool.icon || 'mdi:wrench'" size="40px" [alt]="getToolName(tool)" iconClass="tool-icon-svg"></app-icon>
           </div>
           <h3 class="tool-name">{{ getToolName(tool) }}</h3>
           <p class="tool-description">{{ getToolDescription(tool) }}</p>

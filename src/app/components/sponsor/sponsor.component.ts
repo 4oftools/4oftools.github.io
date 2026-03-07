@@ -4,6 +4,7 @@ import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 import { Subscription } from 'rxjs';
 import { SPONSOR_PAGE_SEO } from '../../config/seo.config';
+import { AppIconComponent } from '../shared/app-icon/app-icon.component';
 
 interface Sponsor {
   name: string;
@@ -16,7 +17,7 @@ interface Sponsor {
 @Component({
   selector: 'app-sponsor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AppIconComponent],
   templateUrl: './sponsor.component.html',
   styleUrls: ['./sponsor.component.css']
 })

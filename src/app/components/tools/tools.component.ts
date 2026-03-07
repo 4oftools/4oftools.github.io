@@ -9,11 +9,12 @@ import { Tool, ToolCategory } from '../../models/tool.model';
 import { Subscription } from 'rxjs';
 import { TOOLS_CATEGORIES } from '../../config/tools.metadata';
 import { TOOLS_LIST_SEO } from '../../config/seo.config';
+import { AppIconComponent } from '../shared/app-icon/app-icon.component';
 
 @Component({
   selector: 'app-tools',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, AppIconComponent],
   templateUrl: './tools.component.html',
   styleUrls: ['./tools.component.css']
 })
@@ -123,10 +124,5 @@ export class ToolsComponent implements OnInit, OnDestroy {
       return this.allTools.length;
     }
     return this.allTools.filter(tool => tool.type === category).length;
-  }
-
-  isIconImage(icon?: string): boolean {
-    if (!icon) return false;
-    return icon.includes('/') || /\.(svg|png|jpg|jpeg|webp)$/i.test(icon);
   }
 }

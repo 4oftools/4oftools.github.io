@@ -37,6 +37,7 @@
           <div class="section-header">
             <h3>{{ mode === 'encode' ? t('base64.input') : t('base64.base64.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(inputText)" *ngIf="inputText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -49,7 +50,7 @@
 
         <div class="swap-button-container">
           <button class="btn-swap" (click)="swapContent()" title="Swap">
-            ⇄
+            <app-icon icon="mdi:swap-vertical" size="1.5em"></app-icon>
           </button>
         </div>
 
@@ -57,6 +58,7 @@
           <div class="section-header">
             <h3>{{ mode === 'encode' ? t('base64.output') : t('base64.text.output') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(outputText)" *ngIf="outputText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

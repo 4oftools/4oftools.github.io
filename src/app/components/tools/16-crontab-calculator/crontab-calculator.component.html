@@ -42,6 +42,7 @@
             <span class="run-number">#{{ i + 1 }}</span>
             <span class="run-time">{{ formatDate(run) }}</span>
             <button class="btn-icon-small" (click)="copyToClipboard(formatDate(run))">
+              <app-icon icon="mdi:content-copy" size="0.9em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

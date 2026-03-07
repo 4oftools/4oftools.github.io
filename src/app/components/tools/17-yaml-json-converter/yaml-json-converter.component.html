@@ -37,6 +37,7 @@
           <div class="section-header">
             <h3>{{ mode === 'yaml-to-json' ? t('yaml.yaml.input') : t('yaml.json.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(mode === 'yaml-to-json' ? yamlText : jsonText)" *ngIf="mode === 'yaml-to-json' ? yamlText : jsonText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -64,6 +65,7 @@
           <div class="section-header">
             <h3>{{ mode === 'yaml-to-json' ? t('yaml.json.output') : t('yaml.yaml.output') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(mode === 'yaml-to-json' ? jsonText : yamlText)" *ngIf="mode === 'yaml-to-json' ? jsonText : yamlText">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

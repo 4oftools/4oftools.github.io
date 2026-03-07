@@ -38,6 +38,7 @@
           <div class="section-header">
             <h3>{{ t('json.formatter.input') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(inputJson)" *ngIf="inputJson">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>
@@ -50,7 +51,7 @@
 
         <div class="swap-button-container">
           <button class="btn-swap" (click)="swapContent()" title="Swap">
-            ⇄
+            <app-icon icon="mdi:swap-vertical" size="1.5em"></app-icon>
           </button>
         </div>
 
@@ -58,6 +59,7 @@
           <div class="section-header">
             <h3>{{ t('json.formatter.output') }}</h3>
             <button class="btn-icon" (click)="copyToClipboard(outputJson)" *ngIf="outputJson">
+              <app-icon icon="mdi:content-copy" size="1em"></app-icon>
               {{ t('json.formatter.copy') }}
             </button>
           </div>

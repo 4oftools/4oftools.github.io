@@ -38,6 +38,7 @@
               <div class="value-box">
                 <span class="color-value">{{ selectedColor }}</span>
                 <button class="btn-icon" (click)="copyToClipboard(selectedColor)">
+                <app-icon icon="mdi:content-copy" size="1em"></app-icon>
                   {{ t('json.formatter.copy') }}
                 </button>
               </div>
@@ -47,6 +48,7 @@
               <div class="value-box">
                 <span class="color-value">{{ hexToRgb(selectedColor) }}</span>
                 <button class="btn-icon" (click)="copyToClipboard(hexToRgb(selectedColor))">
+                <app-icon icon="mdi:content-copy" size="1em"></app-icon>
                   {{ t('json.formatter.copy') }}
                 </button>
               </div>
@@ -56,6 +58,7 @@
               <div class="value-box">
                 <span class="color-value">{{ hexToHsl(selectedColor) }}</span>
                 <button class="btn-icon" (click)="copyToClipboard(hexToHsl(selectedColor))">
+                <app-icon icon="mdi:content-copy" size="1em"></app-icon>
                   {{ t('json.formatter.copy') }}
                 </button>
               </div>

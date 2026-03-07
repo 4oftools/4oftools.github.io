@@ -7,13 +7,14 @@ import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-timestamp-converter',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent],
+  imports: [CommonModule, FormsModule, ToolHeaderComponent, AppIconComponent],
   templateUrl: './timestamp-converter.component.html',
   styleUrls: ['./timestamp-converter.component.css']
 })

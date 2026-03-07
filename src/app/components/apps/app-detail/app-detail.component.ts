@@ -7,11 +7,12 @@ import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { getAppDetailSEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
+import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 
 @Component({
   selector: 'app-app-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AppIconComponent],
   templateUrl: './app-detail.component.html',
   styleUrls: ['./app-detail.component.css']
 })
