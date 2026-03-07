@@ -68,23 +68,6 @@ export const APPS_LIST_SEO: SEOData = {
   }
 };
 
-// AI页面SEO
-export const AI_PAGE_SEO: SEOData = {
-  ...BASE_SEO,
-  title: {
-    zh: 'AI 前沿探索 - 否兔联盟 | 最新人工智能应用和技术',
-    en: 'AI Exploration - 4oftools | Latest AI Applications and Technologies'
-  },
-  description: {
-    zh: '探索否兔联盟汇集的最新人工智能应用、产品和技术，包括AI编程工具、AI底层模型、AI图片技术、AI视频技术等，了解人工智能领域的最新发展。',
-    en: 'Explore the latest AI applications, products and technologies collected by 4oftools, including AI programming tools, AI foundation models, AI image technology, AI video technology and more, to understand the latest developments in artificial intelligence.'
-  },
-  keywords: {
-    zh: 'AI,人工智能,AI工具,AI编程工具,AI模型,AI图片技术,AI视频技术,机器学习,深度学习',
-    en: 'AI,artificial intelligence,AI tools,AI programming tools,AI models,AI image technology,AI video technology,machine learning,deep learning'
-  }
-};
-
 // 赞助页面SEO
 export const SPONSOR_PAGE_SEO: SEOData = {
   ...BASE_SEO,
