@@ -43,6 +43,18 @@
 .detail-icon {
   font-size: 64px;
   flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #059669;
+}
+
+.detail-icon ::ng-deep iconify-icon {
+  color: inherit;
 }
 
 .detail-info {
