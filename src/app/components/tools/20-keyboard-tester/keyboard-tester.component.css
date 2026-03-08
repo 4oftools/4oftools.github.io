@@ -1,0 +1,153 @@
+.keyboard-tester-page {
+  background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--green-bg) 30%, var(--bg-secondary) 100%);
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+}
+
+.page-content {
+  padding: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tool-controls {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--green-color);
+  color: var(--green-color);
+}
+
+.keyboard-hint {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.keyboard-test-area {
+  background: var(--bg-primary);
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  min-height: 180px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.keyboard-test-area:focus {
+  border-color: var(--green-color);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.keyboard-result {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.result-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 80px;
+}
+
+.result-value {
+  font-family: ui-monospace, monospace;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.result-key {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--green-color);
+}
+
+.keyboard-empty {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 24px 0;
+}
+
+.keyboard-history {
+  margin-top: 24px;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.records-list {
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.record-type {
+  font-weight: 600;
+  min-width: 56px;
+  color: var(--green-color);
+}
+
+.record-type.keyup {
+  color: var(--text-secondary);
+}
+
+.record-key {
+  min-width: 32px;
+  font-weight: 500;
+}
+
+.record-code {
+  font-family: ui-monospace, monospace;
+  color: var(--text-secondary);
+}
+
+.record-mod {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-size: 12px;
+}

@@ -1,0 +1,67 @@
+<div class="chronos-page">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/apps">{{ t('nav.apps') }}</a>
+      <span class="separator">/</span>
+      <span *ngIf="app">{{ getAppName(app) }}</span>
+    </div>
+
+    <header class="app-header" *ngIf="app">
+      <div class="app-header-icon" [ngClass]="'tool-icon--' + (app.iconColor || 'app')">
+        <app-icon [icon]="app.icon || 'mdi:cellphone'" size="56px"></app-icon>
+      </div>
+      <div class="app-header-text">
+        <h1 class="app-title">{{ getAppName(app) }}</h1>
+        <p class="app-subtitle">{{ getAppDescription(app) }}</p>
+        <div class="app-tags" *ngIf="getAppTags(app).length">
+          <span class="tag" *ngFor="let tag of getAppTags(app)">{{ tag }}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <section class="content-section">
+        <h2>简介</h2>
+        <p>Chronos 是一款仿 JIRA 的开源项目与问题跟踪工具，支持看板视图、迭代（Sprint）、工作流与权限管理，适合团队协作与敏捷开发。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/03-chronos/overview.png" alt="Chronos 概览" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「概览」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/03-chronos/overview.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section">
+        <h2>功能特性</h2>
+        <p>看板与列表、迭代规划、工作流配置、项目与权限管理、问题类型与自定义字段等（可根据实际项目补充）。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/03-chronos/features.png" alt="Chronos 功能" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「功能」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/03-chronos/features.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section open-source-section">
+        <h2>{{ t('app.openSource') }}</h2>
+        <p>Chronos 为开源项目，代码托管于 GitHub，欢迎 Star、Fork 与参与贡献。</p>
+        <a href="https://github.com/4oftools/chronos" target="_blank" rel="noopener noreferrer" class="btn">
+          {{ t('app.openSourceUrl') }}
+          <span class="btn-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+        </a>
+      </section>
+
+      <div class="back-actions">
+        <a routerLink="/apps" class="btn btn-secondary">
+          {{ t('tool.back.to.list') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

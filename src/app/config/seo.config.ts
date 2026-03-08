@@ -402,6 +402,20 @@ export const TOOL_PAGES_SEO: { [key: string]: SEOData } = {
       zh: 'SQL转ER图,ER图生成,SQL建表,数据库可视化,Mermaid ER,在线ER图工具',
       en: 'SQL to ER diagram,ER diagram generator,CREATE TABLE,Database visualization,Mermaid ER,online ER tool'
     }
+  },
+  'keyboard-tester': {
+    title: {
+      zh: '键盘测试 - 否兔联盟 | 在线键盘检测工具',
+      en: 'Keyboard Tester - 4oftools | Online Keyboard Test Tool'
+    },
+    description: {
+      zh: '在线键盘测试工具，按下任意键可显示键名、键码与修饰键状态，便于检查键盘是否正常。',
+      en: 'Online keyboard tester: press any key to see key name, key code and modifier state, useful for checking if your keyboard works.'
+    },
+    keywords: {
+      zh: '键盘测试,键码,键盘检测,在线键盘测试',
+      en: 'keyboard tester,key code,keyboard test,online keyboard'
+    }
   }
 };
 

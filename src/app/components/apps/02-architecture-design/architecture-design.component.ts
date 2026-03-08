@@ -5,20 +5,20 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
+import { getAppDetailSEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
-import { getAppDetailSEO } from '../../../config/seo.config';
 
-const APP_ID = 'bamboo-gtd';
+const APP_ID = 'architecture-design';
 
 @Component({
-  selector: 'app-bamboo-gtd',
+  selector: 'app-architecture-design',
   standalone: true,
   imports: [CommonModule, RouterLink, AppIconComponent],
-  templateUrl: './bamboo-gtd.component.html',
-  styleUrls: ['./bamboo-gtd.component.css', '../app-header-icons.css']
+  templateUrl: './architecture-design.component.html',
+  styleUrls: ['./architecture-design.component.css', '../app-header-icons.css']
 })
-export class BambooGtdComponent implements OnInit, OnDestroy {
+export class ArchitectureDesignComponent implements OnInit, OnDestroy {
   app: Tool | undefined;
   private subscriptions = new Subscription();
 

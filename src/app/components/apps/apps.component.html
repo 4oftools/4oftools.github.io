@@ -33,7 +33,7 @@
 
       <div class="apps-grid">
         <div *ngFor="let app of filteredApps" class="app-card card" [routerLink]="['/apps', app.id]">
-          <div class="app-icon"><app-icon [icon]="app.icon || 'mdi:cellphone'" size="40px"></app-icon></div>
+          <div class="app-icon tool-icon-wrap" [ngClass]="'tool-icon--' + (app.iconColor || 'app')"><app-icon [icon]="app.icon || 'mdi:cellphone'" size="40px"></app-icon></div>
           <h3 class="app-name">{{ getToolName(app) }}</h3>
           <p class="app-description">{{ getToolDescription(app) }}</p>
           <div class="app-badges" *ngIf="app.openSource || app.website || app.url || app.downloadUrl">

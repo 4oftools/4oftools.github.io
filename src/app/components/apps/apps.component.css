@@ -172,6 +172,85 @@
   margin-bottom: 12px;
 }
 
+/* 应用卡片图标彩色包裹（与工具集/首页一致，由 iconColor 控制） */
+.app-icon.tool-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-card:hover .app-icon.tool-icon-wrap {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.app-icon.tool-icon-wrap.tool-icon--indigo {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #4f46e5;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--violet {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+  color: #6d28d9;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--emerald {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #059669;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--teal {
+  background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
+  color: #0d9488;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--sky {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: #0284c7;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--blue {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1d4ed8;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--cyan {
+  background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%);
+  color: #0891b2;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--amber {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  color: #d97706;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--rose {
+  background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+  color: #e11d48;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--slate {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #475569;
+}
+
+.app-icon.tool-icon-wrap.tool-icon--app {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #4f46e5;
+}
+
+.app-icon.tool-icon-wrap ::ng-deep iconify-icon,
+.app-icon.tool-icon-wrap ::ng-deep .tool-icon-svg {
+  color: inherit;
+}
+
 .app-name {
   font-size: 20px;
   font-weight: 600;

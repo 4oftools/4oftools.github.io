@@ -5,20 +5,20 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
+import { getAppDetailSEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
-import { getAppDetailSEO } from '../../../config/seo.config';
 
-const APP_ID = 'bamboo-gtd';
+const APP_ID = 'yijun';
 
 @Component({
-  selector: 'app-bamboo-gtd',
+  selector: 'app-yijun',
   standalone: true,
   imports: [CommonModule, RouterLink, AppIconComponent],
-  templateUrl: './bamboo-gtd.component.html',
-  styleUrls: ['./bamboo-gtd.component.css', '../app-header-icons.css']
+  templateUrl: './yijun.component.html',
+  styleUrls: ['./yijun.component.css', '../app-header-icons.css']
 })
-export class BambooGtdComponent implements OnInit, OnDestroy {
+export class YijunComponent implements OnInit, OnDestroy {
   app: Tool | undefined;
   private subscriptions = new Subscription();
 

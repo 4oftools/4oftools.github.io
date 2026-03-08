@@ -1,0 +1,58 @@
+<div class="git-loom-page">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/apps">{{ t('nav.apps') }}</a>
+      <span class="separator">/</span>
+      <span *ngIf="app">{{ getAppName(app) }}</span>
+    </div>
+
+    <header class="app-header" *ngIf="app">
+      <div class="app-header-icon" [ngClass]="'tool-icon--' + (app.iconColor || 'app')">
+        <app-icon [icon]="app.icon || 'mdi:cellphone'" size="56px"></app-icon>
+      </div>
+      <div class="app-header-text">
+        <h1 class="app-title">{{ getAppName(app) }}</h1>
+        <p class="app-subtitle">{{ getAppDescription(app) }}</p>
+        <div class="app-tags" *ngIf="getAppTags(app).length">
+          <span class="tag" *ngFor="let tag of getAppTags(app)">{{ tag }}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <section class="content-section">
+        <h2>简介</h2>
+        <p>Git Loom 是一款仿 GitHub 的代码托管与协作平台，支持仓库管理、分支、Pull Request、Issue 等常见能力，可自建或内网部署。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/07-git-loom/overview.png" alt="Git Loom 概览" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「概览」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/07-git-loom/overview.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section">
+        <h2>功能特性</h2>
+        <p>仓库与分支、Pull Request、Issue、Wiki、权限与团队协作等（可根据实际功能补充）。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/07-git-loom/features.png" alt="Git Loom 功能" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「功能」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/07-git-loom/features.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <div class="back-actions">
+        <a routerLink="/apps" class="btn btn-secondary">
+          {{ t('tool.back.to.list') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

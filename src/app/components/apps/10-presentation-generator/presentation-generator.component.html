@@ -1,0 +1,58 @@
+<div class="presentation-generator-page">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/apps">{{ t('nav.apps') }}</a>
+      <span class="separator">/</span>
+      <span *ngIf="app">{{ getAppName(app) }}</span>
+    </div>
+
+    <header class="app-header" *ngIf="app">
+      <div class="app-header-icon" [ngClass]="'tool-icon--' + (app.iconColor || 'app')">
+        <app-icon [icon]="app.icon || 'mdi:cellphone'" size="56px"></app-icon>
+      </div>
+      <div class="app-header-text">
+        <h1 class="app-title">{{ getAppName(app) }}</h1>
+        <p class="app-subtitle">{{ getAppDescription(app) }}</p>
+        <div class="app-tags" *ngIf="getAppTags(app).length">
+          <span class="tag" *ngFor="let tag of getAppTags(app)">{{ tag }}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <section class="content-section">
+        <h2>简介</h2>
+        <p>演示文稿生成器类似 PPT 工具，但更强大：支持动态内容、动画效果与数据驱动排版，可从数据源自动更新图表与文本，适合汇报、路演与在线演示。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/10-presentation-generator/overview.png" alt="演示文稿生成器概览" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「概览」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/10-presentation-generator/overview.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section">
+        <h2>功能特性</h2>
+        <p>幻灯片编辑与模板、动态绑定（数据驱动图表/文本）、动画与转场、导出为 PDF/视频或在线演示等（可根据实际功能补充）。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/10-presentation-generator/features.png" alt="演示文稿生成器功能" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「功能」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/10-presentation-generator/features.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <div class="back-actions">
+        <a routerLink="/apps" class="btn btn-secondary">
+          {{ t('tool.back.to.list') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

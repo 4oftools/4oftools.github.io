@@ -24,7 +24,20 @@ import { CrontabCalculatorComponent } from './components/tools/16-crontab-calcul
 import { YamlJsonConverterComponent } from './components/tools/17-yaml-json-converter/yaml-json-converter.component';
 import { SeveranceCalculatorComponent } from './components/tools/18-severance-calculator/severance-calculator.component';
 import { SqlToErDiagramComponent } from './components/tools/19-sql-to-er-diagram/sql-to-er-diagram.component';
+import { KeyboardTesterComponent } from './components/tools/20-keyboard-tester/keyboard-tester.component';
 import { BambooGtdComponent } from './components/apps/01-bamboo-gtd/bamboo-gtd.component';
+import { ArchitectureDesignComponent } from './components/apps/02-architecture-design/architecture-design.component';
+import { ChronosComponent } from './components/apps/03-chronos/chronos.component';
+import { VideoTranslatorComponent } from './components/apps/04-video-translator/video-translator.component';
+import { UpWordComponent } from './components/apps/05-upword/upword.component';
+import { YijunComponent } from './components/apps/06-yijun/yijun.component';
+import { GitLoomComponent } from './components/apps/07-git-loom/git-loom.component';
+import { MnemoraComponent } from './components/apps/08-mnemora/mnemora.component';
+import { AiShortDramaComponent } from './components/apps/09-ai-short-drama/ai-short-drama.component';
+import { PresentationGeneratorComponent } from './components/apps/10-presentation-generator/presentation-generator.component';
+import { ComputerUseAgentComponent } from './components/apps/11-computer-use-agent/computer-use-agent.component';
+import { DevilBrainComponent } from './components/apps/12-devil-brain/devil-brain.component';
+import { FortuneLotteryComponent } from './components/apps/13-fortune-lottery/fortune-lottery.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,9 +61,22 @@ export const routes: Routes = [
   { path: 'tools/yaml-json-converter', component: YamlJsonConverterComponent },
   { path: 'tools/severance-calculator', component: SeveranceCalculatorComponent },
   { path: 'tools/sql-to-er-diagram', component: SqlToErDiagramComponent },
+  { path: 'tools/keyboard-tester', component: KeyboardTesterComponent },
   { path: 'tools/:id', component: ToolDetailComponent },
   { path: 'apps', component: AppsComponent },
   { path: 'apps/bamboo-gtd', component: BambooGtdComponent },
+  { path: 'apps/architecture-design', component: ArchitectureDesignComponent },
+  { path: 'apps/chronos', component: ChronosComponent },
+  { path: 'apps/video-translator', component: VideoTranslatorComponent },
+  { path: 'apps/upword', component: UpWordComponent },
+  { path: 'apps/yijun', component: YijunComponent },
+  { path: 'apps/git-loom', component: GitLoomComponent },
+  { path: 'apps/mnemora', component: MnemoraComponent },
+  { path: 'apps/ai-short-drama', component: AiShortDramaComponent },
+  { path: 'apps/presentation-generator', component: PresentationGeneratorComponent },
+  { path: 'apps/computer-use-agent', component: ComputerUseAgentComponent },
+  { path: 'apps/devil-brain', component: DevilBrainComponent },
+  { path: 'apps/fortune-lottery', component: FortuneLotteryComponent },
   { path: 'apps/:id', component: AppDetailComponent },
   { path: 'sponsor', component: SponsorComponent },
   { path: '**', redirectTo: '' }

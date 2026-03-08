@@ -304,5 +304,21 @@ export const TOOLS_DATA: Tool[] = [
     featured: false,
     url: 'https://example.com/sql-to-er-diagram',
     internalRoute: 'sql-to-er-diagram' // 已实现的内部页面
+  },
+  {
+    id: 'tool-20',
+    name: '键盘测试',
+    nameEn: 'Keyboard Tester',
+    description: '在线键盘测试工具，按下任意键可显示键名、键码与修饰键状态，便于检查键盘是否正常。',
+    descriptionEn: 'Online keyboard tester: press any key to see key name, key code and modifier state, useful for checking if your keyboard works.',
+    category: 'tool',
+    type: 'programmer',
+    icon: 'tabler:keyboard',
+    iconColor: 'slate',
+    tags: ['键盘', '测试', '键码', '实用工具'],
+    tagsEn: ['Keyboard', 'Tester', 'Key Code', 'Utility'],
+    featured: false,
+    url: 'https://example.com/keyboard-tester',
+    internalRoute: 'keyboard-tester' // 已实现的内部页面
   }
 ];

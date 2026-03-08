@@ -1,0 +1,58 @@
+<div class="computer-use-agent-page">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">{{ t('site.name') }}</a>
+      <span class="separator">/</span>
+      <a routerLink="/apps">{{ t('nav.apps') }}</a>
+      <span class="separator">/</span>
+      <span *ngIf="app">{{ getAppName(app) }}</span>
+    </div>
+
+    <header class="app-header" *ngIf="app">
+      <div class="app-header-icon" [ngClass]="'tool-icon--' + (app.iconColor || 'app')">
+        <app-icon [icon]="app.icon || 'mdi:cellphone'" size="56px"></app-icon>
+      </div>
+      <div class="app-header-text">
+        <h1 class="app-title">{{ getAppName(app) }}</h1>
+        <p class="app-subtitle">{{ getAppDescription(app) }}</p>
+        <div class="app-tags" *ngIf="getAppTags(app).length">
+          <span class="tag" *ngFor="let tag of getAppTags(app)">{{ tag }}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <section class="content-section">
+        <h2>简介</h2>
+        <p>ComputerUseAgent 是一种可操作电脑的 AI 智能体，通过自然语言指令执行点击、输入、浏览等自动化任务，适合重复性操作、流程编排与人机协作。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/11-computer-use-agent/overview.png" alt="ComputerUseAgent 概览" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「概览」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/11-computer-use-agent/overview.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <section class="content-section">
+        <h2>功能特性</h2>
+        <p>自然语言指令、屏幕理解与点击/输入、多步骤任务编排、安全与权限控制等（可根据实际功能补充）。</p>
+        <figure class="figure-block">
+          <img src="/assets/apps/11-computer-use-agent/features.png" alt="ComputerUseAgent 功能" (error)="onImageError($event)" />
+          <div class="image-placeholder">
+            <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+            <p>此处放置「功能」截图</p>
+            <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/11-computer-use-agent/features.png</code></p>
+          </div>
+        </figure>
+      </section>
+
+      <div class="back-actions">
+        <a routerLink="/apps" class="btn btn-secondary">
+          {{ t('tool.back.to.list') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="keyboard-tester-page">
+  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-controls">
+        <button class="btn btn-outline" (click)="clear()">
+          {{ t('keyboard.clear') }}
+        </button>
+      </div>
+
+      <p class="keyboard-hint">{{ t('keyboard.hint') }}</p>
+
+      <div
+        class="keyboard-test-area"
+        tabindex="0"
+        (keydown)="onKeyDown($event)"
+        (keyup)="onKeyUp($event)">
+        <div class="keyboard-result" *ngIf="lastKey || lastCode || lastKeyCode">
+          <div class="result-row">
+            <span class="result-label">{{ t('keyboard.lastKey') }}</span>
+            <span class="result-value result-key">{{ lastKey || '—' }}</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">{{ t('keyboard.keyCode') }}</span>
+            <span class="result-value">{{ lastCode }} ({{ lastKeyCode }})</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">{{ t('keyboard.modifiers') }}</span>
+            <span class="result-value">{{ lastModifiers }}</span>
+          </div>
+        </div>
+        <div class="keyboard-empty" *ngIf="!lastKey && !lastCode && !lastKeyCode">
+          {{ t('keyboard.empty') }}
+        </div>
+      </div>
+
+      <div class="keyboard-history" *ngIf="records.length">
+        <h3 class="section-title">{{ t('keyboard.recent') }}</h3>
+        <div class="records-list">
+          <div class="record-item" *ngFor="let r of records; trackBy: trackByTime">
+            <span class="record-type" [class.keyup]="r.type === 'keyup'">{{ r.type }}</span>
+            <span class="record-key">{{ r.key }}</span>
+            <span class="record-code">{{ r.code }} ({{ r.keyCode }})</span>
+            <span class="record-mod">{{ r.modifiers }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
