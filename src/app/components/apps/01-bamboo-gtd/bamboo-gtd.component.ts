@@ -16,10 +16,11 @@ const APP_ID = 'bamboo-gtd';
   standalone: true,
   imports: [CommonModule, RouterLink, AppIconComponent],
   templateUrl: './bamboo-gtd.component.html',
-  styleUrls: ['./bamboo-gtd.component.css', '../app-header-icons.css']
+  styleUrls: ['./bamboo-gtd.component.css']
 })
 export class BambooGtdComponent implements OnInit, OnDestroy {
   app: Tool | undefined;
+  error = false;
   private subscriptions = new Subscription();
 
   constructor(
@@ -32,7 +33,10 @@ export class BambooGtdComponent implements OnInit, OnDestroy {
     this.toolService.getToolById(APP_ID).subscribe(t => {
       if (t && t.category === 'app') {
         this.app = t;
+        this.error = false;
         this.seoService.setSEO(getAppDetailSEO(t));
+      } else {
+        this.error = true;
       }
     });
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {
