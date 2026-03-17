@@ -88,17 +88,18 @@ export class AppDetailComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   getAppStatusLabel(app: Tool): string {
+    const isEn = this.langService.currentLang === 'en';
     switch (app.status) {
       case 'planning':
-        return '待开发';
+        return isEn ? 'Planning' : '待开发';
       case 'developing':
-        return '开发中';
+        return isEn ? 'In development' : '开发中';
       case 'testing':
-        return '测试中 / 待发布';
+        return isEn ? 'Testing / Pending release' : '测试中 / 待发布';
       case 'released':
-        return '已发布 / 运维中';
+        return isEn ? 'Released / In maintenance' : '已发布 / 运维中';
       case 'ended':
-        return '运维终止';
+        return isEn ? 'Maintenance ended' : '运维终止';
       default:
         return '';
     }
