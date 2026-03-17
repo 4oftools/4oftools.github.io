@@ -1,9 +1,5 @@
-<div class="jwt-parser-page">
-  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
-
-  <div class="page-content">
-    <div class="container">
-      <div class="tool-controls">
+<app-tool-detail [tool]="tool" *ngIf="tool">
+  <div class="tool-controls">
         <div class="input-section">
           <label>{{ t('jwt.input.token') }}</label>
           <textarea
@@ -84,7 +80,5 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+</app-tool-detail>
 

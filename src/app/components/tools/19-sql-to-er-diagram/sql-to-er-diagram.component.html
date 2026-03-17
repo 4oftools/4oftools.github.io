@@ -1,9 +1,5 @@
-<div class="sql-er-page">
-  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
-
-  <div class="page-content">
-    <div class="container">
-      <div class="tool-controls">
+<app-tool-detail [tool]="tool" *ngIf="tool">
+  <div class="tool-controls">
         <div class="button-group">
           <button class="btn btn-primary" (click)="generateDiagram()">
             {{ t('sql.er.generate') }}
@@ -115,6 +111,4 @@
           {{ t('sql.er.empty') }}
         </div>
       </div>
-    </div>
-  </div>
-</div>
+</app-tool-detail>

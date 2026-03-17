@@ -1,9 +1,5 @@
-<div class="severance-calculator-page">
-  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
-
-  <div class="page-content">
-    <div class="container">
-      <div class="tool-controls">
+<app-tool-detail [tool]="tool" *ngIf="tool">
+  <div class="tool-controls">
         <div class="termination-type-switch">
           <label class="switch-label">{{ t('severance.termination.type') }}</label>
           <div class="switch-container">
@@ -161,7 +157,5 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+</app-tool-detail>
 

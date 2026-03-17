@@ -1,32 +1,5 @@
-.base64-encoder-page {
-  background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--green-bg) 30%, var(--bg-secondary) 100%);
-  min-height: 100vh;
-  padding: 0;
-  position: relative;
-}
-
-.base64-encoder-page::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 20%, rgba(52, 211, 153, 0.06) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.page-content {
-  padding: 10px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.tool-controls {
+/* 使用 ViewEncapsulation.None，所有选择器限定在 .base64-encoder-content 内以作用于投影内容 */
+.base64-encoder-content .tool-controls {
   background: var(--bg-primary);
   border-radius: 8px;
   padding: 20px;
@@ -39,44 +12,13 @@
   gap: 16px;
 }
 
-.mode-switcher {
-  display: flex;
-  gap: 8px;
-  background: var(--bg-secondary);
-  padding: 4px;
-  border-radius: 6px;
-}
-
-.mode-btn {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-  background: transparent;
-  color: var(--text-secondary);
-}
-
-.mode-btn.active {
-  background: var(--green-color);
-  color: white;
-  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
-}
-
-.mode-btn:hover:not(.active) {
-  background: var(--green-bg);
-  color: var(--green-dark);
-}
-
-.button-group {
+.base64-encoder-content .button-group {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.btn {
+.base64-encoder-content .btn {
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
@@ -88,29 +30,41 @@
   display: inline-block;
 }
 
-.btn-primary {
+.base64-encoder-content .btn-primary {
   background: linear-gradient(135deg, var(--green-color) 0%, var(--green-light) 100%);
   color: white;
 }
 
-.btn-primary:hover {
+.base64-encoder-content .btn-primary:hover {
   background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-color) 100%);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
 
-.btn-outline {
+.base64-encoder-content .btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.base64-encoder-content .btn-secondary:hover {
+  background: var(--green-bg);
+  border-color: var(--green-color);
+  color: var(--green-dark);
+}
+
+.base64-encoder-content .btn-outline {
   background: transparent;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
 }
 
-.btn-outline:hover {
+.base64-encoder-content .btn-outline:hover {
   background: var(--bg-secondary);
   border-color: var(--text-secondary);
 }
 
-.error-message {
+.base64-encoder-content .error-message {
   padding: 12px 16px;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -120,41 +74,41 @@
   border-left: 4px solid var(--green-color);
 }
 
-.error-message.error {
+.base64-encoder-content .error-message.error {
   background: #fef2f2;
   color: #dc2626;
   border-left-color: #dc2626;
 }
 
-.editor-container {
+.base64-encoder-content .base64-editor-container {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 20px;
   align-items: start;
 }
 
-.editor-section {
+.base64-encoder-content .base64-editor-section {
   background: var(--bg-primary);
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.section-header {
+.base64-encoder-content .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.section-header h3 {
+.base64-encoder-content .section-header h3 {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
 }
 
-.btn-icon {
+.base64-encoder-content .btn-icon {
   padding: 6px 12px;
   background: var(--green-bg);
   color: var(--green-dark);
@@ -165,13 +119,13 @@
   transition: all 0.3s;
 }
 
-.btn-icon:hover {
+.base64-encoder-content .btn-icon:hover {
   background: var(--green-color);
   color: white;
   border-color: var(--green-color);
 }
 
-.editor {
+.base64-encoder-content .base64-editor {
   width: 100%;
   padding: 12px;
   border: 1px solid var(--border-color);
@@ -183,28 +137,29 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   transition: border-color 0.3s;
-  min-height: 900px;
+  min-height: 300px;
+  box-sizing: border-box;
 }
 
-.editor:focus {
+.base64-encoder-content .base64-editor:focus {
   outline: none;
   border-color: var(--green-color);
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-.editor[readonly] {
+.base64-encoder-content .base64-editor[readonly] {
   background: var(--bg-secondary);
   cursor: default;
 }
 
-.swap-button-container {
+.base64-encoder-content .swap-button-container {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 40px;
 }
 
-.btn-swap {
+.base64-encoder-content .btn-swap {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -219,75 +174,37 @@
   justify-content: center;
 }
 
-.btn-swap:hover {
+.base64-encoder-content .btn-swap:hover {
   background: var(--green-color);
   color: white;
   transform: rotate(180deg);
 }
 
 @media (max-width: 768px) {
-  .editor-container {
+  .base64-encoder-content .base64-editor-container {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .swap-button-container {
+  .base64-encoder-content .swap-button-container {
     padding: 0;
   }
 
-  .btn-swap {
+  .base64-encoder-content .btn-swap {
     transform: rotate(90deg);
   }
 
-  .tool-controls {
+  .base64-encoder-content .tool-controls {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .mode-switcher {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .mode-btn {
-    flex: 1;
-  }
-
-  .button-group {
+  .base64-encoder-content .button-group {
     width: 100%;
   }
 
-  .button-group .btn {
+  .base64-encoder-content .button-group .btn {
     flex: 1;
     min-width: 0;
   }
-
-  .tool-header {
-    padding: 16px 0;
-  }
-
-  .header-top {
-    margin-bottom: 16px;
-  }
-
-  .tool-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .tool-icon-large {
-    width: 56px;
-    height: 56px;
-    font-size: 40px;
-  }
-
-  .tool-title {
-    font-size: 24px;
-  }
-
-  .tool-subtitle {
-    font-size: 14px;
-  }
 }
-

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToolService } from '../../../services/tool.service';
@@ -17,7 +17,8 @@ import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
   styleUrls: ['./tool-detail.component.css']
 })
 export class ToolDetailComponent implements OnInit, OnDestroy {
-  tool: Tool | undefined;
+  /** 由父组件传入时使用；未传入则从路由 id 拉取 */
+  @Input() tool: Tool | undefined;
   error = false;
   private subscriptions = new Subscription();
 
@@ -30,18 +31,25 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    // 若父组件已传入 tool（如各工具页内嵌 layout），直接使用
+    if (this.tool) {
+      this.seoService.setSEO(getToolDetailSEO(this.tool));
+      const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+        if (this.tool) this.seoService.setSEO(getToolDetailSEO(this.tool));
+      });
+      this.subscriptions.add(langSub);
+      return;
+    }
+
     const id = this.route.snapshot.paramMap.get('id');
-    
     if (id) {
       this.toolService.getToolById(id).subscribe((tool: Tool | undefined) => {
         if (tool && tool.category === 'tool') {
-          // 如果有内部实现页面，跳转到工具页面
           if (tool.internalRoute) {
             this.router.navigate(['/tools', tool.internalRoute]);
             return;
           }
           this.tool = tool;
-          // 设置SEO
           this.seoService.setSEO(getToolDetailSEO(tool));
         } else {
           this.error = true;
@@ -51,11 +59,8 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
       this.error = true;
     }
 
-    // 订阅语言变化，更新SEO
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {
-      if (this.tool) {
-        this.seoService.setSEO(getToolDetailSEO(this.tool));
-      }
+      if (this.tool) this.seoService.setSEO(getToolDetailSEO(this.tool));
     });
     this.subscriptions.add(langSub);
   }

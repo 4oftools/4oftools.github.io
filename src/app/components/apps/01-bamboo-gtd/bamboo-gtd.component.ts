@@ -7,6 +7,7 @@ import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
 import { Subscription } from 'rxjs';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
+import { AppDetailComponent } from '../app-detail/app-detail.component';
 import { getAppDetailSEO } from '../../../config/seo.config';
 
 const APP_ID = 'bamboo-gtd';
@@ -14,7 +15,7 @@ const APP_ID = 'bamboo-gtd';
 @Component({
   selector: 'app-bamboo-gtd',
   standalone: true,
-  imports: [CommonModule, RouterLink, AppIconComponent],
+  imports: [CommonModule, RouterLink, AppIconComponent, AppDetailComponent],
   templateUrl: './bamboo-gtd.component.html',
   styleUrls: ['./bamboo-gtd.component.css']
 })

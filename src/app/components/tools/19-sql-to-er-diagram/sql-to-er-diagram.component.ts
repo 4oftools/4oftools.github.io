@@ -6,7 +6,7 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
-import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 
 interface ParsedColumn {
@@ -43,7 +43,7 @@ interface DiagramLink {
 @Component({
   selector: 'app-sql-to-er-diagram',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent],
+  imports: [CommonModule, FormsModule, ToolDetailComponent],
   templateUrl: './sql-to-er-diagram.component.html',
   styleUrls: ['./sql-to-er-diagram.component.css']
 })

@@ -8,18 +8,20 @@ import { Tool } from '../../../models/tool.model';
 import { getAppDetailSEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
+import { AppDetailComponent } from '../app-detail/app-detail.component';
 
 const APP_ID = 'computer-use-agent';
 
 @Component({
   selector: 'app-computer-use-agent',
   standalone: true,
-  imports: [CommonModule, RouterLink, AppIconComponent],
+  imports: [CommonModule, RouterLink, AppIconComponent, AppDetailComponent],
   templateUrl: './computer-use-agent.component.html',
   styleUrls: ['./computer-use-agent.component.css', '../app-header-icons.css']
 })
 export class ComputerUseAgentComponent implements OnInit, OnDestroy {
   app: Tool | undefined;
+  error = false;
   private subscriptions = new Subscription();
 
   constructor(
@@ -32,7 +34,10 @@ export class ComputerUseAgentComponent implements OnInit, OnDestroy {
     this.toolService.getToolById(APP_ID).subscribe(t => {
       if (t && t.category === 'app') {
         this.app = t;
+        this.error = false;
         this.seoService.setSEO(getAppDetailSEO(t));
+      } else {
+        this.error = true;
       }
     });
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {

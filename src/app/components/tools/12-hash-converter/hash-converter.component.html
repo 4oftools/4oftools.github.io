@@ -1,9 +1,5 @@
-<div class="hash-converter-page">
-  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
-
-  <div class="page-content">
-    <div class="container">
-      <div class="tool-controls">
+<app-tool-detail [tool]="tool" *ngIf="tool">
+  <div class="tool-controls">
         <div class="algorithm-selector">
           <label>{{ t('hash.algorithm') }}</label>
           <select [(ngModel)]="selectedAlgorithm" (change)="generateHash()" class="select-input">
@@ -50,7 +46,5 @@
             readonly></textarea>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+</app-tool-detail>
 

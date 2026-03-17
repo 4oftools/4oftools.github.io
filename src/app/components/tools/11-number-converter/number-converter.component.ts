@@ -6,7 +6,7 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
-import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ type BaseType = 'binary' | 'octal' | 'decimal' | 'hexadecimal';
 @Component({
   selector: 'app-number-converter',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent, AppIconComponent],
+  imports: [CommonModule, FormsModule, ToolDetailComponent, AppIconComponent],
   templateUrl: './number-converter.component.html',
   styleUrls: ['./number-converter.component.css']
 })

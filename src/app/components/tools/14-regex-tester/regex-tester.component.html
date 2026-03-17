@@ -1,9 +1,5 @@
-<div class="regex-tester-page">
-  <app-tool-header *ngIf="tool" [tool]="tool"></app-tool-header>
-
-  <div class="page-content">
-    <div class="container">
-      <div class="tool-controls">
+<app-tool-detail [tool]="tool" *ngIf="tool">
+  <div class="tool-controls">
         <div class="regex-input-group">
           <label>{{ t('regex.pattern') }}</label>
           <div class="input-wrapper">
@@ -122,7 +118,5 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+</app-tool-detail>
 

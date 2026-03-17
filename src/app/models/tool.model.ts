@@ -1,6 +1,9 @@
 export type ToolCategory = 'programmer' | 'life' | 'efficiency' | 'design' | 'other';
 export type ToolType = 'tool' | 'app';
 
+// 应用进度状态（仅 app 使用）
+export type AppStatus = 'planning' | 'developing' | 'testing' | 'released' | 'ended';
+
 export interface Tool {
   id: string;
   name: string;
@@ -13,6 +16,8 @@ export interface Tool {
   image?: string;
   category: ToolType;
   type?: ToolCategory;
+  /** 应用进度状态，仅当 category === 'app' 时使用 */
+  status?: AppStatus;
   url?: string;
   tags?: string[];
   tagsEn?: string[];

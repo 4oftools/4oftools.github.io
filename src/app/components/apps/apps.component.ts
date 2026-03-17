@@ -116,5 +116,27 @@ export class AppsComponent implements OnInit, OnDestroy {
     }
     return this.allApps.filter(app => app.type === category).length;
   }
+
+  getAppStatusLabel(app: Tool): string {
+    switch (app.status) {
+      case 'planning':
+        return '待开发';
+      case 'developing':
+        return '开发中';
+      case 'testing':
+        return '测试中 / 待发布';
+      case 'released':
+        return '已发布 / 运维中';
+      case 'ended':
+        return '运维终止';
+      default:
+        return '';
+    }
+  }
+
+  getAppStatusClass(app: Tool): string {
+    const status = app.status || 'released';
+    return 'app-status--' + status;
+  }
 }
 

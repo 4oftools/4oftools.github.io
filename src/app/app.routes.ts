@@ -38,6 +38,7 @@ import { PresentationGeneratorComponent } from './components/apps/10-presentatio
 import { ComputerUseAgentComponent } from './components/apps/11-computer-use-agent/computer-use-agent.component';
 import { DevilBrainComponent } from './components/apps/12-devil-brain/devil-brain.component';
 import { FortuneLotteryComponent } from './components/apps/13-fortune-lottery/fortune-lottery.component';
+import { SmartPasteComponent } from './components/apps/14-smart-paste/smart-paste.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -77,6 +78,7 @@ export const routes: Routes = [
   { path: 'apps/computer-use-agent', component: ComputerUseAgentComponent },
   { path: 'apps/devil-brain', component: DevilBrainComponent },
   { path: 'apps/fortune-lottery', component: FortuneLotteryComponent },
+  { path: 'apps/smart-paste', component: SmartPasteComponent },
   { path: 'apps/:id', component: AppDetailComponent },
   { path: 'sponsor', component: SponsorComponent },
   { path: '**', redirectTo: '' }

@@ -1,0 +1,44 @@
+<app-app-detail [app]="app" [useAsLayout]="true" *ngIf="app">
+  <section class="content-section">
+    <h2>简介</h2>
+    <p>Smart Paste 是一款跨平台智能剪贴板应用，支持 Windows 与 macOS，自动记录剪贴历史、识别内容类型（文本、代码、链接等），并提供一键搜索与智能粘贴能力。</p>
+    <figure class="figure-block">
+      <img src="/assets/apps/14-smart-paste/overview.png" alt="Smart Paste 概览" (error)="onImageError($event)" />
+      <div class="image-placeholder">
+        <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+        <p>此处放置「概览」截图</p>
+        <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/14-smart-paste/overview.png</code></p>
+      </div>
+    </figure>
+  </section>
+
+  <section class="content-section">
+    <h2>核心特性</h2>
+    <p>支持 Windows 与 macOS，提供多设备一致的剪贴体验。自动分组文本、代码片段、图片与链接，支持固定常用片段与快捷搜索。</p>
+    <figure class="figure-block">
+      <img src="/assets/apps/14-smart-paste/features.png" alt="Smart Paste 功能特性" (error)="onImageError($event)" />
+      <div class="image-placeholder">
+        <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
+        <p>此处放置「特性」截图</p>
+        <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/14-smart-paste/features.png</code></p>
+      </div>
+    </figure>
+  </section>
+
+  <section class="content-section">
+    <h2>使用场景</h2>
+    <p>适合程序员整理代码片段、产品/运营收集文案素材、日常多窗口复制粘贴等高频场景，让「复制一次、多处复用」变得更轻松。</p>
+  </section>
+</app-app-detail>
+<div class="app-detail app-loading" *ngIf="!app && !error">
+  <div class="app-container">
+    <p>{{ t('loading') }}</p>
+  </div>
+</div>
+<div class="app-detail app-error" *ngIf="error">
+  <div class="app-container">
+    <p>{{ t('app.notfound') }}</p>
+    <a routerLink="/apps" class="app-btn">{{ t('tool.back.to.list') }}</a>
+  </div>
+</div>
+

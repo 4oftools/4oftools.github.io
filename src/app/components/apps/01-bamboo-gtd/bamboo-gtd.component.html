@@ -1,92 +1,45 @@
-<div class="app-detail" *ngIf="app">
-  <!-- Header 按 tool-header 样式 -->
-  <header class="app-header">
-    <div class="app-container">
-      <div class="app-header-top">
-        <div class="app-breadcrumb">
-          <a routerLink="/" class="app-breadcrumb-link">
-            <app-icon icon="mdi:home" size="16px" iconClass="app-breadcrumb-icon"></app-icon>
-            {{ t('site.name') }}
-          </a>
-          <span class="app-breadcrumb-separator">›</span>
-          <a routerLink="/apps" class="app-breadcrumb-link">{{ t('nav.apps') }}</a>
-          <span class="app-breadcrumb-separator">›</span>
-          <span class="app-breadcrumb-current">{{ getAppName(app) }}</span>
-        </div>
-      </div>
-      <div class="app-header-content">
-        <div class="app-tool-info">
-          <div class="app-tool-icon-large">
-            <app-icon [icon]="app.icon || 'mdi:cellphone'" size="48px" [alt]="getAppName(app)"></app-icon>
-          </div>
-          <div class="app-tool-title-group">
-            <h1 class="app-tool-title">{{ getAppName(app) }}</h1>
-            <p class="app-tool-subtitle">{{ getAppDescription(app) }}</p>
-            <div class="app-tool-tags" *ngIf="getAppTags(app).length > 0">
-              <span *ngFor="let tag of getAppTags(app)" class="app-tag">{{ tag }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="app-container">
-    <div class="app-detail-content">
-      <div class="app-detail-body">
-        <div class="app-detail-section">
-          <h2>{{ t('tool.intro') }}</h2>
-          <p class="app-detail-description">{{ getAppDescription(app) }}</p>
-        </div>
-
-        <div class="app-detail-section">
-          <h2>方法介绍</h2>
-          <p class="app-detail-description">竹林工作法是一套个人 GTD（Getting Things Done）工作法，通过简洁的流程帮助管理任务、清空收件箱并保持专注。下文将用截图展示核心步骤与工具使用方式。</p>
-          <figure class="app-detail-figure">
-            <img src="/assets/apps/01-bamboo-gtd/intro.png" alt="竹林工作法介绍截图" (error)="onImageError($event)" />
-            <div class="app-detail-figure-placeholder">
-              <app-icon icon="mdi:image-outline" size="48px"></app-icon>
-              <span>此处放置「方法介绍」截图</span>
-              <small>intro.png</small>
-            </div>
-          </figure>
-        </div>
-
-        <div class="app-detail-section">
-          <h2>核心流程</h2>
-          <p class="app-detail-description">收件箱 → 拆解与分类 → 执行与回顾。以下为流程示意与工具界面截图。</p>
-          <figure class="app-detail-figure">
-            <img src="/assets/apps/01-bamboo-gtd/flow.png" alt="核心流程截图" (error)="onImageError($event)" />
-            <div class="app-detail-figure-placeholder">
-              <app-icon icon="mdi:image-outline" size="48px"></app-icon>
-              <span>此处放置「核心流程」截图</span>
-              <small>flow.png</small>
-            </div>
-          </figure>
-        </div>
-
-        <div class="app-detail-section">
-          <h2>工具使用</h2>
-          <p class="app-detail-description">可补充说明使用的工具或模板，并配截图。</p>
-          <figure class="app-detail-figure">
-            <img src="/assets/apps/01-bamboo-gtd/tools.png" alt="工具使用截图" (error)="onImageError($event)" />
-            <div class="app-detail-figure-placeholder">
-              <app-icon icon="mdi:image-outline" size="48px"></app-icon>
-              <span>此处放置「工具使用」截图</span>
-              <small>tools.png</small>
-            </div>
-          </figure>
-        </div>
-
-        <div class="app-detail-actions">
-          <a routerLink="/apps" class="app-btn app-btn-secondary">
-            {{ t('tool.back.to.list') }}
-          </a>
-        </div>
-      </div>
-    </div>
+<app-app-detail [app]="app" [useAsLayout]="true" *ngIf="app">
+  <div class="app-detail-section">
+    <h2>{{ t('tool.intro') }}</h2>
+    <p class="app-detail-description">{{ getAppDescription(app) }}</p>
   </div>
-</div>
+  <div class="app-detail-section">
+    <h2>方法介绍</h2>
+    <p class="app-detail-description">竹林工作法是一套个人 GTD（Getting Things Done）工作法，通过简洁的流程帮助管理任务、清空收件箱并保持专注。下文将用截图展示核心步骤与工具使用方式。</p>
+    <figure class="app-detail-figure">
+      <img src="/assets/apps/01-bamboo-gtd/intro.png" alt="竹林工作法介绍截图" (error)="onImageError($event)" />
+      <div class="app-detail-figure-placeholder">
+        <app-icon icon="mdi:image-outline" size="48px"></app-icon>
+        <span>此处放置「方法介绍」截图</span>
+        <small>intro.png</small>
+      </div>
+    </figure>
+  </div>
+  <div class="app-detail-section">
+    <h2>核心流程</h2>
+    <p class="app-detail-description">收件箱 → 拆解与分类 → 执行与回顾。以下为流程示意与工具界面截图。</p>
+    <figure class="app-detail-figure">
+      <img src="/assets/apps/01-bamboo-gtd/flow.png" alt="核心流程截图" (error)="onImageError($event)" />
+      <div class="app-detail-figure-placeholder">
+        <app-icon icon="mdi:image-outline" size="48px"></app-icon>
+        <span>此处放置「核心流程」截图</span>
+        <small>flow.png</small>
+      </div>
+    </figure>
+  </div>
+  <div class="app-detail-section">
+    <h2>工具使用</h2>
+    <p class="app-detail-description">可补充说明使用的工具或模板，并配截图。</p>
+    <figure class="app-detail-figure">
+      <img src="/assets/apps/01-bamboo-gtd/tools.png" alt="工具使用截图" (error)="onImageError($event)" />
+      <div class="app-detail-figure-placeholder">
+        <app-icon icon="mdi:image-outline" size="48px"></app-icon>
+        <span>此处放置「工具使用」截图</span>
+        <small>tools.png</small>
+      </div>
+    </figure>
+  </div>
+</app-app-detail>
 <div class="app-detail app-loading" *ngIf="!app && !error">
   <div class="app-container">
     <p>{{ t('loading') }}</p>

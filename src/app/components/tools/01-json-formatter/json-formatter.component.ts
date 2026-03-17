@@ -6,15 +6,15 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
-import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 
 @Component({
   selector: 'app-json-formatter',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent, AppIconComponent],
+  imports: [CommonModule, FormsModule, ToolDetailComponent, AppIconComponent],
   templateUrl: './json-formatter.component.html',
   styleUrls: ['./json-formatter.component.css']
 })
@@ -37,7 +37,7 @@ export class JsonFormatterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // 设置SEO
     this.seoService.setSEO(TOOL_PAGES_SEO['json-formatter']);
-    
+
     // 订阅语言变化，更新SEO
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {
       this.seoService.setSEO(TOOL_PAGES_SEO['json-formatter']);
@@ -61,10 +61,10 @@ export class JsonFormatterComponent implements OnInit, OnDestroy {
 
   formatJson() {
     this.errorMessage = '';
-    
+
     if (!this.inputJson.trim()) {
-      this.errorMessage = this.langService.currentLang === 'en' 
-        ? 'Please enter JSON data' 
+      this.errorMessage = this.langService.currentLang === 'en'
+        ? 'Please enter JSON data'
         : '请输入JSON数据';
       return;
     }
@@ -84,10 +84,10 @@ export class JsonFormatterComponent implements OnInit, OnDestroy {
 
   compressJson() {
     this.errorMessage = '';
-    
+
     if (!this.inputJson.trim()) {
-      this.errorMessage = this.langService.currentLang === 'en' 
-        ? 'Please enter JSON data' 
+      this.errorMessage = this.langService.currentLang === 'en'
+        ? 'Please enter JSON data'
         : '请输入JSON数据';
       return;
     }
@@ -107,10 +107,10 @@ export class JsonFormatterComponent implements OnInit, OnDestroy {
 
   validateJson() {
     this.errorMessage = '';
-    
+
     if (!this.inputJson.trim()) {
-      this.errorMessage = this.langService.currentLang === 'en' 
-        ? 'Please enter JSON data' 
+      this.errorMessage = this.langService.currentLang === 'en'
+        ? 'Please enter JSON data'
         : '请输入JSON数据';
       return;
     }
@@ -135,7 +135,7 @@ export class JsonFormatterComponent implements OnInit, OnDestroy {
 
   copyToClipboard(text: string) {
     if (!text) return;
-    
+
     navigator.clipboard.writeText(text).then(() => {
       // 可以添加一个提示消息
     }).catch(err => {
@@ -150,4 +150,3 @@ export class JsonFormatterComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
   }
 }
-

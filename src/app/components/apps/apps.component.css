@@ -266,6 +266,75 @@
   min-height: 40px;
 }
 
+/* 进度状态（列表小徽章） */
+.app-status-badge {
+  margin-bottom: 8px;
+}
+
+.app-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.app-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-color);
+}
+
+.app-status-pill.app-status--planning {
+  background: rgba(148, 163, 184, 0.15);
+  color: #64748b;
+}
+
+.app-status-pill.app-status--planning .app-status-dot {
+  background: #94a3b8;
+}
+
+.app-status-pill.app-status--developing {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+}
+
+.app-status-pill.app-status--developing .app-status-dot {
+  background: #3b82f6;
+}
+
+.app-status-pill.app-status--testing {
+  background: rgba(234, 179, 8, 0.12);
+  color: #b45309;
+}
+
+.app-status-pill.app-status--testing .app-status-dot {
+  background: #eab308;
+}
+
+.app-status-pill.app-status--released {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+}
+
+.app-status-pill.app-status--released .app-status-dot {
+  background: #22c55e;
+}
+
+.app-status-pill.app-status--ended {
+  background: rgba(148, 163, 184, 0.18);
+  color: #475569;
+}
+
+.app-status-pill.app-status--ended .app-status-dot {
+  background: #64748b;
+}
+
 .app-badges {
   display: flex;
   flex-wrap: wrap;

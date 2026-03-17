@@ -6,7 +6,7 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
-import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-crontab-calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent, AppIconComponent],
+  imports: [CommonModule, FormsModule, ToolDetailComponent, AppIconComponent],
   templateUrl: './crontab-calculator.component.html',
   styleUrls: ['./crontab-calculator.component.css']
 })

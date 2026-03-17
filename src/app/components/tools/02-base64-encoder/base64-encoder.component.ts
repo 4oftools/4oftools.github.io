@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -6,17 +6,18 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
-import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 
 @Component({
   selector: 'app-base64-encoder',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent, AppIconComponent],
+  imports: [CommonModule, FormsModule, ToolDetailComponent, AppIconComponent],
   templateUrl: './base64-encoder.component.html',
-  styleUrls: ['./base64-encoder.component.css']
+  styleUrls: ['./base64-encoder.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Base64EncoderComponent implements OnInit, OnDestroy {
   inputText: string = '';
@@ -36,7 +37,7 @@ export class Base64EncoderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // 设置SEO
     this.seoService.setSEO(TOOL_PAGES_SEO['base64-encoder']);
-    
+
     // 订阅语言变化，更新SEO
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {
       this.seoService.setSEO(TOOL_PAGES_SEO['base64-encoder']);
@@ -58,19 +59,19 @@ export class Base64EncoderComponent implements OnInit, OnDestroy {
     return this.langService.translate(key);
   }
 
+  switchMode() {
+    this.mode = this.mode === 'encode' ? 'decode' : 'encode';
+    this.clearAll();
+  }
+
   encodeBase64() {
     this.errorMessage = '';
-    
     if (!this.inputText.trim()) {
-      this.errorMessage = this.langService.currentLang === 'en' 
-        ? 'Please enter text to encode' 
-        : '请输入要编码的文本';
+      this.errorMessage = this.langService.currentLang === 'en' ? 'Please enter text to encode' : '请输入要编码的文本';
       return;
     }
-
     try {
       this.outputText = btoa(unescape(encodeURIComponent(this.inputText)));
-      this.errorMessage = '';
     } catch (error) {
       this.errorMessage = this.langService.currentLang === 'en'
         ? `Encoding error: ${(error as Error).message}`
@@ -81,38 +82,21 @@ export class Base64EncoderComponent implements OnInit, OnDestroy {
 
   decodeBase64() {
     this.errorMessage = '';
-    
     if (!this.inputText.trim()) {
-      this.errorMessage = this.langService.currentLang === 'en' 
-        ? 'Please enter Base64 string to decode' 
-        : '请输入要解码的 Base64 字符串';
+      this.errorMessage = this.langService.currentLang === 'en' ? 'Please enter Base64 string to decode' : '请输入要解码的 Base64 字符串';
       return;
     }
-
     try {
       this.outputText = decodeURIComponent(escape(atob(this.inputText)));
-      this.errorMessage = '';
     } catch (error) {
-      this.errorMessage = this.langService.currentLang === 'en'
-        ? `Decoding error: Invalid Base64 string`
-        : `解码错误: 无效的 Base64 字符串`;
+      this.errorMessage = this.langService.currentLang === 'en' ? 'Decoding error: Invalid Base64 string' : '解码错误: 无效的 Base64 字符串';
       this.outputText = '';
     }
   }
 
-  switchMode() {
-    this.mode = this.mode === 'encode' ? 'decode' : 'encode';
-    this.inputText = '';
-    this.outputText = '';
-    this.errorMessage = '';
-  }
-
   process() {
-    if (this.mode === 'encode') {
-      this.encodeBase64();
-    } else {
-      this.decodeBase64();
-    }
+    if (this.mode === 'encode') this.encodeBase64();
+    else this.decodeBase64();
   }
 
   clearAll() {
@@ -123,7 +107,7 @@ export class Base64EncoderComponent implements OnInit, OnDestroy {
 
   copyToClipboard(text: string) {
     if (!text) return;
-    
+
     navigator.clipboard.writeText(text).then(() => {
       // 可以添加一个提示消息
     }).catch(err => {
@@ -138,4 +122,3 @@ export class Base64EncoderComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
   }
 }
-

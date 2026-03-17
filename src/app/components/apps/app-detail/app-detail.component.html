@@ -1,77 +1,100 @@
 <div class="app-detail" *ngIf="app">
-  <div class="container">
-    <div class="breadcrumb">
-      <a routerLink="/">{{ t('site.name') }}</a>
-      <span class="separator">/</span>
-      <a routerLink="/apps">{{ t('nav.apps') }}</a>
-      <span class="separator">/</span>
-      <span>{{ getAppName(app) }}</span>
-    </div>
-    
-    <div class="detail-content">
-      <div class="detail-header">
-        <div class="detail-icon"><app-icon [icon]="app.icon || 'mdi:cellphone'" size="48px"></app-icon></div>
-        <div class="detail-info">
-          <h1 class="detail-title">{{ getAppName(app) }}</h1>
-          <div class="detail-tags" *ngIf="getAppTags(app).length > 0">
-            <span *ngFor="let tag of getAppTags(app)" class="tag">{{ tag }}</span>
+  <header class="app-header">
+    <div class="app-container">
+      <div class="app-header-top">
+        <div class="app-breadcrumb">
+          <a routerLink="/" class="app-breadcrumb-link">
+            <app-icon icon="mdi:home" size="16px" iconClass="app-breadcrumb-icon"></app-icon>
+            {{ t('site.name') }}
+          </a>
+          <span class="app-breadcrumb-separator">›</span>
+          <a routerLink="/apps" class="app-breadcrumb-link">{{ t('nav.apps') }}</a>
+          <span class="app-breadcrumb-separator">›</span>
+          <span class="app-breadcrumb-current">{{ getAppName(app) }}</span>
+        </div>
+      </div>
+      <div class="app-header-content">
+        <div class="app-info">
+          <div class="app-icon-large">
+            <app-icon [icon]="app.icon || 'mdi:cellphone'" size="48px" [alt]="getAppName(app)"></app-icon>
+          </div>
+          <div class="app-title-group">
+            <h1 class="app-title">
+              {{ getAppName(app) }}
+              <span class="app-status-badge" *ngIf="app.status">
+                <span class="app-status-pill" [ngClass]="getAppStatusClass(app)">
+                  <span class="app-status-dot"></span>
+                  {{ getAppStatusLabel(app) }}
+                </span>
+              </span>
+            </h1>
+            <p class="app-subtitle">{{ getAppDescription(app) }}</p>
+            <div class="app-tags" *ngIf="getAppTags(app).length > 0">
+              <span *ngFor="let tag of getAppTags(app)" class="app-tag">{{ tag }}</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </header>
 
-      <div class="detail-body">
-        <div class="detail-section">
-          <h2>{{ t('tool.intro') }}</h2>
-          <p class="detail-description">{{ getAppDescription(app) }}</p>
-        </div>
-
-        <!-- 开源应用：展示开源地址 -->
-        <div class="detail-section" *ngIf="app.openSource && app.openSourceUrl">
-          <h2>{{ t('app.openSource') }}</h2>
-          <a [href]="app.openSourceUrl" target="_blank" rel="noopener noreferrer" class="external-link">
-            {{ app.openSourceUrl }}
-            <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
-          </a>
-        </div>
-
-        <!-- 非开源：展示官网、下载地址 -->
-        <div class="detail-section" *ngIf="!app.openSource && (app.website || app.url || app.downloadUrl)">
-          <h2 *ngIf="app.website || app.url">{{ t('app.website') }}</h2>
-          <a *ngIf="app.website || app.url" [href]="app.website || app.url" target="_blank" rel="noopener noreferrer" class="external-link">
-            {{ app.website || app.url }}
-            <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
-          </a>
-          <h2 *ngIf="app.downloadUrl" class="detail-section-sub">{{ t('app.downloadUrl') }}</h2>
-          <a *ngIf="app.downloadUrl" [href]="app.downloadUrl" target="_blank" rel="noopener noreferrer" class="external-link">
-            {{ app.downloadUrl }}
-            <span class="external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
-          </a>
-        </div>
-
-        <div class="detail-actions">
-          <a [href]="app.openSourceUrl || app.website || app.url" target="_blank" rel="noopener noreferrer" class="btn" *ngIf="app.openSource ? app.openSourceUrl : (app.website || app.url)">
-            {{ app.openSource ? t('app.openSourceUrl') : t('tool.use') }}
-          </a>
-          <a [href]="app.downloadUrl" target="_blank" rel="noopener noreferrer" class="btn btn-outline" *ngIf="!app.openSource && app.downloadUrl">
-            {{ t('app.download') }}
-          </a>
-          <a routerLink="/apps" class="btn btn-secondary">
+  <div class="app-container">
+    <div class="app-detail-content">
+      <div class="app-detail-body">
+        <ng-content *ngIf="useAsLayout"></ng-content>
+        <div *ngIf="useAsLayout" class="app-detail-actions">
+          <a routerLink="/apps" class="app-btn app-btn-secondary">
             {{ t('tool.back.to.list') }}
           </a>
         </div>
+        <ng-container *ngIf="!useAsLayout">
+          <div class="app-detail-section">
+            <h2>{{ t('tool.intro') }}</h2>
+            <p class="app-detail-description">{{ getAppDescription(app) }}</p>
+          </div>
+          <div class="app-detail-section" *ngIf="app.openSource && app.openSourceUrl">
+            <h2>{{ t('app.openSource') }}</h2>
+            <a [href]="app.openSourceUrl" target="_blank" rel="noopener noreferrer" class="app-external-link">
+              {{ app.openSourceUrl }}
+              <span class="app-external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+            </a>
+          </div>
+          <div class="app-detail-section" *ngIf="!app.openSource && (app.website || app.url || app.downloadUrl)">
+            <h2 *ngIf="app.website || app.url">{{ t('app.website') }}</h2>
+            <a *ngIf="app.website || app.url" [href]="app.website || app.url" target="_blank" rel="noopener noreferrer" class="app-external-link">
+              {{ app.website || app.url }}
+              <span class="app-external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+            </a>
+            <h2 *ngIf="app.downloadUrl" class="app-detail-section-sub">{{ t('app.downloadUrl') }}</h2>
+            <a *ngIf="app.downloadUrl" [href]="app.downloadUrl" target="_blank" rel="noopener noreferrer" class="app-external-link">
+              {{ app.downloadUrl }}
+              <span class="app-external-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+            </a>
+          </div>
+          <div class="app-detail-actions">
+            <a [href]="app.openSourceUrl || app.website || app.url" target="_blank" rel="noopener noreferrer" class="app-btn" *ngIf="app.openSource ? app.openSourceUrl : (app.website || app.url)">
+              {{ app.openSource ? t('app.openSourceUrl') : t('tool.use') }}
+            </a>
+            <a [href]="app.downloadUrl" target="_blank" rel="noopener noreferrer" class="app-btn app-btn-outline" *ngIf="!app.openSource && app.downloadUrl">
+              {{ t('app.download') }}
+            </a>
+            <a routerLink="/apps" class="app-btn app-btn-secondary">
+              {{ t('tool.back.to.list') }}
+            </a>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
 </div>
-<div class="app-detail loading" *ngIf="!app && !error">
-  <div class="container">
+<div class="app-detail app-loading" *ngIf="!app && !error">
+  <div class="app-container">
     <p>{{ t('loading') }}</p>
   </div>
 </div>
-<div class="app-detail error" *ngIf="error">
-  <div class="container">
+<div class="app-detail app-error" *ngIf="error">
+  <div class="app-container">
     <p>{{ t('app.notfound') }}</p>
-    <a routerLink="/apps" class="btn">{{ t('tool.back.to.list') }}</a>
+    <a routerLink="/apps" class="app-btn">{{ t('tool.back.to.list') }}</a>
   </div>
 </div>
-

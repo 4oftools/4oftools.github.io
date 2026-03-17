@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToolService } from '../../../services/tool.service';
@@ -16,8 +16,10 @@ import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
   templateUrl: './app-detail.component.html',
   styleUrls: ['./app-detail.component.css']
 })
-export class AppDetailComponent implements OnInit, OnDestroy {
-  app: Tool | undefined;
+export class AppDetailComponent implements OnInit, OnDestroy, OnChanges {
+  /** 由父组件传入时作为布局使用，仅渲染 header + 投影内容 + 返回按钮 */
+  @Input() app: Tool | undefined;
+  @Input() useAsLayout = false;
   error = false;
   private subscriptions = new Subscription();
 
@@ -29,14 +31,27 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     private seoService: SEOService
   ) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.useAsLayout && changes['app'] && changes['app'].currentValue) {
+      this.seoService.setSEO(getAppDetailSEO(changes['app'].currentValue));
+    }
+  }
+
   ngOnInit() {
+    if (this.useAsLayout) {
+      if (this.app) this.seoService.setSEO(getAppDetailSEO(this.app));
+      const langSub = this.langService.getCurrentLanguage().subscribe(() => {
+        if (this.app) this.seoService.setSEO(getAppDetailSEO(this.app));
+      });
+      this.subscriptions.add(langSub);
+      return;
+    }
+
     const id = this.route.snapshot.paramMap.get('id');
-    
     if (id) {
       this.toolService.getToolById(id).subscribe((tool: Tool | undefined) => {
         if (tool && tool.category === 'app') {
           this.app = tool;
-          // 设置SEO
           this.seoService.setSEO(getAppDetailSEO(tool));
         } else {
           this.error = true;
@@ -46,11 +61,8 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       this.error = true;
     }
 
-    // 订阅语言变化，更新SEO
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {
-      if (this.app) {
-        this.seoService.setSEO(getAppDetailSEO(this.app));
-      }
+      if (this.app) this.seoService.setSEO(getAppDetailSEO(this.app));
     });
     this.subscriptions.add(langSub);
   }
@@ -73,6 +85,28 @@ export class AppDetailComponent implements OnInit, OnDestroy {
 
   getAppTags(app: Tool): string[] {
     return this.langService.currentLang === 'en' && app.tagsEn ? app.tagsEn : (app.tags || []);
+  }
+
+  getAppStatusLabel(app: Tool): string {
+    switch (app.status) {
+      case 'planning':
+        return '待开发';
+      case 'developing':
+        return '开发中';
+      case 'testing':
+        return '测试中 / 待发布';
+      case 'released':
+        return '已发布 / 运维中';
+      case 'ended':
+        return '运维终止';
+      default:
+        return '';
+    }
+  }
+
+  getAppStatusClass(app: Tool): string {
+    const status = app.status || 'released';
+    return 'app-status--' + status;
   }
 }
 

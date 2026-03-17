@@ -1,32 +1,5 @@
-.qr-code-generator-page {
-  background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--green-bg) 30%, var(--bg-secondary) 100%);
-  min-height: 100vh;
-  padding: 0;
-  position: relative;
-}
-
-.qr-code-generator-page::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 20%, rgba(52, 211, 153, 0.06) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.page-content {
-  padding: 10px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.tool-controls {
+/* 使用 ViewEncapsulation.None，所有选择器限定在 .qr-code-generator-content 内以作用于投影内容 */
+.qr-code-generator-content .tool-controls {
   background: var(--bg-primary);
   border-radius: 8px;
   padding: 20px;
@@ -39,18 +12,18 @@
   gap: 16px;
 }
 
-.control-group {
+.qr-code-generator-content .control-group {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.control-group label {
+.qr-code-generator-content .control-group label {
   font-weight: 500;
   color: var(--text-primary);
 }
 
-.size-input {
+.qr-code-generator-content .size-input {
   width: 80px;
   padding: 6px 12px;
   border: 1px solid var(--border-color);
@@ -58,18 +31,13 @@
   font-size: 14px;
 }
 
-.size-unit {
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-.button-group {
+.qr-code-generator-content .button-group {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.btn {
+.qr-code-generator-content .btn {
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
@@ -81,80 +49,64 @@
   display: inline-block;
 }
 
-.btn-primary {
+.qr-code-generator-content .btn-primary {
   background: linear-gradient(135deg, var(--green-color) 0%, var(--green-light) 100%);
   color: white;
 }
 
-.btn-primary:hover {
+.qr-code-generator-content .btn-primary:hover {
   background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-color) 100%);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
 
-.btn-secondary {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+.qr-code-generator-content .btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
-.btn-secondary:hover {
-  background: var(--green-bg);
-  border-color: var(--green-color);
-  color: var(--green-dark);
-}
-
-.btn-outline {
+.qr-code-generator-content .btn-outline {
   background: transparent;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
 }
 
-.btn-outline:hover {
+.qr-code-generator-content .btn-outline:hover {
   background: var(--bg-secondary);
   border-color: var(--text-secondary);
 }
 
-.error-message {
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  background: #fef2f2;
-  color: #dc2626;
-  border-left: 4px solid #dc2626;
-}
-
-.qr-generator-container {
+.qr-code-generator-content .qr-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: start;
 }
 
-.input-section,
-.output-section {
+.qr-code-generator-content .qr-input-section,
+.qr-code-generator-content .qr-output-section {
   background: var(--bg-primary);
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.section-header {
+.qr-code-generator-content .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.section-header h3 {
+.qr-code-generator-content .section-header h3 {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
 }
 
-.btn-icon {
+.qr-code-generator-content .btn-icon {
   padding: 6px 12px;
   background: var(--green-bg);
   color: var(--green-dark);
@@ -165,13 +117,13 @@
   transition: all 0.3s;
 }
 
-.btn-icon:hover {
+.qr-code-generator-content .btn-icon:hover {
   background: var(--green-color);
   color: white;
   border-color: var(--green-color);
 }
 
-.input-editor {
+.qr-code-generator-content .qr-input {
   width: 100%;
   padding: 12px;
   border: 1px solid var(--border-color);
@@ -183,26 +135,27 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   transition: border-color 0.3s;
-  min-height: 800px;
+  min-height: 120px;
+  box-sizing: border-box;
 }
 
-.input-editor:focus {
+.qr-code-generator-content .qr-input:focus {
   outline: none;
   border-color: var(--green-color);
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-.qr-code-display {
+.qr-code-generator-content .qr-display {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 800px;
+  min-height: 200px;
   background: var(--bg-secondary);
   border-radius: 6px;
   padding: 20px;
 }
 
-.qr-code-placeholder {
+.qr-code-generator-content .qr-placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,18 +164,12 @@
   text-align: center;
 }
 
-.placeholder-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
-  opacity: 0.5;
-}
-
-.qr-code-placeholder p {
-  margin: 0;
+.qr-code-generator-content .qr-placeholder p {
+  margin: 12px 0 0;
   font-size: 14px;
 }
 
-.qr-code-image {
+.qr-code-generator-content .qr-code {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
@@ -230,27 +177,26 @@
 }
 
 @media (max-width: 768px) {
-  .qr-generator-container {
+  .qr-code-generator-content .qr-container {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .tool-controls {
+  .qr-code-generator-content .tool-controls {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .control-group {
+  .qr-code-generator-content .control-group {
     width: 100%;
   }
 
-  .button-group {
+  .qr-code-generator-content .button-group {
     width: 100%;
   }
 
-  .button-group .btn {
+  .qr-code-generator-content .button-group .btn {
     flex: 1;
     min-width: 0;
   }
 }
-

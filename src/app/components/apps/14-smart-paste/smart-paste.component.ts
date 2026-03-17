@@ -10,16 +10,16 @@ import { Subscription } from 'rxjs';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { AppDetailComponent } from '../app-detail/app-detail.component';
 
-const APP_ID = 'git-loom';
+const APP_ID = 'smart-paste';
 
 @Component({
-  selector: 'app-git-loom',
+  selector: 'app-smart-paste',
   standalone: true,
   imports: [CommonModule, RouterLink, AppIconComponent, AppDetailComponent],
-  templateUrl: './git-loom.component.html',
-  styleUrls: ['./git-loom.component.css', '../app-header-icons.css']
+  templateUrl: './smart-paste.component.html',
+  styleUrls: ['./smart-paste.component.css', '../app-header-icons.css']
 })
-export class GitLoomComponent implements OnInit, OnDestroy {
+export class SmartPasteComponent implements OnInit, OnDestroy {
   app: Tool | undefined;
   error = false;
   private subscriptions = new Subscription();
@@ -75,3 +75,4 @@ export class GitLoomComponent implements OnInit, OnDestroy {
     }
   }
 }
+

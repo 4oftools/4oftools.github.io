@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -6,24 +6,24 @@ import { LanguageService } from '../../../services/language.service';
 import { ToolService } from '../../../services/tool.service';
 import { SEOService } from '../../../services/seo.service';
 import { Tool } from '../../../models/tool.model';
-import { ToolHeaderComponent } from '../shared/tool-header/tool-header.component';
 import { AppIconComponent } from '../../shared/app-icon/app-icon.component';
 import { TOOL_PAGES_SEO } from '../../../config/seo.config';
 import { Subscription } from 'rxjs';
-import QRCode from 'qrcode';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 
 @Component({
   selector: 'app-qr-code-generator',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToolHeaderComponent, AppIconComponent],
+  imports: [CommonModule, FormsModule, ToolDetailComponent, AppIconComponent],
   templateUrl: './qr-code-generator.component.html',
-  styleUrls: ['./qr-code-generator.component.css']
+  styleUrls: ['./qr-code-generator.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class QrCodeGeneratorComponent implements OnInit, OnDestroy {
   inputText: string = '';
-  qrCodeDataUrl: string = '';
+  qrDataUrl: string = '';
   errorMessage: string = '';
-  size: number = 300;
+  size: number = 256;
   tool: Tool | undefined;
   private subscriptions = new Subscription();
 
@@ -37,7 +37,7 @@ export class QrCodeGeneratorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // 设置SEO
     this.seoService.setSEO(TOOL_PAGES_SEO['qr-code-generator']);
-    
+
     // 订阅语言变化，更新SEO
     const langSub = this.langService.getCurrentLanguage().subscribe(() => {
       this.seoService.setSEO(TOOL_PAGES_SEO['qr-code-generator']);
@@ -59,20 +59,20 @@ export class QrCodeGeneratorComponent implements OnInit, OnDestroy {
     return this.langService.translate(key);
   }
 
-  async generateQRCode() {
+  async generateQR() {
     this.errorMessage = '';
-    
+
     if (!this.inputText.trim()) {
-      this.errorMessage = this.langService.currentLang === 'en' 
-        ? 'Please enter text or URL to generate QR code' 
-        : '请输入文本或URL以生成二维码';
-      this.qrCodeDataUrl = '';
+      this.errorMessage = this.langService.currentLang === 'en'
+        ? 'Please enter text to generate QR code'
+        : '请输入要生成二维码的文本';
       return;
     }
 
     try {
-      // 使用 qrcode 库生成真正的二维码
-      this.qrCodeDataUrl = await QRCode.toDataURL(this.inputText, {
+      // 使用动态导入加载 qrcode 库
+      const QRCode = (await import('qrcode')).default;
+      this.qrDataUrl = await QRCode.toDataURL(this.inputText, {
         width: this.size,
         margin: 2,
         color: {
@@ -80,40 +80,39 @@ export class QrCodeGeneratorComponent implements OnInit, OnDestroy {
           light: '#FFFFFF'
         }
       });
-      this.errorMessage = '';
     } catch (error) {
       this.errorMessage = this.langService.currentLang === 'en'
-        ? `Error generating QR code: ${(error as Error).message}`
-        : `生成二维码错误: ${(error as Error).message}`;
-      this.qrCodeDataUrl = '';
+        ? 'Failed to generate QR code'
+        : '生成二维码失败';
+      console.error('QR Code generation error:', error);
     }
   }
 
-  downloadQRCode() {
-    if (!this.qrCodeDataUrl) {
-      return;
-    }
+  downloadQR() {
+    if (!this.qrDataUrl) return;
 
     const link = document.createElement('a');
-    link.download = `qrcode-${Date.now()}.png`;
-    link.href = this.qrCodeDataUrl;
+    link.href = this.qrDataUrl;
+    link.download = 'qrcode.png';
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   }
 
   clearAll() {
     this.inputText = '';
-    this.qrCodeDataUrl = '';
+    this.qrDataUrl = '';
     this.errorMessage = '';
   }
 
-  copyToClipboard() {
-    if (!this.inputText) return;
-    
-    navigator.clipboard.writeText(this.inputText).then(() => {
+  copyToClipboard(text?: string) {
+    const textToCopy = text || this.inputText;
+    if (!textToCopy) return;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
       // 可以添加一个提示消息
     }).catch(err => {
       console.error('Failed to copy:', err);
     });
   }
 }
-
