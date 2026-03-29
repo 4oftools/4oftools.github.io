@@ -111,6 +111,24 @@
       >
         <app-icon icon="mdi:close" size="22px" iconClass="bamboo-lightbox-close-ic"></app-icon>
       </button>
+      <button
+        *ngIf="galleryItems.length > 1"
+        type="button"
+        class="bamboo-lightbox-nav bamboo-lightbox-nav--prev"
+        (click)="prevPreview(); $event.stopPropagation()"
+        [attr.aria-label]="getLightboxPrevLabel()"
+      >
+        <app-icon icon="mdi:chevron-left" size="36px" iconClass="bamboo-lightbox-nav-ic"></app-icon>
+      </button>
+      <button
+        *ngIf="galleryItems.length > 1"
+        type="button"
+        class="bamboo-lightbox-nav bamboo-lightbox-nav--next"
+        (click)="nextPreview(); $event.stopPropagation()"
+        [attr.aria-label]="getLightboxNextLabel()"
+      >
+        <app-icon icon="mdi:chevron-right" size="36px" iconClass="bamboo-lightbox-nav-ic"></app-icon>
+      </button>
       <div class="bamboo-lightbox-panel" (click)="$event.stopPropagation()">
         <img [src]="pv.src" [alt]="getGalleryLabel(pv)" />
         <p class="bamboo-lightbox-caption">{{ getGalleryLabel(pv) }}</p>

@@ -35,8 +35,8 @@ interface FeatureItem {
 export class BambooGtdComponent implements OnInit, OnDestroy {
   app: Tool | undefined;
   error = false;
-  /** 灯箱预览当前项 */
-  previewItem: GalleryItem | null = null;
+  /** 灯箱当前图片在 galleryItems 中的下标，null 表示未打开 */
+  previewIndex: number | null = null;
   private subscriptions = new Subscription();
 
   /** 四张截图横向等宽展示 */
@@ -121,21 +121,53 @@ export class BambooGtdComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  @HostListener('document:keydown.escape')
-  onEscapeClosePreview(): void {
-    if (this.previewItem) this.closePreview();
+  @HostListener('document:keydown', ['$event'])
+  onLightboxKeydown(ev: KeyboardEvent): void {
+    if (this.previewIndex === null) return;
+    if (ev.key === 'Escape') {
+      this.closePreview();
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowLeft') {
+      this.prevPreview();
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowRight') {
+      this.nextPreview();
+      ev.preventDefault();
+    }
   }
 
   openPreview(item: GalleryItem, event: Event): void {
     const el = event.currentTarget as HTMLElement;
     if (el.classList.contains('bamboo-gallery-thumb--failed')) return;
-    this.previewItem = item;
+    const i = this.galleryItems.indexOf(item);
+    if (i < 0) return;
+    this.previewIndex = i;
     this.lockBodyScroll();
   }
 
   closePreview(): void {
-    this.previewItem = null;
+    this.previewIndex = null;
     this.unlockBodyScroll();
+  }
+
+  prevPreview(): void {
+    if (this.previewIndex === null) return;
+    const n = this.galleryItems.length;
+    if (n <= 1) return;
+    this.previewIndex = (this.previewIndex - 1 + n) % n;
+  }
+
+  nextPreview(): void {
+    if (this.previewIndex === null) return;
+    const n = this.galleryItems.length;
+    if (n <= 1) return;
+    this.previewIndex = (this.previewIndex + 1) % n;
+  }
+
+  /** 灯箱内当前展示项（供模板 *ngIf="previewItem as pv"） */
+  get previewItem(): GalleryItem | null {
+    if (this.previewIndex === null) return null;
+    return this.galleryItems[this.previewIndex] ?? null;
   }
 
   private lockBodyScroll(): void {
@@ -153,6 +185,14 @@ export class BambooGtdComponent implements OnInit, OnDestroy {
 
   getLightboxCloseLabel(): string {
     return this.isEn() ? 'Close preview' : '关闭预览';
+  }
+
+  getLightboxPrevLabel(): string {
+    return this.isEn() ? 'Previous image' : '上一张';
+  }
+
+  getLightboxNextLabel(): string {
+    return this.isEn() ? 'Next image' : '下一张';
   }
 
   t(key: string): string {
