@@ -139,5 +139,17 @@ export class AppsComponent implements OnInit, OnDestroy {
     const status = app.status || 'released';
     return 'app-status--' + status;
   }
+
+  /** 副标题：中文页显示英文名，英文页显示中文名 */
+  getAppSubtitle(app: Tool): string {
+    if (this.langService.currentLang === 'zh') {
+      return (app.nameEn && app.nameEn.trim()) ? app.nameEn.trim() : '';
+    }
+    return (app.name && app.name.trim()) ? app.name.trim() : '';
+  }
+
+  getCardStaggerMs(index: number): number {
+    return Math.min(100 + index * 45, 750);
+  }
 }
 

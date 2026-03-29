@@ -1,4 +1,6 @@
 <div class="apps-page">
+  <div class="apps-bg-decoration" aria-hidden="true"></div>
+
   <div class="page-header">
     <div class="container">
       <h1 class="page-title">{{ t('apps.title') }}</h1>
@@ -11,8 +13,9 @@
       <div class="filter-section">
         <div class="filter-controls">
           <div class="filter-tabs">
-            <button 
-              *ngFor="let cat of categories" 
+            <button
+              *ngFor="let cat of categories"
+              type="button"
               class="filter-tab"
               [class.active]="selectedCategory === cat.value"
               (click)="filterByCategory(cat.value)">
@@ -20,8 +23,8 @@
             </button>
           </div>
           <div class="search-box">
-            <input 
-              type="text" 
+            <input
+              type="text"
               class="search-input"
               [placeholder]="t('search.placeholder.apps')"
               [(ngModel)]="searchQuery"
@@ -32,34 +35,39 @@
       </div>
 
       <div class="apps-grid">
-        <div *ngFor="let app of filteredApps" class="app-card card" [routerLink]="['/apps', app.id]">
-          <div class="app-icon tool-icon-wrap" [ngClass]="'tool-icon--' + (app.iconColor || 'app')"><app-icon [icon]="app.icon || 'mdi:cellphone'" size="40px"></app-icon></div>
-          <h3 class="app-name">{{ getToolName(app) }}</h3>
+        <div
+          *ngFor="let app of filteredApps; let i = index"
+          class="app-card"
+          [routerLink]="['/apps', app.id]"
+          [style.animation-delay.ms]="getCardStaggerMs(i)">
+          <div class="app-featured-badge" *ngIf="app.featured" title="Featured">
+            <app-icon icon="mdi:star" size="18px"></app-icon>
+          </div>
+          <div class="app-card-ribbon app-card-ribbon--oss" *ngIf="app.openSource">{{ t('app.openSource') }}</div>
+          <div class="app-card-icon tool-icon-wrap" [ngClass]="'tool-icon--' + (app.iconColor || 'app')">
+            <app-icon [icon]="app.icon || 'mdi:cellphone'" size="38px"></app-icon>
+          </div>
+          <h3 class="app-card-title">{{ getToolName(app) }}</h3>
+          <p class="app-card-subtitle" *ngIf="getAppSubtitle(app)">{{ getAppSubtitle(app) }}</p>
           <div class="app-status-badge" *ngIf="app.status">
             <span class="app-status-pill" [ngClass]="getAppStatusClass(app)">
               <span class="app-status-dot"></span>
               {{ getAppStatusLabel(app) }}
             </span>
           </div>
-          <p class="app-description">{{ getToolDescription(app) }}</p>
-          <div class="app-badges" *ngIf="app.openSource || app.website || app.url || app.downloadUrl">
-            <span *ngIf="app.openSource" class="badge badge-open">{{ t('app.openSource') }}</span>
-            <span *ngIf="!app.openSource && (app.website || app.url)" class="badge">{{ t('app.website') }}</span>
-            <span *ngIf="app.downloadUrl" class="badge">{{ t('app.download') }}</span>
+          <p class="app-card-desc">{{ getToolDescription(app) }}</p>
+          <div class="app-card-footer" *ngIf="getToolTags(app).length > 0">
+            <span *ngFor="let tag of getToolTags(app)" class="app-card-tag">{{ tag }}</span>
           </div>
-          <div class="app-tags" *ngIf="getToolTags(app).length > 0">
-            <span *ngFor="let tag of getToolTags(app)" class="tag">{{ tag }}</span>
-          </div>
-          <div class="app-action">
-            <span class="app-link">{{ t('tool.detail') }} →</span>
+          <div class="app-card-cta">
+            <span class="app-card-link">{{ t('tool.detail') }} →</span>
           </div>
         </div>
       </div>
 
-      <div class="empty-state" *ngIf="filteredApps.length === 0">
+      <div class="apps-empty" *ngIf="filteredApps.length === 0">
         <p>{{ t('empty.apps') }}</p>
       </div>
     </div>
   </div>
 </div>
-

@@ -2,8 +2,14 @@
   min-height: calc(100vh - 200px);
 }
 
+/* 与工具集顶栏同色系（靛/绿/紫），改为紫起→靛→深绿收，顺序与光感不同 */
 .page-header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--green-color) 50%, var(--secondary-color) 100%);
+  background: linear-gradient(
+    140deg,
+    #7c3aed 0%,
+    var(--primary-color) 38%,
+    var(--green-dark) 100%
+  );
   color: white;
   padding: 20px 0;
   text-align: center;
@@ -18,7 +24,7 @@
   right: -10%;
   width: 300px;
   height: 300px;
-  background: rgba(16, 185, 129, 0.2);
+  background: rgba(167, 139, 250, 0.28);
   border-radius: 50%;
   filter: blur(60px);
 }
@@ -30,7 +36,7 @@
   left: -5%;
   width: 250px;
   height: 250px;
-  background: rgba(52, 211, 153, 0.15);
+  background: rgba(99, 102, 241, 0.22);
   border-radius: 50%;
   filter: blur(50px);
 }

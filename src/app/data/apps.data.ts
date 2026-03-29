@@ -11,7 +11,7 @@ export const APPS_DATA: Tool[] = [
     type: 'efficiency',
     icon: 'mdi:leaf',
     iconColor: 'emerald',
-    status: 'planning',
+    status: 'released',
     tags: ['GTD', '效率', '个人管理'],
     tagsEn: ['GTD', 'Productivity', 'Personal Management'],
     featured: true,
