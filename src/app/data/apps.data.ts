@@ -16,7 +16,7 @@ export const APPS_DATA: Tool[] = [
     tagsEn: ['GTD', 'Productivity', 'Personal Management'],
     featured: true,
     openSource: true,
-    openSourceUrl: 'https://github.com/4oftools/bamboo-gtd',
+    openSourceUrl: 'https://github.com/4oftools/zhulin',
     website: undefined,
     downloadUrl: undefined
   },

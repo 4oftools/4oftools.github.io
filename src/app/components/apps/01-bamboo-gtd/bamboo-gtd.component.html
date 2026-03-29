@@ -1,53 +1,133 @@
-<app-app-detail [app]="app" [useAsLayout]="true" *ngIf="app">
-  <div class="app-detail-section">
-    <h2>{{ t('tool.intro') }}</h2>
-    <p class="app-detail-description">{{ getAppDescription(app) }}</p>
-  </div>
-  <div class="app-detail-section">
-    <h2>方法介绍</h2>
-    <p class="app-detail-description">竹林工作法是一套个人 GTD（Getting Things Done）工作法，通过简洁的流程帮助管理任务、清空收件箱并保持专注。下文将用截图展示核心步骤与工具使用方式。</p>
-    <figure class="app-detail-figure">
-      <img src="/assets/apps/01-bamboo-gtd/intro.png" alt="竹林工作法介绍截图" (error)="onImageError($event)" />
-      <div class="app-detail-figure-placeholder">
-        <app-icon icon="mdi:image-outline" size="48px"></app-icon>
-        <span>此处放置「方法介绍」截图</span>
-        <small>intro.png</small>
+<ng-container *ngIf="app as a">
+  <div class="bamboo-page">
+    <section class="bamboo-hero">
+      <div class="bamboo-hero-bg" aria-hidden="true"></div>
+      <div class="bamboo-hero-inner">
+        <nav class="bamboo-breadcrumb" aria-label="breadcrumb">
+          <a routerLink="/" class="bamboo-crumb-link">
+            <app-icon icon="mdi:home" size="16px" iconClass="bamboo-crumb-ic"></app-icon>
+            {{ t('site.name') }}
+          </a>
+          <span class="bamboo-crumb-sep">›</span>
+          <a routerLink="/apps" class="bamboo-crumb-link">{{ t('nav.apps') }}</a>
+          <span class="bamboo-crumb-sep">›</span>
+          <span class="bamboo-crumb-current">{{ getAppName(a) }}</span>
+        </nav>
+
+        <div class="bamboo-hero-content">
+          <div class="bamboo-icon-wrap">
+            <app-icon [icon]="a.icon || 'mdi:leaf'" size="44px" iconClass="bamboo-icon-leaf"></app-icon>
+          </div>
+          <p class="bamboo-kicker">{{ getKicker() }}</p>
+          <h1 class="bamboo-title">{{ getAppName(a) }}</h1>
+          <p class="bamboo-subtitle" *ngIf="(isEn() && a.name) || (!isEn() && a.nameEn)">
+            {{ isEn() ? a.name : a.nameEn }}
+          </p>
+          <p class="bamboo-desc">{{ getAppDescription(a) }}</p>
+          <p class="bamboo-desc-extra">{{ getHeroExtra() }}</p>
+          <div class="bamboo-status-row">
+            <span class="bamboo-status-badge" *ngIf="a.status">
+              <app-icon icon="mdi:check-decagram" size="16px" iconClass="bamboo-status-ic"></app-icon>
+              {{ getAppStatusLabel(a) }}
+            </span>
+            <span
+              class="bamboo-opensource-badge"
+              [class.bamboo-opensource-badge--yes]="a.openSource"
+              [class.bamboo-opensource-badge--no]="!a.openSource"
+            >
+              <app-icon
+                [icon]="a.openSource ? 'mdi:source-branch' : 'mdi:lock-outline'"
+                size="16px"
+                iconClass="bamboo-opensource-ic"
+              ></app-icon>
+              {{ getOpenSourceLabel(a) }}
+            </span>
+            <a
+              *ngIf="a.openSourceUrl"
+              [href]="a.openSourceUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bamboo-github-link"
+            >
+              <app-icon icon="mdi:github" size="18px" iconClass="bamboo-github-ic"></app-icon>
+              GitHub
+            </a>
+          </div>
+        </div>
       </div>
-    </figure>
-  </div>
-  <div class="app-detail-section">
-    <h2>核心流程</h2>
-    <p class="app-detail-description">收件箱 → 拆解与分类 → 执行与回顾。以下为流程示意与工具界面截图。</p>
-    <figure class="app-detail-figure">
-      <img src="/assets/apps/01-bamboo-gtd/flow.png" alt="核心流程截图" (error)="onImageError($event)" />
-      <div class="app-detail-figure-placeholder">
-        <app-icon icon="mdi:image-outline" size="48px"></app-icon>
-        <span>此处放置「核心流程」截图</span>
-        <small>flow.png</small>
+    </section>
+
+    <section class="bamboo-shots" id="screenshots">
+      <div class="bamboo-section-inner">
+        <div class="bamboo-section-head bamboo-section-head--solo">
+          <h2 class="bamboo-section-title">{{ getScreenshotsTitle() }}</h2>
+        </div>
+        <div class="bamboo-gallery">
+          <button
+            type="button"
+            *ngFor="let item of galleryItems"
+            class="bamboo-gallery-thumb"
+            (click)="openPreview(item, $event)"
+            [attr.aria-label]="getPreviewHint(item)"
+          >
+            <img [src]="item.src" [alt]="getGalleryLabel(item)" loading="lazy" (error)="onImageError($event)" />
+            <div class="bamboo-gallery-fallback" aria-hidden="true"></div>
+            <span class="bamboo-gallery-overlay">{{ getGalleryLabel(item) }}</span>
+          </button>
+        </div>
       </div>
-    </figure>
-  </div>
-  <div class="app-detail-section">
-    <h2>工具使用</h2>
-    <p class="app-detail-description">可补充说明使用的工具或模板，并配截图。</p>
-    <figure class="app-detail-figure">
-      <img src="/assets/apps/01-bamboo-gtd/tools.png" alt="工具使用截图" (error)="onImageError($event)" />
-      <div class="app-detail-figure-placeholder">
-        <app-icon icon="mdi:image-outline" size="48px"></app-icon>
-        <span>此处放置「工具使用」截图</span>
-        <small>tools.png</small>
+    </section>
+
+    <section class="bamboo-features">
+      <div class="bamboo-section-inner">
+        <div class="bamboo-section-head bamboo-section-head--solo">
+          <h2 class="bamboo-section-title">{{ getFeaturesTitle() }}</h2>
+        </div>
+        <div class="bamboo-feature-grid">
+          <div *ngFor="let f of features" class="bamboo-feature-card">
+            <div class="bamboo-feature-icon">
+              <app-icon [icon]="f.icon" size="26px" iconClass="bamboo-feature-ic"></app-icon>
+            </div>
+            <h3>{{ getFeatureTitle(f) }}</h3>
+            <p>{{ getFeatureDesc(f) }}</p>
+          </div>
+        </div>
       </div>
-    </figure>
+    </section>
+
+    <div
+      *ngIf="previewItem as pv"
+      class="bamboo-lightbox"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="getGalleryLabel(pv)"
+      (click)="closePreview()"
+    >
+      <button
+        type="button"
+        class="bamboo-lightbox-close"
+        (click)="closePreview(); $event.stopPropagation()"
+        [attr.aria-label]="getLightboxCloseLabel()"
+      >
+        <app-icon icon="mdi:close" size="22px" iconClass="bamboo-lightbox-close-ic"></app-icon>
+      </button>
+      <div class="bamboo-lightbox-panel" (click)="$event.stopPropagation()">
+        <img [src]="pv.src" [alt]="getGalleryLabel(pv)" />
+        <p class="bamboo-lightbox-caption">{{ getGalleryLabel(pv) }}</p>
+      </div>
+    </div>
   </div>
-</app-app-detail>
-<div class="app-detail app-loading" *ngIf="!app && !error">
-  <div class="app-container">
+</ng-container>
+
+<div class="bamboo-page bamboo-page--state" *ngIf="!app && !error">
+  <div class="bamboo-state-inner">
     <p>{{ t('loading') }}</p>
   </div>
 </div>
-<div class="app-detail app-error" *ngIf="error">
-  <div class="app-container">
+
+<div class="bamboo-page bamboo-page--state" *ngIf="error">
+  <div class="bamboo-state-inner">
     <p>{{ t('app.notfound') }}</p>
-    <a routerLink="/apps" class="app-btn">{{ t('tool.back.to.list') }}</a>
+    <a routerLink="/apps" class="bamboo-btn bamboo-btn-primary">{{ t('tool.back.to.list') }}</a>
   </div>
 </div>
