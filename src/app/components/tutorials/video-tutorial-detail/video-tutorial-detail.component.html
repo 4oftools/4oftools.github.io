@@ -7,6 +7,20 @@
       <p class="paper-summary">{{ summaryOf(tut) }}</p>
     </header>
 
+    <section *ngIf="tut.externalUrl" class="paper-external-cta">
+      <div *ngIf="tut.coverImage" class="paper-external-cover">
+        <img [src]="tut.coverImage" [alt]="titleOf(tut)" />
+      </div>
+      <p class="paper-external-hint">{{ t('tutorials.external.hint') }}</p>
+      <a
+        [href]="tut.externalUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="paper-external-btn"
+        >{{ t('tutorials.external.open') }}</a
+      >
+    </section>
+
     <div class="paper-video-grid" *ngIf="tut.episodes.length > 0; else emptyEpisodes">
       <article *ngFor="let ep of tut.episodes; let i = index" class="paper-video-card" [style.--paper-delay.ms]="70 * i">
         <a

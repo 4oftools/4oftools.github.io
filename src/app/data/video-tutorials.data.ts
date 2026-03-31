@@ -21,6 +21,10 @@ export interface VideoTutorial {
   summaryZh: string;
   summaryEn: string;
   episodes: VideoEpisode[];
+  /** 站外课程页；列表点击直接打开新窗口 */
+  externalUrl?: string;
+  /** 列表/详情封面，如 /assets/tutorials/.../overview.png */
+  coverImage?: string;
 }
 
 export const VIDEO_TUTORIALS: VideoTutorial[] = [
@@ -30,7 +34,9 @@ export const VIDEO_TUTORIALS: VideoTutorial[] = [
     titleEn: 'WebSphere Application Server',
     summaryZh: 'WAS 安装、配置、部署与运维要点。',
     summaryEn: 'Installation, configuration, deployment, and operations for WAS.',
-    episodes: []
+    episodes: [],
+    externalUrl: 'https://edu.51cto.com/course/38177.html',
+    coverImage: '/assets/tutorials/01-websphere-application-server/overview.png'
   },
   {
     id: 'vault',

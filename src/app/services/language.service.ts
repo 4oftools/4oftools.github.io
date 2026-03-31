@@ -20,7 +20,12 @@ export class LanguageService {
       zh: '技术专题视频讲解，涵盖中间件、协议、AI 与工程实践。',
       en: 'Topic-based video tutorials: middleware, protocols, AI, and hands-on engineering.'
     },
-    'tutorials.list.lead': { zh: '点击下方卡片进入对应专题。', en: 'Open a topic below to view its videos.' },
+    'tutorials.list.lead': { zh: '点击下方卡片进入对应专题；已上线的站外课程会在新窗口打开。', en: 'Open a topic below; courses hosted elsewhere open in a new tab.' },
+    'tutorials.external.hint': {
+      zh: '本课程在合作平台提供完整视频，请在新窗口中打开观看。',
+      en: 'Full videos are on a partner site—open the link in a new tab.'
+    },
+    'tutorials.external.open': { zh: '前往课程', en: 'Open course' },
     'tutorials.back': { zh: '← 返回教程列表', en: '← Back to tutorials' },
     'tutorials.empty': { zh: '该专题的剧集链接将陆续补充，敬请关注。', en: 'Video links for this topic will be added soon.' },
     'tutorials.platform.bilibili': { zh: '哔哩哔哩', en: 'Bilibili' },
