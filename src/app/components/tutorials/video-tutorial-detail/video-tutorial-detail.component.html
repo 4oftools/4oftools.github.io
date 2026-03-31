@@ -1,0 +1,54 @@
+<div class="paper-page" *ngIf="tutorial as tut">
+  <div class="paper-inner">
+    <a routerLink="/tutorials" class="paper-back">{{ t('tutorials.back') }}</a>
+    <header class="paper-header">
+      <h1 class="paper-title">{{ titleOf(tut) }}</h1>
+      <p class="paper-subtitle">{{ t('tutorials.paper.subtitle') }}</p>
+      <p class="paper-summary">{{ summaryOf(tut) }}</p>
+    </header>
+
+    <div class="paper-video-grid" *ngIf="tut.episodes.length > 0; else emptyEpisodes">
+      <article *ngFor="let ep of tut.episodes; let i = index" class="paper-video-card" [style.--paper-delay.ms]="70 * i">
+        <a
+          *ngIf="ep.url"
+          [href]="ep.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="paper-video-link"
+        >
+          <div class="paper-thumbnail">
+            <span class="paper-play-btn" aria-hidden="true">▶</span>
+            <span class="paper-duration" *ngIf="ep.duration">{{ ep.duration }}</span>
+          </div>
+          <div class="paper-card-body">
+            <h2 class="paper-video-title">{{ epTitle(ep) }}</h2>
+            <p class="paper-video-desc">{{ epDesc(ep) }}</p>
+            <div class="paper-meta">
+              <span [ngClass]="platformClass(ep.platform)">{{ platformLabel(ep.platform) }}</span>
+              <span class="paper-views" *ngIf="epViews(ep)">{{ epViews(ep) }}</span>
+            </div>
+          </div>
+        </a>
+        <div *ngIf="!ep.url" class="paper-video-link paper-video-link--static">
+          <div class="paper-thumbnail">
+            <span class="paper-play-btn" aria-hidden="true">▶</span>
+            <span class="paper-duration" *ngIf="ep.duration">{{ ep.duration }}</span>
+          </div>
+          <div class="paper-card-body">
+            <h2 class="paper-video-title">{{ epTitle(ep) }}</h2>
+            <p class="paper-video-desc">{{ epDesc(ep) }}</p>
+            <div class="paper-meta">
+              <span [ngClass]="platformClass(ep.platform)">{{ platformLabel(ep.platform) }}</span>
+              <span class="paper-views" *ngIf="epViews(ep)">{{ epViews(ep) }}</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <ng-template #emptyEpisodes>
+      <div class="paper-video-grid">
+        <p class="paper-empty-hint">{{ t('tutorials.empty') }}</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

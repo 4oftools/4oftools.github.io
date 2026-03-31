@@ -39,6 +39,8 @@ import { ComputerUseAgentComponent } from './components/apps/11-computer-use-age
 import { DevilBrainComponent } from './components/apps/12-devil-brain/devil-brain.component';
 import { FortuneLotteryComponent } from './components/apps/13-fortune-lottery/fortune-lottery.component';
 import { SmartPasteComponent } from './components/apps/14-smart-paste/smart-paste.component';
+import { VideoTutorialsListComponent } from './components/tutorials/video-tutorials-list/video-tutorials-list.component';
+import { VideoTutorialDetailComponent } from './components/tutorials/video-tutorial-detail/video-tutorial-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -80,6 +82,8 @@ export const routes: Routes = [
   { path: 'apps/fortune-lottery', component: FortuneLotteryComponent },
   { path: 'apps/smart-paste', component: SmartPasteComponent },
   { path: 'apps/:id', component: AppDetailComponent },
+  { path: 'tutorials', component: VideoTutorialsListComponent },
+  { path: 'tutorials/:id', component: VideoTutorialDetailComponent },
   { path: 'sponsor', component: SponsorComponent },
   { path: '**', redirectTo: '' }
 ];

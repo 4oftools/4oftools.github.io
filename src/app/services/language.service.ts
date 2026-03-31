@@ -14,6 +14,18 @@ export class LanguageService {
     'nav.home': { zh: '首页', en: 'Home' },
     'nav.tools': { zh: '工具集', en: 'Tools' },
     'nav.apps': { zh: '应用', en: 'Apps' },
+    'nav.tutorials': { zh: '视频教程', en: 'Tutorials' },
+    'tutorials.paper.subtitle': { zh: '纸质质感 · 专题视频', en: 'Paper texture · Topic videos' },
+    'tutorials.page.description': {
+      zh: '技术专题视频讲解，涵盖中间件、协议、AI 与工程实践。',
+      en: 'Topic-based video tutorials: middleware, protocols, AI, and hands-on engineering.'
+    },
+    'tutorials.list.lead': { zh: '点击下方卡片进入对应专题。', en: 'Open a topic below to view its videos.' },
+    'tutorials.back': { zh: '← 返回教程列表', en: '← Back to tutorials' },
+    'tutorials.empty': { zh: '该专题的剧集链接将陆续补充，敬请关注。', en: 'Video links for this topic will be added soon.' },
+    'tutorials.platform.bilibili': { zh: '哔哩哔哩', en: 'Bilibili' },
+    'tutorials.platform.youtube': { zh: 'YouTube', en: 'YouTube' },
+    'tutorials.platform.other': { zh: '更多', en: 'More' },
     'home.banner.title': { zh: '否兔联盟', en: '4oftools' },
     'home.banner.subtitle': { zh: '4oftools - 您的工具和应用集合平台', en: '4oftools - Your Tools and Apps Collection Platform' },
     'home.banner.description': { zh: '汇集了各种实用的在线工具和应用程序，让您的工作和生活更加便捷高效。', en: 'A collection of practical online tools and applications to make your work and life more convenient and efficient.' },

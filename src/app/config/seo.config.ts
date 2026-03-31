@@ -1,5 +1,6 @@
 import { SEOData } from '../services/seo.service';
 import { Tool } from '../models/tool.model';
+import { VideoTutorial } from '../data/video-tutorials.data';
 
 // 基础SEO配置
 export const BASE_SEO: SEOData = {
@@ -84,6 +85,41 @@ export const SPONSOR_PAGE_SEO: SEOData = {
     en: 'sponsor,support,donate,4oftools'
   }
 };
+
+// 视频教程列表
+export const VIDEO_TUTORIALS_LIST_SEO: SEOData = {
+  ...BASE_SEO,
+  title: {
+    zh: '视频教程 - 否兔联盟 | 技术专题与实操',
+    en: 'Video Tutorials - 4oftools | Tech Topics'
+  },
+  description: {
+    zh: '否兔联盟视频教程专题：WebSphere、Vault、Streamlit、FastAPI、Nginx、LDAP、OPC、机器学习、MCP、Python、Modbus、Sklearn、WebRTC 等。',
+    en: '4oftools video tutorials: WebSphere, Vault, Streamlit, FastAPI, Nginx, LDAP, OPC, ML, MCP, Python, Modbus, scikit-learn, WebRTC, and more.'
+  },
+  keywords: {
+    zh: '视频教程,在线教程,WebSphere,Nginx,FastAPI,Streamlit,LDAP,OPC,WebRTC',
+    en: 'video tutorials,WebSphere,Nginx,FastAPI,Streamlit,LDAP,OPC,WebRTC'
+  }
+};
+
+export function getVideoTutorialDetailSEO(t: VideoTutorial): SEOData {
+  return {
+    ...BASE_SEO,
+    title: {
+      zh: `${t.titleZh} - 否兔联盟 | 视频教程`,
+      en: `${t.titleEn} - 4oftools | Video Tutorial`
+    },
+    description: {
+      zh: `${t.summaryZh} 否兔联盟视频教程专题。`,
+      en: `${t.summaryEn} 4oftools video tutorial series.`
+    },
+    keywords: {
+      zh: `${t.titleZh},视频教程,否兔联盟`,
+      en: `${t.titleEn},video tutorial,4oftools`
+    }
+  };
+}
 
 // 工具详情页SEO生成函数
 export function getToolDetailSEO(tool: Tool): SEOData {

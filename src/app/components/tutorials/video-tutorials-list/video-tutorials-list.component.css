@@ -1,0 +1,89 @@
+/* 与 apps 列表同构的顶栏；配色偏深青 → 松石绿 → 薄荷，与应用页的靛蓝紫罗兰区分 */
+.tutorials-page {
+  position: relative;
+  min-height: calc(100vh - 200px);
+  overflow-x: hidden;
+}
+
+.tutorials-page .page-header {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #0f172a 0%, #0f766e 38%, #14b8a6 72%, #2dd4bf 100%);
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.tutorials-page .page-header::before {
+  content: '';
+  position: absolute;
+  top: -45%;
+  right: -8%;
+  width: 280px;
+  height: 280px;
+  background: rgba(45, 212, 191, 0.35);
+  border-radius: 50%;
+  filter: blur(56px);
+  pointer-events: none;
+}
+
+.tutorials-page .page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -35%;
+  left: -6%;
+  width: 240px;
+  height: 240px;
+  background: rgba(99, 102, 241, 0.22);
+  border-radius: 50%;
+  filter: blur(48px);
+  pointer-events: none;
+}
+
+.tutorials-page .page-header .container {
+  position: relative;
+  z-index: 1;
+}
+
+.tutorials-page .page-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.tutorials-page .page-description {
+  font-size: 18px;
+  margin: 0;
+  opacity: 0.94;
+  color: rgba(255, 255, 255, 0.96);
+  line-height: 1.55;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tutorials-page__paper {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 320px);
+}
+
+.tutorials-list-hint {
+  text-align: center;
+  font-size: 15px;
+  color: #64748b;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .tutorials-page .page-title {
+    font-size: 28px;
+  }
+
+  .tutorials-page .page-description {
+    font-size: 16px;
+  }
+}

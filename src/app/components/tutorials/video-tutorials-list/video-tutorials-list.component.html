@@ -1,0 +1,28 @@
+<div class="tutorials-page">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">{{ t('nav.tutorials') }}</h1>
+      <p class="page-description">{{ t('tutorials.page.description') }}</p>
+    </div>
+  </div>
+
+  <div class="paper-page tutorials-page__paper">
+    <div class="paper-inner">
+      <p class="tutorials-list-hint">{{ t('tutorials.list.lead') }}</p>
+      <div class="paper-topic-grid">
+        <a
+          *ngFor="let item of tutorials; let i = index"
+          [routerLink]="['/tutorials', item.id]"
+          class="paper-topic-card"
+          [style.--paper-delay.ms]="50 * i"
+        >
+          <div class="paper-topic-thumb" aria-hidden="true">▶</div>
+          <div class="paper-topic-body">
+            <h2 class="paper-topic-title">{{ titleOf(item) }}</h2>
+            <p class="paper-topic-summary">{{ summaryOf(item) }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
