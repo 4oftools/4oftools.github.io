@@ -70,14 +70,6 @@
   min-height: calc(100vh - 320px);
 }
 
-.tutorials-list-hint {
-  text-align: center;
-  font-size: 15px;
-  color: #64748b;
-  margin: 0 0 28px;
-  line-height: 1.6;
-}
-
 @media (max-width: 768px) {
   .tutorials-page .page-title {
     font-size: 28px;

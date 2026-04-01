@@ -8,42 +8,94 @@
 
   <div class="paper-page tutorials-page__paper">
     <div class="paper-inner">
-      <p class="tutorials-list-hint">{{ t('tutorials.list.lead') }}</p>
       <div class="paper-topic-grid">
         <ng-container *ngFor="let item of tutorials; let i = index">
-          <a
-            *ngIf="item.externalUrl"
-            [href]="item.externalUrl"
-            target="_blank"
-            rel="noopener noreferrer"
+          <article
             class="paper-topic-card"
+            [class.paper-topic-card--planning]="item.status === 'planning'"
             [style.--paper-delay.ms]="50 * i"
-            [attr.aria-label]="cardAriaLabel(item)"
           >
-            <ng-container *ngTemplateOutlet="topicCardInner; context: { $implicit: item }"></ng-container>
-          </a>
-          <a
-            *ngIf="!item.externalUrl"
-            [routerLink]="['/tutorials', item.id]"
-            class="paper-topic-card"
-            [style.--paper-delay.ms]="50 * i"
-            [attr.aria-label]="cardAriaLabel(item)"
-          >
-            <ng-container *ngTemplateOutlet="topicCardInner; context: { $implicit: item }"></ng-container>
-          </a>
+            <a
+              *ngIf="item.externalUrl"
+              [href]="item.externalUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="paper-topic-card__main"
+              [attr.aria-label]="cardAriaLabel(item)"
+            >
+              <ng-container *ngTemplateOutlet="topicCardMain; context: { $implicit: item }"></ng-container>
+            </a>
+            <a
+              *ngIf="!item.externalUrl"
+              [routerLink]="['/tutorials', item.id]"
+              class="paper-topic-card__main"
+              [attr.aria-label]="cardAriaLabel(item)"
+            >
+              <ng-container *ngTemplateOutlet="topicCardMain; context: { $implicit: item }"></ng-container>
+            </a>
+            <footer *ngIf="item.platformLinks?.length" class="paper-topic-platforms">
+              <a
+                *ngFor="let pl of item.platformLinks"
+                [href]="pl.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="paper-topic-platform-link"
+                [class.paper-topic-platform-link--youtube]="pl.platform === 'youtube'"
+                [attr.aria-label]="platformLinkAria(pl)"
+              >
+                <span class="paper-topic-platform-link__icon" aria-hidden="true">
+                  <iconify-icon
+                    *ngIf="platformLinkMediaKind(pl) === 'video'"
+                    class="paper-topic-platform-link__iconify"
+                    icon="mdi:play-circle"
+                    width="16"
+                    height="16"
+                  ></iconify-icon>
+                  <iconify-icon
+                    *ngIf="platformLinkMediaKind(pl) === 'audio'"
+                    class="paper-topic-platform-link__iconify"
+                    icon="mdi:volume-high"
+                    width="16"
+                    height="16"
+                  ></iconify-icon>
+                </span>
+                <span class="paper-topic-platform-link__label">{{ platformLinkLabel(pl) }}</span>
+              </a>
+            </footer>
+          </article>
         </ng-container>
       </div>
 
-      <ng-template #topicCardInner let-item>
+      <ng-template #topicCardMain let-item>
         <div
           class="paper-topic-thumb"
           [class.paper-topic-thumb--cover]="!!item.coverImage"
           aria-hidden="true"
         >
+          <span
+            class="paper-topic-status"
+            [class.paper-topic-status--live]="item.status === 'live'"
+            [class.paper-topic-status--planning]="item.status === 'planning'"
+            >{{ statusLabel(item) }}</span
+          >
           <img *ngIf="item.coverImage" [src]="item.coverImage" alt="" />
-          <span *ngIf="!item.coverImage">▶</span>
+          <span *ngIf="!item.coverImage && item.contentKind === 'video'">▶</span>
+          <span *ngIf="!item.coverImage && item.contentKind === 'text'" class="paper-topic-thumb-icon paper-topic-thumb-icon--text" aria-hidden="true"></span>
+          <span *ngIf="!item.coverImage && item.contentKind === 'mixed'" class="paper-topic-thumb-mixed" aria-hidden="true">
+            <span class="paper-topic-thumb-mixed__play">▶</span>
+            <span class="paper-topic-thumb-icon paper-topic-thumb-icon--text paper-topic-thumb-icon--compact"></span>
+          </span>
         </div>
         <div class="paper-topic-body">
+          <div class="paper-topic-badges">
+            <span
+              class="paper-topic-kind"
+              [class.paper-topic-kind--video]="item.contentKind === 'video'"
+              [class.paper-topic-kind--text]="item.contentKind === 'text'"
+              [class.paper-topic-kind--mixed]="item.contentKind === 'mixed'"
+              >{{ contentKindLabel(item) }}</span
+            >
+          </div>
           <h2 class="paper-topic-title">{{ titleOf(item) }}</h2>
           <p class="paper-topic-summary">{{ summaryOf(item) }}</p>
         </div>

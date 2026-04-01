@@ -2,7 +2,24 @@
   <div class="paper-inner">
     <a routerLink="/tutorials" class="paper-back">{{ t('tutorials.back') }}</a>
     <header class="paper-header">
-      <h1 class="paper-title">{{ titleOf(tut) }}</h1>
+      <div class="paper-title-row">
+        <h1 class="paper-title">{{ titleOf(tut) }}</h1>
+        <div class="paper-title-badges">
+          <span
+            class="paper-topic-kind paper-topic-kind--header"
+            [class.paper-topic-kind--video]="tut.contentKind === 'video'"
+            [class.paper-topic-kind--text]="tut.contentKind === 'text'"
+            [class.paper-topic-kind--mixed]="tut.contentKind === 'mixed'"
+            >{{ contentKindLabel(tut) }}</span
+          >
+          <span
+            class="paper-topic-status paper-topic-status--header"
+            [class.paper-topic-status--live]="tut.status === 'live'"
+            [class.paper-topic-status--planning]="tut.status === 'planning'"
+            >{{ statusLabel(tut) }}</span
+          >
+        </div>
+      </div>
       <p class="paper-subtitle">{{ t('tutorials.paper.subtitle') }}</p>
       <p class="paper-summary">{{ summaryOf(tut) }}</p>
     </header>

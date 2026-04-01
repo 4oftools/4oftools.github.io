@@ -74,6 +74,23 @@ export class VideoTutorialDetailComponent implements OnInit, OnDestroy {
     return this.isEn() ? t.summaryEn : t.summaryZh;
   }
 
+  statusLabel(t: VideoTutorial): string {
+    return t.status === 'live'
+      ? this.t('tutorials.status.live')
+      : this.t('tutorials.status.planning');
+  }
+
+  contentKindLabel(t: VideoTutorial): string {
+    switch (t.contentKind) {
+      case 'text':
+        return this.t('tutorials.kind.text');
+      case 'mixed':
+        return this.t('tutorials.kind.mixed');
+      default:
+        return this.t('tutorials.kind.video');
+    }
+  }
+
   epTitle(ep: VideoEpisode): string {
     return this.isEn() ? ep.titleEn : ep.titleZh;
   }
