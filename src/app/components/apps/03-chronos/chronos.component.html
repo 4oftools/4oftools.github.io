@@ -1,45 +1,124 @@
-<app-app-detail [app]="app" [useAsLayout]="true" *ngIf="app">
-  <section class="content-section">
-    <h2>简介</h2>
-    <p>Chronos 是一款仿 JIRA 的开源项目与问题跟踪工具，支持看板视图、迭代（Sprint）、工作流与权限管理，适合团队协作与敏捷开发。</p>
-    <figure class="figure-block">
-      <img src="/assets/apps/03-chronos/overview.png" alt="Chronos 概览" (error)="onImageError($event)" />
-      <div class="image-placeholder">
-        <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
-        <p>此处放置「概览」截图</p>
-        <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/03-chronos/overview.png</code></p>
-      </div>
-    </figure>
-  </section>
-  <section class="content-section">
-    <h2>功能特性</h2>
-    <p>看板与列表、迭代规划、工作流配置、项目与权限管理、问题类型与自定义字段等（可根据实际项目补充）。</p>
-    <figure class="figure-block">
-      <img src="/assets/apps/03-chronos/features.png" alt="Chronos 功能" (error)="onImageError($event)" />
-      <div class="image-placeholder">
-        <span class="placeholder-icon"><app-icon icon="mdi:image-outline" size="48px"></app-icon></span>
-        <p>此处放置「功能」截图</p>
-        <p class="placeholder-hint">请将图片放入 <code>src/assets/apps/03-chronos/features.png</code></p>
-      </div>
-    </figure>
-  </section>
-  <section class="content-section open-source-section">
-    <h2>{{ t('app.openSource') }}</h2>
-    <p>Chronos 为开源项目，代码托管于 GitHub，欢迎 Star、Fork 与参与贡献。</p>
-    <a href="https://github.com/4oftools/chronos" target="_blank" rel="noopener noreferrer" class="btn">
-      {{ t('app.openSourceUrl') }}
-      <span class="btn-icon"><app-icon icon="tabler:external-link" size="1em"></app-icon></span>
+<div class="chronos-neon-page" *ngIf="app">
+  <div class="data-stream"></div>
+  <div class="corner-decor top-left"></div>
+  <div class="corner-decor top-right"></div>
+  <div class="corner-decor bottom-left"></div>
+  <div class="corner-decor bottom-right"></div>
+  
+  <div class="neon-breadcrumb">
+    <a routerLink="/" class="neon-breadcrumb-link">
+      <app-icon icon="mdi:home" size="16px"></app-icon>
+      {{ t('site.name') }}
     </a>
-  </section>
-</app-app-detail>
-<div class="app-detail app-loading" *ngIf="!app && !error">
-  <div class="app-container">
+    <span class="neon-breadcrumb-separator">›</span>
+    <a routerLink="/apps" class="neon-breadcrumb-link">{{ t('nav.apps') }}</a>
+    <span class="neon-breadcrumb-separator">›</span>
+    <span class="neon-breadcrumb-current">{{ getAppName(app) }}</span>
+  </div>
+
+  <div class="neon-card">
+    <div class="card-corner top-left"></div>
+    <div class="card-corner top-right"></div>
+    <div class="card-corner bottom-left"></div>
+    <div class="card-corner bottom-right"></div>
+    <div class="card-data-label">Chronos</div>
+    <div class="card-progress-indicator">
+      <span class="card-progress-dot active"></span>
+      <span class="card-progress-dot active"></span>
+      <span class="card-progress-dot"></span>
+      <span class="card-progress-dot"></span>
+    </div>
+    
+    <div class="neon-card-header">
+      <div class="neon-icon-box">
+        <app-icon [icon]="app.icon || 'tabler:layout-kanban'" size="48px"></app-icon>
+      </div>
+      <h1 class="neon-title">{{ getAppName(app) }}</h1>
+      <p class="neon-description">{{ getAppDescription(app) }}</p>
+    </div>
+
+    <div class="neon-gallery">
+      <div class="neon-gallery-grid">
+        <div class="neon-gallery-item" *ngFor="let screenshot of screenshots; let i = index" (click)="openModal(i)">
+          <img [src]="screenshot.thumbnail" [alt]="'Screenshot ' + (i + 1)" (error)="onImageError($event)" />
+        </div>
+      </div>
+    </div>
+
+    <div class="neon-meta-row">
+      <div class="neon-meta-item">
+        <div class="neon-meta-label">{{ t('app.status') }}</div>
+        <div class="neon-meta-value">{{ getAppStatusLabel(app) }}</div>
+      </div>
+      <div class="neon-meta-item">
+        <div class="neon-meta-label">{{ t('app.license') }}</div>
+        <div class="neon-meta-value">MIT</div>
+      </div>
+      <div class="neon-meta-item">
+        <div class="neon-meta-label">{{ t('app.openSourceStatus') }}</div>
+        <div class="neon-meta-value">
+          <app-icon icon="mdi:github" size="18px"></app-icon>
+          <span>{{ t('app.openSourceStatus') }}</span>
+        </div>
+      </div>
+    </div>
+
+    <ul class="neon-features-list">
+      <li class="neon-feature-item">
+        <app-icon icon="tabler:layout-kanban" size="20px"></app-icon>
+        <span class="neon-feature-text">{{ t('chronos.features.kanban') }}</span>
+      </li>
+      <li class="neon-feature-item">
+        <app-icon icon="tabler:calendar-event" size="20px"></app-icon>
+        <span class="neon-feature-text">{{ t('chronos.features.sprints') }}</span>
+      </li>
+      <li class="neon-feature-item">
+        <app-icon icon="tabler:users" size="20px"></app-icon>
+        <span class="neon-feature-text">{{ t('chronos.features.permissions') }}</span>
+      </li>
+      <li class="neon-feature-item">
+        <app-icon icon="tabler:chart-bar" size="20px"></app-icon>
+        <span class="neon-feature-text">{{ t('chronos.features.analytics') }}</span>
+      </li>
+    </ul>
+
+    <div class="neon-tags">
+      <span class="neon-tag">{{ t('chronos.tags.project') }}</span>
+      <span class="neon-tag">{{ t('chronos.tags.kanban') }}</span>
+      <span class="neon-tag">{{ t('chronos.tags.agile') }}</span>
+      <span class="neon-tag">{{ t('chronos.tags.opensource') }}</span>
+    </div>
+
+    <div class="neon-actions">
+      <a [href]="app.openSourceUrl" target="_blank" class="neon-btn neon-btn-primary">
+        <app-icon icon="mdi:github" size="20px"></app-icon>
+        GITHUB
+      </a>
+      <a routerLink="/apps" class="neon-btn neon-btn-secondary">
+        {{ t('tool.back.to.list') }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="neon-modal" id="neonModal" *ngIf="isModalOpen">
+  <div class="neon-modal-content">
+    <span class="neon-modal-close" (click)="closeModal()">&times;</span>
+    <span class="neon-modal-nav neon-modal-nav-left" (click)="prevImage()">&#10094;</span>
+    <img [src]="currentImage" alt="Full size screenshot" class="neon-modal-image" />
+    <span class="neon-modal-nav neon-modal-nav-right" (click)="nextImage()">&#10095;</span>
+  </div>
+</div>
+
+<div class="chronos-neon-page chronos-loading" *ngIf="!app && !error">
+  <div class="neon-card">
     <p>{{ t('loading') }}</p>
   </div>
 </div>
-<div class="app-detail app-error" *ngIf="error">
-  <div class="app-container">
+
+<div class="chronos-neon-page chronos-error" *ngIf="error">
+  <div class="neon-card">
     <p>{{ t('app.notfound') }}</p>
-    <a routerLink="/apps" class="app-btn">{{ t('tool.back.to.list') }}</a>
+    <a routerLink="/apps" class="neon-btn neon-btn-secondary">{{ t('tool.back.to.list') }}</a>
   </div>
 </div>

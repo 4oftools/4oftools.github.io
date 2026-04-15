@@ -1,184 +1,944 @@
-.chronos-page {
-  padding: 16px 0 32px;
+/* Chronos Neon Style - Blue Theme - Tech & Task Management Atmosphere */
+.chronos-neon-page {
+  padding: 60px 24px;
   min-height: calc(100vh - 200px);
-  background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--green-bg) 50%, var(--bg-secondary) 100%);
+  background: linear-gradient(135deg, #0a0e1a 0%, #0f1724 40%, #1a1f2e 60%, #0a0e1a 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.breadcrumb {
-  margin-bottom: 24px;
-  color: var(--text-secondary);
+/* 网格背景 */
+.chronos-neon-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* 扫描线效果 - 在背景层 */
+.chronos-neon-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  z-index: 0;
+}
+
+@keyframes scanline {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
+/* 数据流装饰 - 在背景层 */
+.chronos-neon-page .data-stream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.data-stream::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: 10%;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.4), transparent);
+  animation: datafall 4s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+.data-stream::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 20%;
+  width: 1px;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(96, 165, 250, 0.3), transparent);
+  animation: datafall 6s ease-in-out infinite 2s;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
+}
+
+@keyframes datafall {
+  0% {
+    top: -50%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 150%;
+    opacity: 0;
+  }
+}
+
+/* 角落装饰 - 任务节点 */
+.chronos-neon-page .corner-decor {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  pointer-events: none;
+}
+
+.chronos-neon-page .corner-decor.top-left {
+  top: 20px;
+  left: 20px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.chronos-neon-page .corner-decor.top-right {
+  top: 20px;
+  right: 20px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.chronos-neon-page .corner-decor.bottom-left {
+  bottom: 20px;
+  left: 20px;
+  border-right: none;
+  border-top: none;
+}
+
+.chronos-neon-page .corner-decor.bottom-right {
+  bottom: 20px;
+  right: 20px;
+  border-left: none;
+  border-top: none;
+}
+
+/* 状态指示点 */
+.corner-decor::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  animation: statusblink 2s ease-in-out infinite;
+}
+
+.corner-decor.top-left::before {
+  top: -3px;
+  left: -3px;
+}
+
+.corner-decor.top-right::before {
+  top: -3px;
+  right: -3px;
+}
+
+.corner-decor.bottom-left::before {
+  bottom: -3px;
+  left: -3px;
+}
+
+.corner-decor.bottom-right::before {
+  bottom: -3px;
+  right: -3px;
+}
+
+@keyframes statusblink {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.neon-breadcrumb {
+  max-width: 900px;
+  margin: 0 auto 32px;
+  color: #666;
   font-size: 14px;
-}
-
-.breadcrumb a {
-  color: var(--green-color);
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  color: var(--green-dark);
-  text-decoration: underline;
-}
-
-.separator {
-  margin: 0 8px;
-}
-
-.app-header {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  margin-bottom: 32px;
-  padding: 24px;
-  background: var(--bg-primary);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  border-top: 4px solid var(--green-color);
+  align-items: center;
+  gap: 8px;
 }
 
-.app-header-icon {
-  width: 72px;
-  height: 72px;
+.neon-breadcrumb-link {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.neon-breadcrumb-link:hover {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.neon-breadcrumb-separator {
+  color: #444;
+}
+
+.neon-breadcrumb-current {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Neon Card - Task Management Dashboard */
+.neon-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border: 2px solid #3b82f6;
+  padding: 44px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), inset 0 0 60px rgba(59, 130, 246, 0.05);
+  background: linear-gradient(180deg, #0d1117 0%, #0a0e1a 100%);
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.neon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #3b82f6, #60a5fa, #3b82f6, transparent);
+  box-shadow: 0 0 20px #3b82f6;
+}
+
+.neon-card::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+/* 卡片角落装饰 - 任务节点 */
+.neon-card .card-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  pointer-events: none;
+}
+
+.neon-card .card-corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.neon-card .card-corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.neon-card .card-corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.neon-card .card-corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* 任务进度条装饰 */
+.card-progress-indicator {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.card-progress-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+}
+
+.card-progress-dot.active {
+  background: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+  animation: dotpulse 2s ease-in-out infinite;
+}
+
+@keyframes dotpulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+/* 数据标签装饰 */
+.card-data-label {
+  position: absolute;
+  top: 50px;
+  left: 40px;
+  font-size: 10px;
+  color: rgba(59, 130, 246, 0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+}
+
+/* Card Header */
+.neon-card-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.neon-icon-box {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 28px;
+  border: 3px solid #3b82f6;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  animation: neonGlow 2s ease-in-out infinite alternate;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
 }
 
-.app-header-text {
-  flex: 1;
+@keyframes neonGlow {
+  from {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+  }
 }
 
-.app-title {
-  font-size: 32px;
+.neon-icon-box ::ng-deep iconify-icon {
+  color: #3b82f6;
+  text-shadow: 0 0 20px #3b82f6;
+}
+
+.neon-title {
+  font-size: 48px;
   font-weight: 700;
-  margin: 0 0 8px;
-  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 8px;
+  color: #3b82f6;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  letter-spacing: 4px;
 }
 
-.app-subtitle {
+.neon-subtitle {
+  font-size: 18px;
+  text-align: center;
+  color: #3b82f6;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  letter-spacing: 2px;
+}
+
+.neon-description {
   font-size: 16px;
-  color: var(--text-secondary);
-  margin: 0 0 12px;
+  text-align: center;
+  color: #ccc;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.app-tags {
+/* Gallery */
+.neon-gallery {
+  margin-bottom: 40px;
+}
+
+.neon-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.neon-gallery-item {
+  aspect-ratio: 16/10;
+  border: 2px solid #333;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: #111;
+}
+
+.neon-gallery-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transform: scale(1.02);
+}
+
+.neon-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s;
+}
+
+.neon-gallery-item:hover img {
+  opacity: 0.9;
+}
+
+/* Meta Row */
+.neon-meta-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  justify-content: center;
+  gap: 36px;
+  margin-bottom: 40px;
 }
 
-.app-tags .tag {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 13px;
+.neon-meta-item {
+  text-align: center;
 }
 
-.app-body {
-  background: var(--bg-primary);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: var(--shadow);
+.neon-meta-label {
+  font-size: 11px;
+  color: #3b82f6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
 }
 
-.content-section {
-  margin-bottom: 32px;
+.neon-meta-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-.content-section:last-of-type {
-  margin-bottom: 0;
+.neon-meta-value ::ng-deep iconify-icon {
+  color: #3b82f6;
 }
 
-.content-section h2 {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0 0 12px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--border-color);
-}
-
-.content-section p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin: 0 0 16px;
-}
-
-.figure-block {
-  margin: 16px 0 0;
+/* Features List */
+.neon-features-list {
+  list-style: none;
+  margin-bottom: 40px;
   padding: 0;
 }
 
-.figure-block img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  display: block;
-}
-
-.image-placeholder {
-  display: none;
-  min-height: 200px;
-  background: var(--bg-secondary);
-  border: 2px dashed var(--border-color);
-  border-radius: 8px;
-  padding: 32px;
-  text-align: center;
-  color: var(--text-secondary);
-}
-
-.image-placeholder.visible {
+.neon-feature-item {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(34, 34, 34, 0.5);
+  transition: all 0.3s;
+}
+
+.neon-feature-item:last-child {
+  border-bottom: none;
+}
+
+.neon-feature-item:hover {
+  padding-left: 10px;
+}
+
+.neon-feature-item:hover ::ng-deep iconify-icon {
+  color: #60a5fa;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  transform: scale(1.1);
+}
+
+.neon-feature-item ::ng-deep iconify-icon {
+  color: #3b82f6;
+  transition: all 0.3s;
+  width: 20px;
+  height: 20px;
+}
+
+.neon-feature-text {
+  font-size: 16px;
+  color: #ccc;
+  letter-spacing: 0.5px;
+}
+
+/* Changelog - Version Timeline */
+.neon-changelog {
+  border: 1px solid rgba(51, 51, 51, 0.5);
+  padding: 20px;
+  margin-bottom: 40px;
+  background: linear-gradient(180deg, rgba(13, 17, 23, 0.8) 0%, rgba(10, 14, 26, 0.9) 100%);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部光带 */
+.neon-changelog::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.neon-changelog-item {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(34, 34, 34, 0.3);
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.neon-changelog-item:last-child {
+  border-bottom: none;
+}
+
+.neon-changelog-item:hover {
+  background: rgba(59, 130, 246, 0.03);
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+  border-radius: 4px;
+}
+
+.neon-changelog-version {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  padding: 4px 12px;
+  border-radius: 3px;
+  white-space: nowrap;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+  letter-spacing: 1px;
+}
+
+.neon-changelog-text {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+/* Tags - Tech Chip Style */
+.neon-tags {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* 标签上方光带 */
+.neon-tags::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+}
+
+.neon-tag {
+  padding: 8px 16px;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #3b82f6;
+  font-size: 13px;
+  border-radius: 3px;
+  transition: all 0.3s;
+  cursor: default;
+  background: rgba(59, 130, 246, 0.05);
+  position: relative;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* 芯片角标 */
+.neon-tag::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  pointer-events: none;
+}
+
+.neon-tag:hover {
+  background: rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(59, 130, 246, 0.1);
+  border-color: #60a5fa;
+  color: #60a5fa;
+  transform: translateY(-2px);
+}
+
+/* Actions - Command Buttons */
+.neon-actions {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-top: 20px;
+}
+
+/* 按钮上方分割线 */
+.neon-actions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+}
+
+.neon-btn {
+  flex: 1;
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  transition: all 0.3s;
+  border-radius: 4px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-.image-placeholder .placeholder-icon {
-  color: var(--border-color);
+/* 按钮角落装饰 */
+.neon-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(59, 130, 246, 0.6);
+  border-left: 2px solid rgba(59, 130, 246, 0.6);
+  transition: all 0.3s;
 }
 
-.image-placeholder .placeholder-hint {
-  margin: 0;
-  font-size: 13px;
+.neon-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.6);
+  border-right: 2px solid rgba(59, 130, 246, 0.6);
+  transition: all 0.3s;
 }
 
-.image-placeholder code {
-  background: var(--bg-primary);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+.neon-btn-primary {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(59, 130, 246, 0.6) 100%);
+  color: white;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), inset 0 0 10px rgba(59, 130, 246, 0.1);
 }
 
-.open-source-section .btn {
-  display: inline-flex;
+.neon-btn-primary:hover {
+  background: transparent;
+  border-color: #60a5fa;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), inset 0 0 20px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.neon-btn-primary:hover::before,
+.neon-btn-primary:hover::after {
+  border-color: #60a5fa;
+  width: 100%;
+  height: 100%;
+}
+
+.neon-btn-secondary {
+  background: transparent;
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.neon-btn-secondary:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: #60a5fa;
+  color: #60a5fa;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.neon-btn-secondary:hover::before,
+.neon-btn-secondary:hover::after {
+  border-color: #60a5fa;
+  width: 100%;
+  height: 100%;
+}
+
+/* Modal */
+.neon-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
 }
 
-.open-source-section .btn-icon {
-  display: inline-flex;
+.neon-modal.active {
+  display: flex;
 }
 
-.back-actions {
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
+.neon-modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
 }
 
+.neon-modal-image {
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 6px;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+}
+
+.neon-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #3b82f6;
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.neon-modal-close:hover {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.neon-modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #3b82f6;
+  font-size: 32px;
+  cursor: pointer;
+  padding: 20px;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+.neon-modal-nav:hover {
+  color: #60a5fa;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.neon-modal-nav-left {
+  left: -60px;
+}
+
+.neon-modal-nav-right {
+  right: -60px;
+}
+
+/* Loading & Error States */
+.chronos-loading,
+.chronos-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.chronos-loading .neon-card,
+.chronos-error .neon-card {
+  text-align: center;
+  padding: 60px 44px;
+}
+
+.chronos-loading p,
+.chronos-error p {
+  color: #999;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .app-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .chronos-neon-page {
+    padding: 40px 16px;
   }
 
-  .app-tags {
-    justify-content: center;
+  .neon-card {
+    padding: 32px 20px;
+  }
+
+  /* 移动端隐藏部分装饰元素 */
+  .corner-decor,
+  .card-data-label,
+  .card-progress-indicator {
+    display: none;
+  }
+
+  .neon-title {
+    font-size: 28px;
+  }
+
+  .neon-subtitle {
+    font-size: 13px;
+  }
+
+  .neon-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .neon-meta-row {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .neon-meta-label {
+    font-size: 10px;
+  }
+
+  .neon-meta-value {
+    font-size: 16px;
+  }
+
+  /* 移动端功能列表调整 */
+  .neon-features-list::before {
+    left: 7px;
+  }
+
+  .neon-feature-item::before {
+    left: -20px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .neon-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .neon-btn {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .neon-modal-nav-left {
+    left: -20px;
+  }
+
+  .neon-modal-nav-right {
+    right: -20px;
+  }
+
+  .neon-changelog {
+    padding: 16px;
+  }
+
+  .neon-changelog-version {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .neon-changelog-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .neon-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .neon-meta-row {
+    flex-direction: column;
+    gap: 20px;
   }
 }

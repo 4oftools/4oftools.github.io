@@ -49,7 +49,7 @@ export const APPS_DATA: Tool[] = [
     type: 'efficiency',
     icon: 'tabler:layout-kanban',
     iconColor: 'blue',
-    status: 'planning',
+    status: 'released',
     tags: ['项目管理', '看板', '开源', 'JIRA'],
     tagsEn: ['Project Management', 'Kanban', 'Open Source', 'JIRA'],
     featured: false,
