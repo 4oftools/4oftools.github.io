@@ -433,12 +433,35 @@
   cursor: pointer;
   transition: all 0.3s;
   background: #111;
+  position: relative;
 }
 
 .neon-gallery-item:hover {
   border-color: #3b82f6;
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   transform: scale(1.02);
+}
+
+/* 放大提示图标 */
+.neon-gallery-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cpath d='m21 21-4.35-4.35'%3E%3C/path%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.8));
+}
+
+.neon-gallery-item:hover::after {
+  opacity: 1;
 }
 
 .neon-gallery-item img {

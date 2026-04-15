@@ -101,7 +101,7 @@
   </div>
 </div>
 
-<div class="neon-modal" id="neonModal" *ngIf="isModalOpen">
+<div class="neon-modal" [class.active]="isModalOpen" *ngIf="isModalOpen">
   <div class="neon-modal-content">
     <span class="neon-modal-close" (click)="closeModal()">&times;</span>
     <span class="neon-modal-nav neon-modal-nav-left" (click)="prevImage()">&#10094;</span>

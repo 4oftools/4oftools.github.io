@@ -33,21 +33,25 @@ export class ChronosComponent implements OnInit, OnDestroy {
 
   screenshots: Screenshot[] = [
     {
-      thumbnail: 'https://picsum.photos/seed/chronos1/400/250',
-      full: 'https://picsum.photos/seed/chronos1/1200/750'
+      thumbnail: '/assets/apps/03-chronos/01-board.png',
+      full: '/assets/apps/03-chronos/01-board.png'
     },
     {
-      thumbnail: 'https://picsum.photos/seed/chronos2/400/250',
-      full: 'https://picsum.photos/seed/chronos2/1200/750'
+      thumbnail: '/assets/apps/03-chronos/02-issues.png',
+      full: '/assets/apps/03-chronos/02-issues.png'
     },
     {
-      thumbnail: 'https://picsum.photos/seed/chronos3/400/250',
-      full: 'https://picsum.photos/seed/chronos3/1200/750'
+      thumbnail: '/assets/apps/03-chronos/03-roadmap.png',
+      full: '/assets/apps/03-chronos/03-roadmap.png'
     },
     {
-      thumbnail: 'https://picsum.photos/seed/chronos4/400/250',
-      full: 'https://picsum.photos/seed/chronos4/1200/750'
-    }
+      thumbnail: '/assets/apps/03-chronos/04-backlog.png',
+      full: '/assets/apps/03-chronos/04-backlog.png'
+    },
+    // {
+    //   thumbnail: '/assets/apps/03-chronos/05-reports.png',
+    //   full: '/assets/apps/03-chronos/05-reports.png'
+    // }
   ];
 
   constructor(
@@ -140,7 +144,9 @@ export class ChronosComponent implements OnInit, OnDestroy {
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (img) {
-      img.style.display = 'none';
+      // 不隐藏图片，而是显示一个默认的错误提示
+      img.style.opacity = '0.5';
+      img.style.cursor = 'pointer';
     }
   }
 }
