@@ -416,10 +416,9 @@
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.18);
 }
 
-/* 策划中专题：左侧琥珀细条 + 保留纸张叠影 */
+/* 策划中专题：保留纸张叠影 */
 .paper-topic-card--planning {
   border: 1px solid rgba(226, 232, 240, 0.95);
-  border-left: 3px solid rgba(245, 158, 11, 0.42);
   box-shadow:
     0 1px 1px var(--paper-shadow),
     0 8px 0 -4px var(--paper-card),
