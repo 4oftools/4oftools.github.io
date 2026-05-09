@@ -44,8 +44,8 @@ export class AppsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(langSub);
 
     const sub = this.toolService.getToolsByCategory('app').subscribe(apps => {
-      this.allApps = apps;
-      this.filteredApps = apps;
+      this.allApps = this.sortAppsReleasedFirst(apps);
+      this.filteredApps = this.searchApps(this.allApps);
     });
     this.subscriptions.add(sub);
   }
@@ -66,15 +66,22 @@ export class AppsComponent implements OnInit, OnDestroy {
   private applyFilters() {
     // 先按分类过滤
     if (this.selectedCategory === 'all') {
-      // 再按搜索关键词过滤
+      // 已发布优先，再按搜索关键词过滤
       this.filteredApps = this.searchApps(this.allApps);
     } else {
       const sub = this.toolService.getAppsByType(this.selectedCategory).subscribe(categoryApps => {
-        // 再按搜索关键词过滤
-        this.filteredApps = this.searchApps(categoryApps);
+        this.filteredApps = this.searchApps(this.sortAppsReleasedFirst(categoryApps));
       });
       this.subscriptions.add(sub);
     }
+  }
+
+  /** 已发布（released）的应用排在列表最前，其余保持原有相对顺序 */
+  private sortAppsReleasedFirst(apps: Tool[]): Tool[] {
+    return [...apps].sort((a, b) => {
+      const releasedRank = (s: Tool['status']) => (s === 'released' ? 0 : 1);
+      return releasedRank(a.status) - releasedRank(b.status);
+    });
   }
 
   private searchApps(apps: Tool[]): Tool[] {

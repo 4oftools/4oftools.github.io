@@ -22,7 +22,11 @@ import { VIDEO_TUTORIALS_LIST_SEO } from '../../../config/seo.config';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VideoTutorialsListComponent implements OnInit, OnDestroy {
-  readonly tutorials = VIDEO_TUTORIALS;
+  /** 已上线（live）排在最前，其余保持数据文件中的相对顺序 */
+  readonly tutorials: VideoTutorial[] = [...VIDEO_TUTORIALS].sort((a, b) => {
+    const rank = (s: VideoTutorial['status']) => (s === 'live' ? 0 : 1);
+    return rank(a.status) - rank(b.status);
+  });
   private sub = new Subscription();
 
   constructor(

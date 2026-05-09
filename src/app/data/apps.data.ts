@@ -258,12 +258,12 @@ export const APPS_DATA: Tool[] = [
     type: 'efficiency',
     icon: 'mdi:clipboard-text-multiple',
     iconColor: 'indigo',
-    status: 'planning',
+    status: 'released',
     tags: ['剪贴板', '效率', '跨平台', 'Windows', 'macOS'],
     tagsEn: ['Clipboard', 'Productivity', 'Cross-platform', 'Windows', 'macOS'],
     featured: true,
     openSource: true,
-    openSourceUrl: undefined,
+    openSourceUrl: 'https://github.com/4oftools/smart_paste',
     website: undefined,
     downloadUrl: undefined
   }
